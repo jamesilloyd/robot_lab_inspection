@@ -42,7 +42,7 @@ def featureExtraction(img_rgb,contour_filter):
         img = cv2.drawContours(img_feature,[box],0,(0,0,255),1)
 
         # Can also apply other shapes as well
-        # TODO: trial out circles, ellipse and line fitting to establish which are the best. 
+        # Regardless, the information is generated from the contour not the shape you put around it
 
         area_list.append(area)
         aspect_ratio_list.append(aspect_ratio)

@@ -8,86 +8,34 @@ import math
 #This method used belows presents the colored object surrounded by a black background 
 # The other method (in code_example.py) presents the image as a distored color based on the hsv image
 
+blue = np.uint8([[[160,60,0]]])
+brown = np.uint8([[[80,123,155]]])
+# Red isn't quite working atm
+red = np.uint8([[[21,36,102]]])
+green = np.uint8([[[3,197,148]]])
 
-def filterOutBlueObjects(img_bgr):
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
-
-     # define range of blue color in HSV
-    blue = np.uint8([[[160,60,0]]])
-    hsvBlue = cv2.cvtColor(blue,cv2.COLOR_BGR2HSV)
-    hsvBlueValue = hsvBlue[0][0][0]
-    lower_blue = np.array([hsvBlueValue - 10,100,100])
-    upper_blue = np.array([hsvBlueValue + 10,255,255])
-    # Threshold the HSV image to get only blue colors
-    mask = cv2.inRange(hsv, lower_blue, upper_blue)
-    # Bitwise-AND mask and original image
-    res = cv2.bitwise_and(img_bgr,img_bgr, mask= mask)
-
-    cv2.imshow('img_bgr',img_bgr)
-    cv2.imshow('mask',mask)
-    cv2.imshow('res',res)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-
-def filterOutBrownObjects(img_bgr):
+def filterOutColoredObjects(img_bgr, colorArray, show = False):
     # Convert BGR to HSV
     hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
 
      # define range of color in HSV
-    color = np.uint8([[[80,123,155]]])
-    hsvColor = cv2.cvtColor(color,cv2.COLOR_BGR2HSV)
-    hsvValue = hsvColor[0][0][0]
-    lower = np.array([hsvValue - 10,100,100])
-    upper = np.array([hsvValue + 10,255,255])
-    # Threshold the HSV image to get only color
+    hsvColor = cv2.cvtColor(colorArray,cv2.COLOR_BGR2HSV)
+    hsvColorValue = hsvColor[0][0][0]
+    lower = np.array([hsvColorValue - 10,100,100])
+    upper = np.array([hsvColorValue + 10,255,255])
+    # Threshold the HSV image to get only that color
     mask = cv2.inRange(hsv, lower, upper)
     # Bitwise-AND mask and original image
-    res = cv2.bitwise_and(img_bgr,img_bgr, mask= mask)
+    res = cv2.bitwise_and(img_bgr,img_bgr, mask = mask)
 
-    cv2.imshow('img_bgr',img_bgr)
-    cv2.imshow('mask',mask)
-    cv2.imshow('res',res)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    if(show):
+        cv2.imshow('img_bgr',img_bgr)
+        cv2.imshow('mask',mask)
+        cv2.imshow('res',res)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
+    # Invert the mask to be used for contouring
+    mask_inv = 255 - mask
 
-
-def filterOutGreenObjects(img_bgr):
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
-
-    lower = np.array([36,100,100])
-    upper = np.array([70,255,255])
-    # Threshold the HSV image to get only color
-    mask = cv2.inRange(hsv, lower, upper)
-    # Bitwise-AND mask and original image
-    res = cv2.bitwise_and(img_bgr,img_bgr, mask= mask)
-
-    cv2.imshow('img_bgr',img_bgr)
-    cv2.imshow('mask',mask)
-    cv2.imshow('res',res)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-
-
-def filterOutRedObjects(img_bgr):
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
-    color = np.uint8([[[51,51,216]]])
-    hsvColor = cv2.cvtColor(color,cv2.COLOR_BGR2HSV)
-    hsvValue = hsvColor[0][0][0]
-    lower = np.array([hsvValue - 10,100,100])
-    upper = np.array([hsvValue - 10,255,255])
-    # Threshold the HSV image to get only color
-    mask = cv2.inRange(hsv, lower, upper)
-    # Bitwise-AND mask and original image
-    res = cv2.bitwise_and(img_bgr,img_bgr, mask= mask)
-
-    cv2.imshow('img_bgr',img_bgr)
-    cv2.imshow('mask',mask)
-    cv2.imshow('res',res)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    return mask_inv

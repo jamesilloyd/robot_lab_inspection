@@ -6,8 +6,6 @@ from matplotlib import pyplot as plt
 
 # This function needs to take a blurred / smoothed image
 def simpleThresholding(img_gray):
-
-
     #want to first put a blur on it
     # img = cv2.medianBlur(img_bgr,5)
     
@@ -49,6 +47,7 @@ def adaptiveThresholding(img_gray):
     blockSize = 127
     constant = 11
 
+    # Trialling different blurs and adaptive types
 
     # thresh1 = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,blockSize,constant)
     # thresh2 = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,blockSize,constant)
@@ -62,12 +61,30 @@ def adaptiveThresholding(img_gray):
     # thresh7 = cv2.adaptiveThreshold(img_median, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,blockSize,constant)
     # thresh8 = cv2.adaptiveThreshold(img_median, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,blockSize,constant)
 
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows() 
+
+
+    # titles = ['Original Image','Mean_bin','Gaus_bin']
+    # images = [img_gray, thresh1, thresh2]
+
+    # for i in range(len(images)):
+    #     plt.subplot(2,3,i+1),plt.imshow(images[i],'gray')
+    #     plt.title(titles[i])
+    #     plt.xticks([]),plt.yticks([])
+
+    # plt.show()
+
+
+    # Using an iterative approach to identify which block size and constant that contours the correct number of objects
+
     for i in range(150):
         
         if((i % 2 == 1) and (i > 1)):
             
             for j in range(30):
                 
+                # Trial with different blur types
                 thresh = cv2.adaptiveThreshold(img_gaussian, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,i,j)
                 # cv2.imshow('{0}_{1}'.format(i,j),thresh)
 
@@ -83,7 +100,7 @@ def adaptiveThresholding(img_gray):
                         contour_filter.append(contour)
 
                 if count == 12 or count == 13:
-
+                    # print(count)
                     print('blocksize {0} and constant {1}'.format(i,j))
 
 
@@ -95,19 +112,7 @@ def adaptiveThresholding(img_gray):
                     plt.show()
 
 
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows() 
-
-
-    # titles = ['Original Image','Mean_bin','Gaus_bin']
-    # images = [img_gray, thresh1, thresh2]
-
-    # for i in range(len(images)):
-    #     plt.subplot(2,3,i+1),plt.imshow(images[i],'gray')
-    #     plt.title(titles[i])
-    #     plt.xticks([]),plt.yticks([])
-
-    # plt.show()
+    
 
 
 # Otsu doesn't work for this image type

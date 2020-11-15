@@ -24,19 +24,18 @@ def main():
     imageLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/JamesTutorials/low_cost_vision_exercise/example2.png'
     img_bgr = cv2.imread(imageLocation) 
 
-    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-
-    c_filter =  ZhengyangContourSolution(img_bgr, False)
-    feature_extraction.featureExtraction(img_rgb,c_filter)
-
-
-    # colorFiltering.filterOutGreenObjects(img_bgr)
+    colorFiltering.filterOutColoredObjects(img_bgr,colorFiltering.brown,True)
+    
+    # c_filter =  ZhengyangContourSolution(img_bgr, False)
+    # feature_extraction.featureExtraction(img_rgb,c_filter)
+    
+    
     # originalCode(img_bgr)
-    # findContours(img_bgr)
     # smoothing.smoothing(img_gray)
 
+    # img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+    # thresholding.simpleThresholding(img_gray)
     # thresholding.adaptiveThresholding(img_gray)
-
 
     
 
@@ -45,50 +44,6 @@ def showImageSection(y,h,x,w,img):
     plt.imshow(img_roi,'section')
     plt.show()
 
-
-def findContours(img_bgr):
-    # This function is varies the input parameters to the canny 
-    # edge detection to see which combination yields the correct number of contours
-    gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
-
-    # METHOD 1 using Canny
-    ksize = 3
-    img_blur = cv2.blur(gray,(ksize,ksize))
-    img_gaussian = cv2.GaussianBlur(gray,(ksize,ksize),0)
-    img_median = cv2.medianBlur(gray,ksize)
-    
-
-    for i in range(20):
-        print("Threshold 1: {0}".format(i*0.05))
-        for j in range(25):
-            print("Variance: {0}".format(j*10))
-            # Try this with different blur types
-            canny = cv2.Canny(img_median,j*10*(1-i*0.05),min(j*10*(1+i*0.05),255))
-
-            # cv2.imshow('Canny_orig_{0}_{1}'.format(i*0.05,j*10), canny)
-
-            contours, hierarchy = cv2.findContours(canny, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
-            contour_filter=[]
-            count = 0
-            img_contour= cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
-            for i,contour in enumerate(contours):
-                if hierarchy[0][i][3]==0:
-                    count += 1
-                    cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)  
-                    contour_filter.append(contour)
-
-            print(count)
-            # Want to see which combination of thresholds identifies the correct number of objects  
-            if count == 13 or count == 12:
-                print(i)
-                print(j)
-                cv2.drawContours(img_contour, contours, -1, (0,0,255), 1)
-
-                plt.figure(figsize = (5,5))
-                plt.imshow(img_contour)
-                plt.axis('off')
-                plt.show()
 
 def ZhengyangContourSolution(img_bgr, show = True):
 
@@ -113,7 +68,6 @@ def ZhengyangContourSolution(img_bgr, show = True):
     
     # Find contours
     contours, hierarchy = cv2.findContours(img_thresh,cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
 
     # (3)display
     count = 0
@@ -229,7 +183,6 @@ def originalCode(img_bgr):
     # img_pro=img_otsu.copy()
     img_pro= img_adaptive.copy()
 
-
     # #Image Pre-Process: Morphological Transformations
 
     # (1)region of image
@@ -256,7 +209,6 @@ def originalCode(img_bgr):
 
 
     # (4)display
-
 
     img_up = np.concatenate((img_roi, img_erode), axis=1)
     img_down = np.concatenate((img_dilate, img_open), axis=1)
@@ -285,9 +237,7 @@ def originalCode(img_bgr):
 
     # (2)filter contours
 
-
     print('hierarchy',hierarchy)
-
 
 
     contour_filter=[]
@@ -295,11 +245,11 @@ def originalCode(img_bgr):
     for i,contour in enumerate(contours):
         if hierarchy[0][i][3]==0:
             cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)  
+            # THIS IS THE MAIN LIST THAT STORES THE OBJECTS
             contour_filter.append(contour)
 
 
     # (3)display
-
     plt.figure(figsize = (ds,ds))
     plt.imshow(img_contour)
     plt.axis('off')
@@ -307,12 +257,8 @@ def originalCode(img_bgr):
 
 
 
-
-
-
     # #Feature Extraction
     # Using a contour you can get the centre, area, perimeter
-
 
     area_list=[]
     aspect_ratio_list=[]
@@ -323,6 +269,7 @@ def originalCode(img_bgr):
         M = cv2.moments(contour)
         cx = int(M['m10']/M['m00'])
         cy = int(M['m01']/M['m00'])
+
         # Put a red dot on the image to represent the centre of mass
         img = cv2.circle(img_feature,(cx,cy), 3, (255,0,0), -1)
         
@@ -341,9 +288,6 @@ def originalCode(img_bgr):
         img = cv2.putText(img_feature ,"perimeter: "+str(int(perimeter)),(cx-50,cy+15),cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
         img = cv2.putText(img_feature ,"number: "+str(i),(cx-50,cy+5),cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
 
-
-        # Can also create a bounded rectangle 
-
         area_list.append(area)
         aspect_ratio_list.append(aspect_ratio)
 
@@ -359,7 +303,7 @@ def originalCode(img_bgr):
 
     # (1)tag the data
 
-
+    # How do we make this tag array ?
     tag=['wheel','axle','disk','axle','wheel','flag','wheel','chasis','wheel']
     tag_color={'wheel':'m','axle':'c','disk':'y','chasis':'g','flag':'r'}
     tag_number={'wheel':'0','axle':'1','disk':'2','chasis':'3','flag':'4'}
@@ -371,35 +315,49 @@ def originalCode(img_bgr):
 
 
     # (2)plot features space
-
     plt.figure(figsize = (ds,ds))
 
     for i,t in enumerate(tag):
         plt.scatter(area_list[i],aspect_ratio_list[i],marker='o',color=tag_color[tag[i]])
-        plt.text(area_list[i],aspect_ratio_list[i],t, fontsize=40)
+        plt.text(area_list[i],aspect_ratio_list[i],t, fontsize=20)
 
         plt.xlabel('area',fontsize=40)
         plt.ylabel('aspect_ratio',fontsize=40)
         
         
     plt.scatter(newcomer[0],newcomer[1],marker='*',s=1000,color='r')
-    plt.text(newcomer[0],newcomer[1],'an unknown part?', fontsize=40)
+    plt.text(newcomer[0],newcomer[1],'an unknown part?', fontsize=20)
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
     plt.show()  
 
 
-    # (3)normalize
-
+    # (3)normalize 
     trainData_x_norm = [float(i)/max(area_list) for i in area_list]
     trainData_y_norm = [float(i)/max(aspect_ratio_list) for i in aspect_ratio_list]
     newcomer=[newcomer[0]/max(area_list),newcomer[1]/max(aspect_ratio_list)]
 
+    # (2)plot features space
+    plt.figure(figsize = (ds,ds))
 
-    # #Classification:prediction
+    for i,t in enumerate(tag):
+        plt.scatter(trainData_x_norm[i],trainData_y_norm[i],marker='o',color=tag_color[tag[i]])
+        plt.text(trainData_x_norm[i],trainData_y_norm[i],t, fontsize=20)
+
+        plt.xlabel('area',fontsize=40)
+        plt.ylabel('aspect_ratio',fontsize=40)
+        
+        
+    plt.scatter(newcomer[0],newcomer[1],marker='*',s=1000,color='r')
+    plt.text(newcomer[0],newcomer[1],'an unknown part?', fontsize=20)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.show()  
+
+
+    # #Classification: prediction
 
     # (1)Load data
-
     f=open('/Users/heisenberg/RobotLab/robot_lab_inspection/JamesTutorials/low_cost_vision_exercise/train_model.txt',"r")
     lines=f.readlines()
 
@@ -432,28 +390,34 @@ def originalCode(img_bgr):
 
     # (2)train model
 
-
     trainData=[ [trainData_x[i],trainData_y[i]] for i in range(len(trainData_x))]
     train_arr = np.array(trainData).astype('float32')
     respones_arr = np.array(respones).astype('float32')
 
+
+    # Exciting stuff here, need to checkout how this works.
     knn=cv2.ml.KNearest_create()
     knn.train(train_arr,cv2.ml.ROW_SAMPLE,respones_arr)
 
 
     # (3)prediction
-
     parts_list=[]
     for i,contour in enumerate(contour_filter):
 
         M = cv2.moments(contour)
+        # Get the centre of each contour
         cx = int(M['m10']/M['m00'])
         cy = int(M['m01']/M['m00'])
         
+        # Creates an array of the contour's normalised area and aspect ratio
         newcomer=[area_list[i]/max(area_list),aspect_ratio_list[i]/max(aspect_ratio_list)]   
         newcomer_arr = np.array([newcomer]).astype(np.float32)
         
-        ret,results,neighbour,dist=knn.findNearest(newcomer_arr, 5)    
+        # Using the newcome it find's the nearest value using the trained knn
+        # TODO: look at what format the results are in
+        ret,results,neighbour,dist= knn.findNearest(newcomer_arr, 5)
+
+        # Indexes the number tag array to assign the result back to a part value
         img_new = cv2.putText(img_rgb ,number_tag[str(int(results[0][0]))],(cx+12,cy-12),cv2.FONT_HERSHEY_SIMPLEX ,0.5,(0,0,255),1,cv2.LINE_AA) 
         parts_list.append(number_tag[str(int(results[0][0]))])
 
@@ -463,19 +427,13 @@ def originalCode(img_bgr):
     plt.show()  
 
 
-
     #Post-process
-
-
     count={'wheel':0,'axle':0,'disk':0,'flag':0,'chasis':0}
     for part in parts_list:
         count[part]=count[part]+1
 
 
     print('result',count)
-
-
-
     print('Pass!')
 
 

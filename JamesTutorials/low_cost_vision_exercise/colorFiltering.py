@@ -5,7 +5,8 @@ import random
 import math
 
 
-
+#This method used belows presents the colored object surrounded by a black background 
+# The other method (in code_example.py) presents the image as a distored color based on the hsv image
 
 
 def filterOutBlueObjects(img_bgr):
@@ -69,7 +70,6 @@ def filterOutGreenObjects(img_bgr):
     cv2.imshow('res',res)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
 
 
 

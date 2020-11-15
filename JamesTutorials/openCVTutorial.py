@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 def main():
     loadColorImageInMatPlotLib()
 
+    
 def loadGreyImageInMatPlotLib():
     img = cv2.imread('image.jpeg',0)
 

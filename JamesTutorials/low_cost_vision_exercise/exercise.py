@@ -13,15 +13,178 @@ from matplotlib import pyplot as plt
 import random 
 import math
 import colorFiltering
+import smoothing
+import feature_extraction
+import thresholding
 
-img_bgr = cv2.imread('example2.png') 
+# mean brightness is 202.1570612244898
+
 
 def main():
-    colorFiltering.filterOutRedObjects(img_bgr)
-    # otherCode()
+    imageLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/JamesTutorials/low_cost_vision_exercise/example2.png'
+    img_bgr = cv2.imread(imageLocation) 
+
+    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+
+    c_filter =  ZhengyangContourSolution(img_bgr, False)
+    feature_extraction.featureExtraction(img_rgb,c_filter)
 
 
-def otherCode():
+    # colorFiltering.filterOutGreenObjects(img_bgr)
+    # otherCode(img_bgr)
+    # findContours(img_bgr)
+    # smoothing.smoothing(img_gray)
+
+    # thresholding.adaptiveThresholding(img_gray)
+
+
+    
+
+def showImageSection(y,h,x,w,img):
+    img_roi = img[y:y+h,x:x+w]
+    plt.imshow(img_roi,'section')
+    plt.show()
+
+
+# def findContours(img_bgr):
+
+
+    gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+
+    # METHOD 1 using Canny
+    ksize = 3
+    # blur = cv2.GaussianBlur(gray, (ksize,ksize),0, cv2.BORDER_DEFAULT)
+
+    img_blur = cv2.blur(gray,(ksize,ksize))
+    img_gaussian = cv2.GaussianBlur(gray,(ksize,ksize),0)
+    img_median = cv2.medianBlur(gray,ksize)
+
+    # variance = 0.2
+    # average = 70
+
+
+    # canny = cv2.Canny(gray,average*(1-variance),average*(1+variance))
+    
+    # canny2 = cv2.Canny(img_gaussian,average*(1-variance),average*(1+variance))
+    # canny3 = cv2.Canny(img_median,average*(1-variance),average*(1+variance))
+
+    # cv2.imshow('Canny_orig_{0}_{1}'.format(variance,average), canny)
+    # cv2.imshow('Canny_gaus_{0}_{1}'.format(variance,average), canny2)
+    # cv2.imshow('Canny_median_{0}_{1}'.format(variance,average), canny3)
+
+    # variance = 0.33
+    # average = 70
+
+
+    # canny = cv2.Canny(gray,average*(1-variance),average*(1+variance))
+    
+    # canny2 = cv2.Canny(img_gaussian,average*(1-variance),average*(1+variance))
+    # canny3 = cv2.Canny(img_median,average*(1-variance),average*(1+variance))
+
+    # cv2.imshow('Canny_orig_{0}_{1}'.format(variance,average), canny)
+    # cv2.imshow('Canny_gaus_{0}_{1}'.format(variance,average), canny2)
+    # cv2.imshow('Canny_median_{0}_{1}'.format(variance,average), canny3)
+
+    # variance = 0.5
+    # average = 70
+
+    
+
+
+    # canny = cv2.Canny(gray,average*(1-variance),average*(1+variance))
+    
+    # canny2 = cv2.Canny(img_gaussian,average*(1-variance),average*(1+variance))
+    # canny3 = cv2.Canny(img_median,average*(1-variance),average*(1+variance))
+
+    # cv2.imshow('Canny_orig_{0}_{1}'.format(variance,average), canny)
+    # cv2.imshow('Canny_gaus_{0}_{1}'.format(variance,average), canny2)
+    # cv2.imshow('Canny_median_{0}_{1}'.format(variance,average), canny3)
+
+    for i in range(20):
+        print(i*0.05)
+        for j in range(25):
+            print(j*10)
+            canny = cv2.Canny(img_median,j*10*(1-i*0.05),min(j*10*(1+i*0.05),255))
+            # cv2.imshow('Canny_orig_{0}_{1}'.format(i*0.05,j*10), canny)
+
+            contours, hierarchy = cv2.findContours(canny, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+            contour_filter=[]
+            count = 0
+            img_contour= cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+            for i,contour in enumerate(contours):
+                if hierarchy[0][i][3]==0:
+                    count += 1
+                    cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)  
+                    contour_filter.append(contour)
+
+            print(count)
+            if count == 13 or count == 12:
+                print(i)
+                print(j)
+                cv2.drawContours(img_contour, contours, -1, (0,0,255), 1)
+
+                plt.figure(figsize = (5,5))
+                plt.imshow(img_contour)
+                plt.axis('off')
+                plt.show()
+
+def ZhengyangContourSolution(img_bgr, show = True):
+
+    # Change color space
+    img_grey = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+
+    if(show): cv2.imshow('Gray', img_grey)
+
+    # Apply blur to remove noise
+    ksize = 3
+    img_gausBlur = cv2.GaussianBlur(img_grey,(ksize,ksize),0)
+
+    if(show): cv2.imshow('GausBlur', img_gausBlur)
+
+    # Apply thresholding to find 
+    img_thresh = cv2.adaptiveThreshold(img_gausBlur, 255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,127,11)
+
+    if(show): cv2.imshow('Adaptive Gaus Threshold', img_thresh)
+
+    # He doesn't choose to actually apply any morphological transformations
+    
+    # Find contours
+    contours, hierarchy = cv2.findContours(img_thresh,cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+
+    # (3)display
+    count = 0
+    contour_filter=[]
+    img_contour=img_rgb.copy()
+    for i,contour in enumerate(contours):
+        if hierarchy[0][i][3]==0:
+            count += 1
+            cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)  
+            contour_filter.append(contour)
+
+
+    if(show):
+        print(count)
+
+        plt.figure(figsize = (5,5))
+        plt.imshow(img_contour)
+        plt.axis('off')
+        plt.show()
+
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+    return contour_filter
+
+
+
+
+
+
+
+def otherCode(img_bgr):
     ds=5
 
     #Change colours
@@ -29,24 +192,24 @@ def otherCode():
     img_grey = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2GRAY)
     img_hsv = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2HSV)
 
+    plt.imshow(img_grey)
+    plt.show()
+
+
+    # DONE
     # (4)color filter
     lower = np.array([36,25,25])
     upper = np.array([70,255,255])
     img_color = cv2.inRange(img_hsv, lower, upper)
-
-
 
     f, axarr = plt.subplots(1,2)
     axarr[0].imshow(img_rgb)
     axarr[1].imshow(img_color)
     plt.show()
 
-
     #Image Pre-Process: Smoothing
-
+    #Image Pre-Process: Smoothing
     #(1)region of image
-
-
     y1=140
     h=150
     x1=10
@@ -68,10 +231,7 @@ def otherCode():
     img_gaussian = cv2.GaussianBlur(img_roi,(ksize,ksize),0)
     img_median = cv2.medianBlur(img_roi,ksize)
 
-
     # (4)display
-
-
     img_up = np.concatenate((img_roi, img_blur), axis=1)
     img_down = np.concatenate((img_gaussian, img_median), axis=1)
     img_all = np.concatenate((img_up, img_down), axis=0)
@@ -83,18 +243,13 @@ def otherCode():
     plt.axis('off')
     plt.show()
 
-
     img_pro = cv2.GaussianBlur(img_grey,(ksize,ksize),0)
 
 
     # #Image Pre-Process: Thresholding
 
     # (1)global,adaptive,otsu 
-
-
     ret,img_global = cv2.threshold(img_pro,100,255,cv2.THRESH_BINARY)
-    #look at adaptives
-    # cv2.ADAPTIVE
     img_adaptive = cv2.adaptiveThreshold(img_pro,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,127, 11)
     # img_adaptive = cv2.adaptiveThreshold(img_pro,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
     ret2,img_otsu = cv2.threshold(img_pro,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
@@ -115,18 +270,19 @@ def otherCode():
     plt.show()
 
 
-    img_pro=img_otsu.copy()
+    # img_pro=img_otsu.copy()
+    img_pro= img_adaptive.copy()
 
 
     # #Image Pre-Process: Morphological Transformations
 
     # (1)region of image
 
-    y1=240
-    h=80
-    x1=220
-    w=80
-    img_roi=img_otsu[y1:y1+h,x1:x1+w]
+    y1=140
+    h=150
+    x1=10
+    w=40
+    img_roi=img_pro[y1:y1+h,x1:x1+w]
 
 
     # (2)kernel size and iterative number
@@ -137,7 +293,6 @@ def otherCode():
 
 
     # (3)erode,dilate,open
-
 
     img_erode = cv2.erode(img_roi,kernel,itern)
     img_dilate = cv2.dilate(img_roi,kernel,itern)
@@ -167,8 +322,9 @@ def otherCode():
 
     # (1)contours calculation
 
-
-    contours,hierarchy = cv2.findContours(img_pro,cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE )
+    #TREE = hierarchical , LIST = all, EXTERNAL = external 
+    #APPROX_NONE = returns all, APPROX_SIMPLE = compresses contours into two points on a line
+    contours, hierarchy = cv2.findContours(img_pro,cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE )
 
 
     # (2)filter contours
@@ -188,14 +344,18 @@ def otherCode():
 
     # (3)display
 
-
     plt.figure(figsize = (ds,ds))
     plt.imshow(img_contour)
     plt.axis('off')
     plt.show()
 
 
+
+
+
+
     # #Feature Extraction
+    # Using a contour you can get the centre, area, perimeter
 
 
     area_list=[]
@@ -207,6 +367,7 @@ def otherCode():
         M = cv2.moments(contour)
         cx = int(M['m10']/M['m00'])
         cy = int(M['m01']/M['m00'])
+        # Put a red dot on the image to represent the centre of mass
         img = cv2.circle(img_feature,(cx,cy), 3, (255,0,0), -1)
         
         #The aspect ratio, which is the width divided by the height of the bounding rectangle
@@ -223,6 +384,9 @@ def otherCode():
         perimeter = cv2.arcLength(contour,True)
         img = cv2.putText(img_feature ,"perimeter: "+str(int(perimeter)),(cx-50,cy+15),cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
         img = cv2.putText(img_feature ,"number: "+str(i),(cx-50,cy+5),cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
+
+
+        # Can also create a bounded rectangle 
 
         area_list.append(area)
         aspect_ratio_list.append(aspect_ratio)
@@ -280,7 +444,7 @@ def otherCode():
 
     # (1)Load data
 
-    f=open('train_model.txt',"r")
+    f=open('/Users/heisenberg/RobotLab/robot_lab_inspection/JamesTutorials/low_cost_vision_exercise/train_model.txt',"r")
     lines=f.readlines()
 
     trainData_x=[]

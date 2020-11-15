@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-def findContours(img_bgr):
+def findCannyContoursParameters(img_bgr):
     # This function is varies the input parameters to the canny 
     # edge detection to see which combination yields the correct number of contours
     gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)

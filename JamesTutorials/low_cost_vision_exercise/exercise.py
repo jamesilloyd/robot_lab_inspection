@@ -5,8 +5,6 @@
 
 # Zhengyang Ling ZL461@cam.ac.uk
 
-# #import modules 
-
 import numpy as np
 from cv2 import cv2
 from matplotlib import pyplot as plt
@@ -16,15 +14,49 @@ import colorFiltering
 import smoothing
 import feature_extraction
 import thresholding
+from part import Part
 
 # mean brightness is 202.1570612244898
 
 
 def main():
     imageLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/JamesTutorials/low_cost_vision_exercise/example2.png'
-    img_bgr = cv2.imread(imageLocation) 
+    img_bgr = cv2.imread(imageLocation)
 
-    colorFiltering.filterOutColoredObjects(img_bgr,colorFiltering.brown,True)
+
+    mask_inv = colorFiltering.filterOutColoredObjects(img_bgr,colorFiltering.blue,False)
+    cv2.imshow('mask_inv',mask_inv)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    contours, hierarchy = cv2.findContours(mask_inv, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    contour_filter=[]
+    count = 0
+    for i,contour in enumerate(contours):
+        if hierarchy[0][i][3]==0:
+            count += 1
+            contour_filter.append(contour)
+
+    contour = contour_filter[0]
+
+
+    bluePart = Part(contour_filter[0])
+    print(bluePart.aspectRatio)
+    print(bluePart.angleOfRotation)
+
+    
+
+    # M = cv2.moments(contour_filter[0])
+    # cx = int(M['m10']/M['m00'])
+    # cy = int(M['m01']/M['m00'])
+
+    # contour_filter_all = ZhengyangContourSolution(img_bgr,show = False)
+
+    # for i, contour in enumerate(contour_filter_all):
+    #     result = cv2.pointPolygonTest(contour, (cx,cy), False)
+    #     if(result == 1):
+    #         print(i)
     
     # c_filter =  ZhengyangContourSolution(img_bgr, False)
     # feature_extraction.featureExtraction(img_rgb,c_filter)

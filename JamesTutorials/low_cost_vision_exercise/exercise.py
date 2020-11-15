@@ -31,7 +31,7 @@ def main():
 
 
     # colorFiltering.filterOutGreenObjects(img_bgr)
-    # otherCode(img_bgr)
+    # originalCode(img_bgr)
     # findContours(img_bgr)
     # smoothing.smoothing(img_gray)
 
@@ -46,65 +46,25 @@ def showImageSection(y,h,x,w,img):
     plt.show()
 
 
-# def findContours(img_bgr):
-
-
+def findContours(img_bgr):
+    # This function is varies the input parameters to the canny 
+    # edge detection to see which combination yields the correct number of contours
     gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
 
     # METHOD 1 using Canny
     ksize = 3
-    # blur = cv2.GaussianBlur(gray, (ksize,ksize),0, cv2.BORDER_DEFAULT)
-
     img_blur = cv2.blur(gray,(ksize,ksize))
     img_gaussian = cv2.GaussianBlur(gray,(ksize,ksize),0)
     img_median = cv2.medianBlur(gray,ksize)
-
-    # variance = 0.2
-    # average = 70
-
-
-    # canny = cv2.Canny(gray,average*(1-variance),average*(1+variance))
     
-    # canny2 = cv2.Canny(img_gaussian,average*(1-variance),average*(1+variance))
-    # canny3 = cv2.Canny(img_median,average*(1-variance),average*(1+variance))
-
-    # cv2.imshow('Canny_orig_{0}_{1}'.format(variance,average), canny)
-    # cv2.imshow('Canny_gaus_{0}_{1}'.format(variance,average), canny2)
-    # cv2.imshow('Canny_median_{0}_{1}'.format(variance,average), canny3)
-
-    # variance = 0.33
-    # average = 70
-
-
-    # canny = cv2.Canny(gray,average*(1-variance),average*(1+variance))
-    
-    # canny2 = cv2.Canny(img_gaussian,average*(1-variance),average*(1+variance))
-    # canny3 = cv2.Canny(img_median,average*(1-variance),average*(1+variance))
-
-    # cv2.imshow('Canny_orig_{0}_{1}'.format(variance,average), canny)
-    # cv2.imshow('Canny_gaus_{0}_{1}'.format(variance,average), canny2)
-    # cv2.imshow('Canny_median_{0}_{1}'.format(variance,average), canny3)
-
-    # variance = 0.5
-    # average = 70
-
-    
-
-
-    # canny = cv2.Canny(gray,average*(1-variance),average*(1+variance))
-    
-    # canny2 = cv2.Canny(img_gaussian,average*(1-variance),average*(1+variance))
-    # canny3 = cv2.Canny(img_median,average*(1-variance),average*(1+variance))
-
-    # cv2.imshow('Canny_orig_{0}_{1}'.format(variance,average), canny)
-    # cv2.imshow('Canny_gaus_{0}_{1}'.format(variance,average), canny2)
-    # cv2.imshow('Canny_median_{0}_{1}'.format(variance,average), canny3)
 
     for i in range(20):
-        print(i*0.05)
+        print("Threshold 1: {0}".format(i*0.05))
         for j in range(25):
-            print(j*10)
+            print("Variance: {0}".format(j*10))
+            # Try this with different blur types
             canny = cv2.Canny(img_median,j*10*(1-i*0.05),min(j*10*(1+i*0.05),255))
+
             # cv2.imshow('Canny_orig_{0}_{1}'.format(i*0.05,j*10), canny)
 
             contours, hierarchy = cv2.findContours(canny, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -119,6 +79,7 @@ def showImageSection(y,h,x,w,img):
                     contour_filter.append(contour)
 
             print(count)
+            # Want to see which combination of thresholds identifies the correct number of objects  
             if count == 13 or count == 12:
                 print(i)
                 print(j)
@@ -179,12 +140,7 @@ def ZhengyangContourSolution(img_bgr, show = True):
     return contour_filter
 
 
-
-
-
-
-
-def otherCode(img_bgr):
+def originalCode(img_bgr):
     ds=5
 
     #Change colours

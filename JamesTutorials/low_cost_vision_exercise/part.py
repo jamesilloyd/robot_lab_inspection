@@ -3,9 +3,10 @@ from cv2 import cv2
 # Want to use this class to initiate objects that can be added to a list and identified 
 class Part:
 
-    name = 'unamed'
+    name = 'unnamed'
     isIdentified = False
     isQCPassed = False
+    colour = "colourless"
 
 
     def __init__(self, contour):
@@ -17,7 +18,7 @@ class Part:
         M = cv2.moments(self.contour)
         cx = int(M['m10']/M['m00'])
         cy = int(M['m01']/M['m00'])
-        return [cx,cy]
+        return (cx,cy)
     
 
     # This method creates a bounding rectangle, however it isn't isn't orientated with the object

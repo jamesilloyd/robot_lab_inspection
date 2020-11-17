@@ -14,6 +14,7 @@ import colorFiltering
 import smoothing
 import feature_extraction
 import thresholding
+import contouring
 from part import Part
 
 # mean brightness is 202.1570612244898
@@ -23,51 +24,11 @@ def main():
     imageLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/JamesTutorials/low_cost_vision_exercise/example2.png'
     img_bgr = cv2.imread(imageLocation)
 
-
-    mask_inv = colorFiltering.filterOutColoredObjects(img_bgr,colorFiltering.blue,False)
-    cv2.imshow('mask_inv',mask_inv)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-    contours, hierarchy = cv2.findContours(mask_inv, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
-    contour_filter=[]
-    count = 0
-    for i,contour in enumerate(contours):
-        if hierarchy[0][i][3]==0:
-            count += 1
-            contour_filter.append(contour)
-
-    contour = contour_filter[0]
+    # knn = cv2.ml.KNearest_create()
+    originalCode(img_bgr)
 
 
-    bluePart = Part(contour_filter[0])
-    print(bluePart.aspectRatio)
-    print(bluePart.angleOfRotation)
 
-    
-
-    # M = cv2.moments(contour_filter[0])
-    # cx = int(M['m10']/M['m00'])
-    # cy = int(M['m01']/M['m00'])
-
-    # contour_filter_all = ZhengyangContourSolution(img_bgr,show = False)
-
-    # for i, contour in enumerate(contour_filter_all):
-    #     result = cv2.pointPolygonTest(contour, (cx,cy), False)
-    #     if(result == 1):
-    #         print(i)
-    
-    # c_filter =  ZhengyangContourSolution(img_bgr, False)
-    # feature_extraction.featureExtraction(img_rgb,c_filter)
-    
-    
-    # originalCode(img_bgr)
-    # smoothing.smoothing(img_gray)
-
-    # img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
-    # thresholding.simpleThresholding(img_gray)
-    # thresholding.adaptiveThresholding(img_gray)
 
     
 
@@ -83,13 +44,17 @@ def ZhengyangContourSolution(img_bgr, show = True):
     img_grey = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 
-    if(show): cv2.imshow('Gray', img_grey)
+    if(show):
+        plt.imshow(img_grey,'gray')
+        plt.show()
 
     # Apply blur to remove noise
     ksize = 3
     img_gausBlur = cv2.GaussianBlur(img_grey,(ksize,ksize),0)
 
-    if(show): cv2.imshow('GausBlur', img_gausBlur)
+    if(show):
+        plt.imshow(img_gausBlur,'gray')
+        plt.show()
 
     # Apply thresholding to find 
     img_thresh = cv2.adaptiveThreshold(img_gausBlur, 255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,127,11)
@@ -103,10 +68,10 @@ def ZhengyangContourSolution(img_bgr, show = True):
 
     # (3)display
     count = 0
-    contour_filter=[]
-    img_contour=img_rgb.copy()
-    for i,contour in enumerate(contours):
-        if hierarchy[0][i][3]==0:
+    contour_filter = []
+    img_contour = img_rgb.copy()
+    for i, contour in enumerate(contours):
+        if hierarchy[0][i][3] == 0:
             count += 1
             cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)  
             contour_filter.append(contour)
@@ -417,7 +382,7 @@ def originalCode(img_bgr):
     plt.ylabel('aspect_ratio',fontsize=40)
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
-    plt.show()  
+    plt.show() 
 
 
     # (2)train model
@@ -447,7 +412,7 @@ def originalCode(img_bgr):
         
         # Using the newcome it find's the nearest value using the trained knn
         # TODO: look at what format the results are in
-        ret,results,neighbour,dist= knn.findNearest(newcomer_arr, 5)
+        ret,results,neighbour,dist = knn.findNearest(newcomer_arr, 5)
 
         # Indexes the number tag array to assign the result back to a part value
         img_new = cv2.putText(img_rgb ,number_tag[str(int(results[0][0]))],(cx+12,cy-12),cv2.FONT_HERSHEY_SIMPLEX ,0.5,(0,0,255),1,cv2.LINE_AA) 

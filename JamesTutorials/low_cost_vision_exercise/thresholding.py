@@ -36,7 +36,7 @@ def simpleThresholding(img_gray):
 def adaptiveThresholding(img_gray):
 
 
-    ksize = 3
+    ksize = 5
     img_blur = cv2.blur(img_gray,(ksize,ksize))
     img_gaussian = cv2.GaussianBlur(img_gray,(ksize,ksize),0)
     img_median = cv2.medianBlur(img_gray,ksize)
@@ -77,7 +77,6 @@ def adaptiveThresholding(img_gray):
 
 
     # Using an iterative approach to identify which block size and constant that contours the correct number of objects
-
     for i in range(150):
         
         if((i % 2 == 1) and (i > 1)):
@@ -99,10 +98,10 @@ def adaptiveThresholding(img_gray):
                         cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)  
                         contour_filter.append(contour)
 
-                if count == 12 or count == 13:
-                    # print(count)
+                # if count == 12 or count == 13:
+                print(count)
+                if count < 10 and count > 3 :
                     print('blocksize {0} and constant {1}'.format(i,j))
-
 
                     cv2.drawContours(img_contour, contours, -1, (0,0,255), 1)
 

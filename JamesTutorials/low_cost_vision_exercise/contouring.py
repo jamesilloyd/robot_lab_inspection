@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 
 def findCannyContoursParameters(img_bgr):
-    # This function is varies the input parameters to the canny 
+    # This function varies the input parameters to the canny
     # edge detection to see which combination yields the correct number of contours
     gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
 
@@ -20,6 +20,7 @@ def findCannyContoursParameters(img_bgr):
             print("Variance: {0}".format(j*10))
             # Try this with different blur types
             canny = cv2.Canny(img_gaussian,j*10*(1-i*0.05),min(j*10*(1+i*0.05),255))
+            cv2.imshow('canny',canny)
 
             # cv2.imshow('Canny_orig_{0}_{1}'.format(i*0.05,j*10), canny)
 
@@ -37,7 +38,7 @@ def findCannyContoursParameters(img_bgr):
             print(count)
             # Want to see which combination of thresholds identifies the correct number of objects  
             # if count == 13 or count == 12:
-            if count == 9:
+            if count == 4:
                 print(i)
                 print(j)
                 cv2.drawContours(img_contour, contours, -1, (0,0,255), 1)
@@ -46,3 +47,6 @@ def findCannyContoursParameters(img_bgr):
                 plt.imshow(img_contour)
                 plt.axis('off')
                 plt.show()
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

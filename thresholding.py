@@ -117,7 +117,9 @@ def otsuThresholding(img_gray, show = False):
 
     # Otsu's thresholding after Gaussian filtering
 
-    minArea = 30
+    # Is this too high?
+    minArea = 160
+
 
     blur = cv2.GaussianBlur(img_gray,(5,5),0)
     ret3 , th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)

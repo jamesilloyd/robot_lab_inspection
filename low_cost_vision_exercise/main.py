@@ -30,8 +30,6 @@ def main():
 
 
 
-    
-
 def showImageSection(y,h,x,w,img):
     img_roi = img[y:y+h,x:x+w]
     plt.imshow(img_roi,'section')

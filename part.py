@@ -1,4 +1,5 @@
 from cv2 import cv2
+import numpy as np
 
 # Want to use this class to initiate objects that can be added to a list and identified 
 class Part:
@@ -40,7 +41,8 @@ class Part:
         # box = cv2.boxPoints(rect)
         # box = np.int0(box)
         rect = cv2.minAreaRect(self.contour)
-        return round(rect[1][0]/rect[1][1],2)
+        (x,y), (width, height), angle = rect
+        return min(width,height) / max(width,height)
 
 
     @property
@@ -59,6 +61,30 @@ class Part:
 
         return cv2.contourArea(self.contour) - negativeArea 
 
+
+    @property
+    def extent(self):
+        # Ratio of contour area to bounding rectangle area
+        rect = cv2.minAreaRect(self.contour)
+        box = cv2.boxPoints(rect)
+        box = np.int0(box)
+        boxArea = cv2.contourArea(box)
+        return self.area / boxArea
+
+    @property 
+    def solidity(self):
+        # Ratio of contour area to it's convex hull area
+        hull = cv2.convexHull(self.contour)
+        hullArea = cv2.contourArea(hull)
+        return float(self.area)/hullArea
+
     @property
     def perimeter(self):
-        return cv2.arcLength(self.contour,True)
+        outerPerimeter = cv2.arcLength(self.contour,True)
+        innerPerimeter = 0
+        if self.childContours:
+            for i in range(len(self.childContours)):
+                innerPerimeter += cv2.arcLength(self.childContours[i],True)
+
+        return innerPerimeter + outerPerimeter
+

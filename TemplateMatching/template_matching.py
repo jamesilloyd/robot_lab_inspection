@@ -87,6 +87,7 @@ def imageCropping(img_bgr, match_list, temp_w, temp_h):
 	plt.axis('off')
 	plt.show()
 
+	# Return the cropped image to be used in the next function
 	return img_crop
 
 

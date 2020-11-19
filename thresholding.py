@@ -4,53 +4,52 @@ from matplotlib import pyplot as plt
 import part
 
 
-def otsuThresholding(img_gray, show = False):
+def otsuThresholding(img_gray):
 
-    # Otsu's thresholding after Gaussian filtering
     # Is this too high?
+    # The minimum area is used to remove any contours that should be neglected
     minArea = 160
 
+    # Apply a gaussion blur to the grey image
     blur = cv2.GaussianBlur(img_gray,(5,5),0)
-    ret3 , th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    # Apply otsu thresholding to the blurred image
+    ret3 , thresh = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
-    contours, hierarchy = cv2.findContours(th3, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
+    # Prepare a list for the part objects corresponding to contours
     parts = []
-    count = 0
-    if(show): img_contour= cv2.cvtColor(img_gray, cv2.COLOR_BGR2RGB)
-    # This check ensures that the tray isn't blank (and a silly amount of contours have been detected)
+
+    # This check ensures that the tray isn't empty (and a silly amount of contours have been detected)
     if(len(contours) < 30):
+        # Iterate through contours found
         for m, contour in enumerate(contours):
             # If the contour is on the outside, you have found a part
             if hierarchy[0][m][3] == -1:
                 # Check that the part has a non negligble area
                 if cv2.contourArea(contour) > minArea:
-                    count += 1
-                    if(show): cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)
-
+                    # YOU HAVE FOUND A PART
+                    # Create a list to add the contour's child contours to
                     child_contours = []
                     
                     # Check if the contour has a child
                     if hierarchy[0][m][2] != -1:
+                        # Get the index of the child contour
                         index = hierarchy[0][m][2]
                         foundLastChild = False
+
                         while foundLastChild is False:
                             # Use recurrsion to get all the child contours
                             child_contours, index, foundLastChild = addChildContoursToList(child_contours,contours,hierarchy,index)
                             
-
+                    # Create a part object for each contour found
                     piece = part.Part(contour)
+                    # Add the child contours to the object
                     piece.childContours = child_contours
+                    # Add the part object to the list to be returned
                     parts.append(piece)
 
-    if show:
-        cv2.drawContours(img_contour, contours, -1, (0,0,255), 1)
-        plt.figure(figsize = (7,7)) 
-        plt.title(count)
-        plt.imshow(img_contour)
-        plt.axis('off')
-        plt.show()
-                
+    # Return the list of part objects to be classified
     return parts
 
 
@@ -59,11 +58,21 @@ def addChildContoursToList(childContourList,contours,hierarchy,index):
     childContourList.append(contours[index])
     # Check if there is another child
     if hierarchy[0][index][0] != -1:
+        # Get the new child index
         newIndex = hierarchy[0][index][0]
+        # Return the updated contour list, the index for the the next countour
+        # If there is another child return False to indicate calling the function again
         return childContourList, newIndex, False
     else:
+        # Return the completed contour list, same index as before, and true to indicate we have found the last child
         return childContourList, index, True
 
+    
+
+
+
+
+# --------------NOT USED--------------NOT USED--------------NOT USED--------------NOT USED-------------- #
 
 # This function needs to take a blurred / smoothed image
 def simpleThresholding(img_gray):
@@ -72,7 +81,6 @@ def simpleThresholding(img_gray):
     
     threshold = 127
     maxValue = 255
-
 
     ret, thresh1 = cv2.threshold(img_gray,threshold,maxValue,cv2.THRESH_BINARY)
     ret, thresh2 = cv2.threshold(img_gray,threshold,maxValue,cv2.THRESH_BINARY_INV)

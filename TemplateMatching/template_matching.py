@@ -51,6 +51,7 @@ def templateMatching(img_bgr, img_template):
 	ds=7
 	plt.figure(figsize = (ds,ds))
 	plt.imshow(img_rgb)
+	plt.title('Templates found')
 	plt.axis('off')
 	plt.show()
 
@@ -85,16 +86,8 @@ def imageCropping(img_bgr, match_list, temp_w, temp_h):
 	plt.figure(figsize = (ds,ds))
 	plt.imshow(img_crop_rgb)
 	plt.axis('off')
+	plt.title('Cropped image')
 	plt.show()
 
 	# Return the cropped image to be used in the next function
 	return img_crop
-
-
-# if __name__ == "__main__":
-
-# 	match_list, temp_w, temp_h = templateMatching(img_bgr, img_template)
-
-# 	print(match_list)
-
-# 	imageCropping(img_bgr, match_list, temp_w, temp_h)

@@ -36,6 +36,10 @@ def partClassification(img_bgr, show = False, isCurves = True):
                 "10":0,
                 "11":0}
 
+    # prepare variables for graph title
+    passedCount = 0
+    failedCount = 0
+
     # Change to rgb for plotting purposes
     img_rgb = cv2.cvtColor(img_bgr,cv2.COLOR_BGR2RGB)
 
@@ -59,7 +63,7 @@ def partClassification(img_bgr, show = False, isCurves = True):
         if show:
             cv2.drawContours(img_rgb, [piece.contour], -1, (0,0,255), 2)
             cv2.drawContours(img_rgb,piece.childContours,-1,(0,0,255), 1)
-            cv2.putText(img_rgb ,str(j),piece.centreXY,cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
+            cv2.putText(img_rgb ,str(j),piece.centreXYText,cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
             cv2.circle(img_rgb,piece.centreXY, 3, (255,0,0), -1)
             # Get the bounding rectangle to be plotted after we have identified the part as good or bad
             rect = cv2.minAreaRect(piece.contour)
@@ -67,6 +71,7 @@ def partClassification(img_bgr, show = False, isCurves = True):
             box = np.int0(box)
 
         # Classifying using parameters of aspect ratio, solidity and area / perimeter
+        #TODO: This can all be added into the part object
         if(piece.aspectRatio > aspectRatioRange[0] and piece.aspectRatio < aspectRatioRange[1] and piece.solidity > solidityRange[0] and piece.solidity < solidityRange[1] and piece.area / piece.perimeter > areaPerimeterRange[0] and piece.area / piece.perimeter < areaPerimeterRange[1]):
             # The part has passed QC and can be marked as good
             piece.isQCPassed = True
@@ -112,15 +117,17 @@ def partClassification(img_bgr, show = False, isCurves = True):
 
         # Mark the piece as good or bad
         if piece.isQCPassed:
-            results[str(resultIndex)] = 1 
+            results[str(resultIndex)] = 1
+            passedCount += 1
         
         else:
             results[str(resultIndex)] = 0
+            failedCount += 1
 
     # Show results
     if(show):
         plt.figure(figsize = (7,7))
-        plt.title('Count: {0}'.format(len(parts)))
+        plt.title('Count: {0} - {1} Passed - {2} Failed'.format(len(parts),passedCount,failedCount))
         plt.imshow(img_rgb)
         plt.axis('off')
         plt.show()

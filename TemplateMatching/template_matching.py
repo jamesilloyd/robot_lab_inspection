@@ -1,12 +1,18 @@
 #import modules
-import cv2
+# import cv2
+from cv2 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 import math
 
 #read image and template
-img_bgr = cv2.imread('opencv_frame_24.png')
-img_template = cv2.imread('template_straight.png',0)
+
+# imageLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/TemplateMatching/opencv_frame_24.png'
+# templateLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/TemplateMatching/template_straight.png'
+# img_bgr = cv2.imread(imageLocation)
+# img_template = cv2.imread(templateLocation,0)
+# img_bgr = cv2.imread('opencv_frame_24.png')
+# img_template = cv2.imread('template_straight.png',0)
 
 
 #template matching function returns list of matched locations
@@ -42,7 +48,7 @@ def templateMatching(img_bgr, img_template):
 	for pt in pt_list:
 		cv2.rectangle(img_rgb, pt, (pt[0] + temp_w, pt[1] + temp_h), (0,0,255), 2)
 
-	ds=5
+	ds=7
 	plt.figure(figsize = (ds,ds))
 	plt.imshow(img_rgb)
 	plt.axis('off')
@@ -51,6 +57,7 @@ def templateMatching(img_bgr, img_template):
 	return pt_list, temp_w, temp_h
 
 #image cropping function crops image to matched template locations
+# Returns the cropped image to be used by contouring
 def imageCropping(img_bgr, match_list, temp_w, temp_h):
 
 	x_list = []
@@ -68,19 +75,25 @@ def imageCropping(img_bgr, match_list, temp_w, temp_h):
 
 	img_crop = img_bgr[y_min:y_max, x_min:x_max]
 
-	cv2.imwrite('img_crop.png',img_crop)
+	# TODO: come back to this
+	# cv2.imwrite('img_crop.png',img_crop)
 
-	ds=5
+	# Change from bgr to rgb for matplot lib
+	img_crop_rgb = cv2.cvtColor(img_crop, cv2.COLOR_BGR2RGB)
+
+	ds=7
 	plt.figure(figsize = (ds,ds))
-	plt.imshow(img_crop)
+	plt.imshow(img_crop_rgb)
 	plt.axis('off')
 	plt.show()
 
+	return img_crop
 
-if __name__ == "__main__":
 
-	match_list, temp_w, temp_h = templateMatching(img_bgr, img_template)
+# if __name__ == "__main__":
 
-	print(match_list)
+# 	match_list, temp_w, temp_h = templateMatching(img_bgr, img_template)
 
-	imageCropping(img_bgr, match_list, temp_w, temp_h)
+# 	print(match_list)
+
+# 	imageCropping(img_bgr, match_list, temp_w, temp_h)

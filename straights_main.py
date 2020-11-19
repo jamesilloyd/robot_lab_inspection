@@ -7,7 +7,6 @@ from mpl_toolkits.mplot3d import Axes3D
 
 # TODO: finish writing code to send back results.
 
-
 total_part_number = 0
 
 correct_part_tags = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1]
@@ -19,7 +18,6 @@ aspectRatioRange = [0.5396824839373978, 0.5612188032263316]
 solidityRange = [0.8258002560819462, 0.8425492651420287]
 areaPerimeterRange = [13.984231658690996, 14.375006235699498]
 show = True
-
 
 
 for i in range(36):
@@ -60,8 +58,7 @@ for i in range(36):
         if show:
             cv2.drawContours(img_rgb, [piece.contour], -1, (0,0,255), 2)
             cv2.drawContours(img_rgb,piece.childContours,-1,(0,0,255), 1)
-            img = cv2.putText(img_rgb ,str(total_part_number),piece.centreXY,cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
-            
+            img = cv2.putText(img_rgb ,str(j),piece.centreXY,cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
             img = cv2.circle(img_rgb,piece.centreXY, 3, (255,0,0), -1)
             rect = cv2.minAreaRect(piece.contour)
             box = cv2.boxPoints(rect)
@@ -69,9 +66,11 @@ for i in range(36):
 
         # Classifying using parameters
         if(piece.aspectRatio > 0.52 and piece.aspectRatio < 0.57 and piece.solidity > 0.80 and piece.solidity < 0.85 and piece.area / piece.perimeter > 13.6 and piece.area / piece.perimeter < 14.5):
+            piece.isQCPassed = True
             if show: img = cv2.drawContours(img_rgb,[box],0,(0,255,0),1)
 
         else:
+            piece.isQCPassed = False
             if show: img = cv2.drawContours(img_rgb,[box],0,(255,0,0),1)
 
         total_part_number += 1

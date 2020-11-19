@@ -3,6 +3,68 @@ import numpy as np
 from matplotlib import pyplot as plt
 import part
 
+
+def otsuThresholding(img_gray, show = False):
+
+    # Otsu's thresholding after Gaussian filtering
+    # Is this too high?
+    minArea = 160
+
+    blur = cv2.GaussianBlur(img_gray,(5,5),0)
+    ret3 , th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+
+    contours, hierarchy = cv2.findContours(th3, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    parts = []
+    count = 0
+    if(show): img_contour= cv2.cvtColor(img_gray, cv2.COLOR_BGR2RGB)
+    # This check ensures that the tray isn't blank (and a silly amount of contours have been detected)
+    if(len(contours) < 30):
+        for m, contour in enumerate(contours):
+            # If the contour is on the outside, you have found a part
+            if hierarchy[0][m][3] == -1:
+                # Check that the part has a non negligble area
+                if cv2.contourArea(contour) > minArea:
+                    count += 1
+                    if(show): cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)
+
+                    child_contours = []
+                    
+                    # Check if the contour has a child
+                    if hierarchy[0][m][2] != -1:
+                        index = hierarchy[0][m][2]
+                        foundLastChild = False
+                        while foundLastChild is False:
+                            # Use recurrsion to get all the child contours
+                            child_contours, index, foundLastChild = addChildContoursToList(child_contours,contours,hierarchy,index)
+                            
+
+                    piece = part.Part(contour)
+                    piece.childContours = child_contours
+                    parts.append(piece)
+
+    if show:
+        cv2.drawContours(img_contour, contours, -1, (0,0,255), 1)
+        plt.figure(figsize = (7,7)) 
+        plt.title(count)
+        plt.imshow(img_contour)
+        plt.axis('off')
+        plt.show()
+                
+    return parts
+
+
+def addChildContoursToList(childContourList,contours,hierarchy,index):
+    # Add child to list
+    childContourList.append(contours[index])
+    # Check if there is another child
+    if hierarchy[0][index][0] != -1:
+        newIndex = hierarchy[0][index][0]
+        return childContourList, newIndex, False
+    else:
+        return childContourList, index, True
+
+
 # This function needs to take a blurred / smoothed image
 def simpleThresholding(img_gray):
     #want to first put a blur on it
@@ -105,72 +167,3 @@ def adaptiveThresholding(img_gray):
                     plt.imshow(img_contour)
                     plt.axis('off')
                     plt.show()
-
-
-    
-def otsuThresholding(img_gray, show = False):
-    # global thresholding
-    # ret1,th1 = cv2.threshold(img_gray,127,255,cv2.THRESH_BINARY)
-
-    # # Otsu's thresholding
-    # ret2,th2 = cv2.threshold(img_gray,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-
-    # Otsu's thresholding after Gaussian filtering
-
-    # Is this too high?
-    minArea = 160
-
-
-    blur = cv2.GaussianBlur(img_gray,(5,5),0)
-    ret3 , th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-
-    contours, hierarchy = cv2.findContours(th3, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
-    parts = []
-    count = 0
-    if(show): img_contour= cv2.cvtColor(img_gray, cv2.COLOR_BGR2RGB)
-    # This check ensures that the tray isn't blank (and a silly amount of contours have been detected)
-    if(len(contours) < 30):
-        for m, contour in enumerate(contours):
-            # If the contour is on the outside, you have found a part
-            if hierarchy[0][m][3] == -1:
-                # Check that the part has a non negligble area
-                if cv2.contourArea(contour) > minArea:
-                    count += 1
-                    if(show): cv2.drawContours(img_contour, [contour], -1, (0,0,255), 2)
-
-                    child_contours = []
-                    
-                    # Check if the contour has a child
-                    if hierarchy[0][m][2] != -1:
-                        index = hierarchy[0][m][2]
-                        foundLastChild = False
-                        while foundLastChild is False:
-                            # Use recurrsion to get all the child contours
-                            child_contours, index, foundLastChild = addChildContoursToList(child_contours,contours,hierarchy,index)
-                            
-
-                    piece = part.Part(contour)
-                    piece.childContours = child_contours
-                    parts.append(piece)
-
-    if show:
-        cv2.drawContours(img_contour, contours, -1, (0,0,255), 1)
-        plt.figure(figsize = (7,7)) 
-        plt.title(count)
-        plt.imshow(img_contour)
-        plt.axis('off')
-        plt.show()
-                
-    return parts
-
-
-def addChildContoursToList(childContourList,contours,hierarchy,index):
-    # Add child to list
-    childContourList.append(contours[index])
-    # Check if there is another child
-    if hierarchy[0][index][0] != -1:
-        newIndex = hierarchy[0][index][0]
-        return childContourList, newIndex, False
-    else:
-        return childContourList, index, True

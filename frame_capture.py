@@ -48,10 +48,8 @@ def filterOutColoredObjects(img_bgr, colorArray, show = False):
 
 while (capture.isOpened()):
 
-
     ret, frame_bgr = capture.read()
-    imageHeight , imageWidth = frame_bgr.shape[:2]
-
+    
     # Imshow not working 
 
     # Video is finished
@@ -59,6 +57,7 @@ while (capture.isOpened()):
         break
     # Video is running
     else:
+        imageHeight , imageWidth = frame_bgr.shape[:2]
         # Convert to rgb for plotting
         img_rgb = cv2.cvtColor(frame_bgr,cv2.COLOR_BGR2RGB)
         # Use above function to create a mask for any green coloured objects

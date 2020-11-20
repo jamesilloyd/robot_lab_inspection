@@ -27,5 +27,6 @@ if __name__ == "__main__":
         
         # Use the cropped image to classify the parts
         results, parts = classification.partClassification(img_crop_bgr, show = True,isCurves=True)
+        
 
         print(results)

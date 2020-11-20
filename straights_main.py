@@ -19,12 +19,12 @@ if __name__ == "__main__":
         img_bgr = cv2.imread(imageLocation)
 
         # Carry out template matching on the image 
-        match_list, temp_w, temp_h = template_matching.templateMatching(img_bgr, img_template)
+        match_list = template_matching.templateMatching(img_bgr, img_template)
 
         print(match_list)
 
         # Use the templates to crop the image
-        img_crop_bgr = template_matching.imageCropping(img_bgr, match_list, temp_w, temp_h)
+        img_crop_bgr = template_matching.imageCropping(img_bgr, img_template, match_list)
 
         # Use the cropped image to classify the parts
         results, parts = classification.partClassification(img_crop_bgr, show = True,isCurves=False)

@@ -11,11 +11,11 @@ if __name__ == "__main__":
     # getting the template part
     leftTemplateLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/TemplateMatching/template_curve_left.png'
     rightTemplateLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/TemplateMatching/template_curve.png'
-    img_template = cv2.imread(leftTemplateLocation,0)
+    img_template = cv2.imread(rightTemplateLocation,0)
 
     for i in range(63):
         # Getting the image to test on
-        imageLocation = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Dock Images/curve_left/group1/opencv_frame_{0}.png'.format(i)
+        imageLocation = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Data/Corner/4/opencv_frame_{0}.png'.format(i)
         img_bgr = cv2.imread(imageLocation)
         
         # Carry out template matching on the image 

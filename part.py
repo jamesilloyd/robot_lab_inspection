@@ -26,7 +26,8 @@ class Part:
     #     areaPerimeterRange = [13.6,14.5]
 
 
-    def __init__(self, contour, isCurvePiece):
+    # def __init__(self, contour, isCurvePiece):
+    def __init__(self, contour):
         self.contour = contour 
 
 

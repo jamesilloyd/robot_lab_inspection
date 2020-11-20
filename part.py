@@ -6,30 +6,46 @@ class Part:
 
     # Initialise parameters that don't need to be passed on init
     name = 'unnamed'
-    isIdentified = False
-    isQCPassed = False
     colour = "colourless"
     childContours = []
 
-
-    # Choose the correct ranges depending on whether the function is called for straight or curved pieces
-    # if isCurves:
-    #     # Curved piece classification ranges
-    #     aspectRatioRange = [0.43,0.47]
-    #     solidityRange = [0.8,0.94]
-    #     areaPerimeterRange = [16.2,17.1]
-
-    # else:
-    #     # Straight piece classification ranges
-    #     aspectRatioRange = [0.52,0.57]
-    #     solidityRange = [0.80,0.85]
-    #     areaPerimeterRange = [13.6,14.5]
-
+    aspectRatioRange = []
+    solidityRange = []
+    areaPerimeterRange = []
 
     # def __init__(self, contour, isCurvePiece):
     def __init__(self, contour):
         self.contour = contour 
 
+
+    @property
+    def isQCPassed(self):
+        if(self.aspectRatio > self.aspectRatioRange[0] and self.aspectRatio < self.aspectRatioRange[1] and self.solidity > self.solidityRange[0] and self.solidity < self.solidityRange[1] and self.area / self.perimeter > self.areaPerimeterRange[0] and self.area / self.perimeter < self.areaPerimeterRange[1]):
+            return True
+        else:
+            return False
+
+    @property
+    def reasonForFailure(self):
+        reason = ""
+        if(self.isQCPassed):
+            return "QCPassed"
+        else:
+            if(self.aspectRatio < self.aspectRatioRange[0]):
+                reason += 'aspectRatio too small & '
+            elif(self.aspectRatio > self.aspectRatioRange[1]):
+                reason += 'aspectRatio too large & '
+
+            if(self.solidity < self.solidityRange[0]):
+                reason += 'solidity too small & '
+            elif(self.solidity > self.solidityRange[1]):
+                reason += 'solidity too large & '
+
+            if(self.area / self.perimeter < self.areaPerimeterRange[0]):
+                reason += 'area/Perimeter too small & '
+            elif(self.area / self.perimeter > self.areaPerimeterRange[1]):
+                reason += 'area/Perimeter too large & '
+            return reason[:len(reason)-3]
 
     @property
     def centreXY(self):
@@ -104,4 +120,21 @@ class Part:
                 innerPerimeter += cv2.arcLength(self.childContours[i],True)
 
         return innerPerimeter + outerPerimeter
+
+
+
+class StraightPart(Part):
+
+    aspectRatioRange = [0.52,0.57]
+    solidityRange = [0.80,0.85]
+    areaPerimeterRange = [13.6,14.5]
+
+
+
+class CurvedPart(Part):
+
+    aspectRatioRange = [0.43,0.47]
+    solidityRange = [0.8,0.94]
+    areaPerimeterRange = [16.2,17.1]
+
 

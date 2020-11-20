@@ -2,15 +2,13 @@ from cv2 import cv2
 from matplotlib import pyplot as plt 
 import numpy as np
 
-capture = cv2.VideoCapture('test5.avi')
+
 
 # TODO: how do we make this bit more robust
 greenDotColor = np.uint8([[[40,89,24]]])
 
 minArea = 100
-# Init dot position variables
-cx = 0
-cy = 0
+
 
 def filterOutColoredObjects(img_bgr, colorArray, show = False):
 
@@ -46,83 +44,89 @@ def filterOutColoredObjects(img_bgr, colorArray, show = False):
 
     return mask_inv
 
-while (capture.isOpened()):
 
-    ret, frame_bgr = capture.read()
-    
-    # Imshow not working 
 
-    # Video is finished
-    if(frame_bgr is None):
-        break
-    # Video is running
-    else:
-        imageHeight , imageWidth = frame_bgr.shape[:2]
-        # Convert to rgb for plotting
-        img_rgb = cv2.cvtColor(frame_bgr,cv2.COLOR_BGR2RGB)
-        # Use above function to create a mask for any green coloured objects
-        mask_inv = filterOutColoredObjects(frame_bgr,greenDotColor,show=False)
-        # Get the contours from the mask
-        contours, hierarchy = cv2.findContours(mask_inv, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+for image in range(1,8):
+    image_location = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Videos/grp23/test{0}.avi'.format(image)
+    capture = cv2.VideoCapture(image_location)
+    # Init dot position variables
+    cx = 0
+    cy = 0
+
+    while (capture.isOpened()):
+
+        ret, frame_bgr = capture.read()
         
-        # Loop through the contours
-        for i, contour in enumerate(contours):
+        # Imshow not working 
+
+        # Video is finished
+        if(frame_bgr is None):
+            break
+        # Video is running
+        else:
+
+            imageHeight , imageWidth = frame_bgr.shape[:2]
+            # Convert to rgb for plotting
+            img_rgb = cv2.cvtColor(frame_bgr,cv2.COLOR_BGR2RGB)
+            # Use above function to create a mask for any green coloured objects
+            mask_inv = filterOutColoredObjects(frame_bgr,greenDotColor,show=False)
+            # Get the contours from the mask
+            contours, hierarchy = cv2.findContours(mask_inv, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
             
-            if(hierarchy[0][i][3]==0):
-                if(cv2.contourArea(contour) > minArea):
-                    # Found a contour that is inside the outer edge and is not of negliglbe size
-                    dotContour = contour
-                    # Get the coordinates of the coordinate centre
-                    M = cv2.moments(dotContour)
-                    cx = int(M['m10']/M['m00'])
-                    cy = int(M['m01']/M['m00'])   
-                    # if the x position is over 90% of image width you have found the right frame
-                    if(cx > imageWidth*0.9): 
+            # Loop through the contours
+            for i, contour in enumerate(contours):
+                
+                if(hierarchy[0][i][3]==0):
+                    if(cv2.contourArea(contour) > minArea):
+                        # Found a contour that is inside the outer edge and is not of negliglbe size
+                        dotContour = contour
+                        # Get the coordinates of the coordinate centre
+                        M = cv2.moments(dotContour)
+                        cx = int(M['m10']/M['m00'])
+                        cy = int(M['m01']/M['m00'])   
+                        # if the x position is over 90% of image width you have found the right frame
+                        if(cx > imageWidth*0.92): 
+                            foundFrame = True
+
+                            # Plot the image centre and contours
+                            cv2.circle(img_rgb,(cx,cy), 3, (255,0,0), -1)
+                            cv2.drawContours(img_rgb, contours, -1, (0,0,255), 2)
+                            plt.figure(figsize = (7,7))
+                            plt.imshow(img_rgb)
+                            plt.title("Image {0}, Count {1}".format(image,len(contours)))
+                            plt.axis('off')
+                            plt.show()
+
+                
+                # img_gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+                
+                #  # Apply a gaussion blur to the grey image
+                # blur = cv2.GaussianBlur(img_gray,(5,5),0)
+                # # Apply otsu thresholding to the blurred image
+                # ret3 , thresh = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+
+                
+
+                # cv2.drawContours(img_rgb, contours, -1, (0,0,255), 1)
+
+                # plt.figure(figsize = (7,7))
+                # plt.imshow(img_rgb)
+                # plt.axis('off')
+                # plt.show()
+                # plt.imshow(thresh,'gray')
+                # plt.axis('off')
+                # plt.show()
 
 
-                        # Plot the image centre and contours
-                        cv2.circle(img_rgb,(cx,cy), 3, (255,0,0), -1)
-                        cv2.drawContours(img_rgb, contours, -1, (0,0,255), 2)
-                        plt.figure(figsize = (7,7))
-                        plt.imshow(img_rgb)
-                        plt.title(len(contours))
-                        plt.axis('off')
-                        plt.show()
+            # cv2.imshow('Video',frame)
 
-            
-            # take the contours of the inverted mask
-            
-            # Identify the centre point of the dot
-            
-            # img_gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-            
-            #  # Apply a gaussion blur to the grey image
-            # blur = cv2.GaussianBlur(img_gray,(5,5),0)
-            # # Apply otsu thresholding to the blurred image
-            # ret3 , thresh = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-
-            
-
-            # cv2.drawContours(img_rgb, contours, -1, (0,0,255), 1)
-
-            # plt.figure(figsize = (7,7))
-            # plt.imshow(img_rgb)
+            # plt.imshow(frame)
             # plt.axis('off')
             # plt.show()
-            # plt.imshow(thresh,'gray')
-            # plt.axis('off')
-            # plt.show()
 
+            # if cv2.waitKey(1) & 0xFF == ord('q'):
+            #     break 
 
-        # cv2.imshow('Video',frame)
-
-        # plt.imshow(frame)
-        # plt.axis('off')
-        # plt.show()
-
-        # if cv2.waitKey(1) & 0xFF == ord('q'):
-        #     break 
-
-capture.release()
-cv2.destroyAllWindows()
+    capture.release()
+    cv2.destroyAllWindows()
 

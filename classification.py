@@ -6,35 +6,21 @@ import part
 from mpl_toolkits.mplot3d import Axes3D
 
 
-def partClassification(img_bgr, show = False, isCurves = True):
-
-    # Choose the correct ranges depending on whether the function is called for straight or curved pieces
-    if isCurves:
-        # Curved piece classification ranges
-        aspectRatioRange = [0.43,0.47]
-        solidityRange = [0.8,0.94]
-        areaPerimeterRange = [16.2,17.1]
-
-    else:
-        # Straight piece classification ranges
-        aspectRatioRange = [0.52,0.57]
-        solidityRange = [0.80,0.85]
-        areaPerimeterRange = [13.6,14.5]
-    
+def partClassification(img_bgr, show = False, isCurves = True):    
 
     # Prepare the position results to be returned
-    results = {"0":0,
-                "1":0,
-                "2":0,
-                "3":0,
-                "4":0,
-                "5":0,
-                "6":0,
-                "7":0,
-                "8":0,
-                "9":0,
-                "10":0,
-                "11":0}
+    results = {"0":{'QCPassed': False, 'reason' : 'part missing'},
+                "1":{'QCPassed': False, 'reason' : 'part missing'},
+                "2":{'QCPassed': False, 'reason' : 'part missing'},
+                "3":{'QCPassed': False, 'reason' : 'part missing'},
+                "4":{'QCPassed': False, 'reason' : 'part missing'},
+                "5":{'QCPassed': False, 'reason' : 'part missing'},
+                "6":{'QCPassed': False, 'reason' : 'part missing'},
+                "7":{'QCPassed': False, 'reason' : 'part missing'},
+                "8":{'QCPassed': False, 'reason' : 'part missing'},
+                "9":{'QCPassed': False, 'reason' : 'part missing'},
+                "10":{'QCPassed': False, 'reason' : 'part missing'},
+                "11":{'QCPassed': False, 'reason' : 'part missing'}}
 
     # prepare variables for graph title
     passedCount = 0
@@ -50,9 +36,10 @@ def partClassification(img_bgr, show = False, isCurves = True):
     img_gray = cv2.cvtColor(img_bgr,cv2.COLOR_BGR2GRAY)
 
     # Carry out otsu thrsholding on the cropped gray image
-    parts = thresholding.otsuThresholding(img_gray)
+    parts = thresholding.otsuThresholding(img_gray, isCurved = isCurves)
     
     # Sort parts by position in the grid (Top left to right)
+    # TODO: may not need this
     parts.sort(key=lambda x: x.centreXY[0], reverse=False)
     parts.sort(key=lambda x: x.centreXY[1], reverse=False)
 
@@ -70,18 +57,6 @@ def partClassification(img_bgr, show = False, isCurves = True):
             box = cv2.boxPoints(rect)
             box = np.int0(box)
 
-        # Classifying using parameters of aspect ratio, solidity and area / perimeter
-        #TODO: This can all be added into the part object
-        if(piece.aspectRatio > aspectRatioRange[0] and piece.aspectRatio < aspectRatioRange[1] and piece.solidity > solidityRange[0] and piece.solidity < solidityRange[1] and piece.area / piece.perimeter > areaPerimeterRange[0] and piece.area / piece.perimeter < areaPerimeterRange[1]):
-            # The part has passed QC and can be marked as good
-            piece.isQCPassed = True
-            # Draw a green box
-            if show: cv2.drawContours(img_rgb,[box],0,(0,255,0),1)
-        else:
-            # The part has failed QC and can be marked as bad
-            piece.isQCPassed = False
-            # Draw a red box
-            if show: cv2.drawContours(img_rgb,[box],0,(255,0,0),1)
 
         # This code finds the part index within the results grid dictionary to be marked as good 
         resultIndex = 0
@@ -115,13 +90,19 @@ def partClassification(img_bgr, show = False, isCurves = True):
             # print('y4')
             resultIndex += 9
 
-        # Mark the piece as good or bad
+        # The object is automatically QC checked on initialisation
+        # Mark the QC result on the output dictionary
+
+        results[str(resultIndex)]["QCPassed"] = piece.isQCPassed
+        results[str(resultIndex)]["reason"] = piece.reasonForFailure
+
+
         if piece.isQCPassed:
-            results[str(resultIndex)] = 1
+            if show: cv2.drawContours(img_rgb,[box],0,(0,255,0),1)
             passedCount += 1
         
         else:
-            results[str(resultIndex)] = 0
+            if show: cv2.drawContours(img_rgb,[box],0,(255,0,0),1)
             failedCount += 1
 
     # Show results
@@ -133,6 +114,3 @@ def partClassification(img_bgr, show = False, isCurves = True):
         plt.show()
 
     return results, parts
-
-# For group 4 straight pieces images
-# correct_part_tags = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1]

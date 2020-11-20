@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 import part
 
 
-def otsuThresholding(img_gray):
+def otsuThresholding(img_gray, isCurved = True):
 
     # Is this too high?
     # The minimum area is used to remove any contours that should be neglected
@@ -43,7 +43,10 @@ def otsuThresholding(img_gray):
                             child_contours, index, foundLastChild = addChildContoursToList(child_contours,contours,hierarchy,index)
                             
                     # Create a part object for each contour found
-                    piece = part.Part(contour)
+                    if(isCurved):
+                        piece = part.CurvedPart(contour)
+                    else:
+                        piece = part.StraightPart(contour)
                     # Add the child contours to the object
                     piece.childContours = child_contours
                     # Add the part object to the list to be returned

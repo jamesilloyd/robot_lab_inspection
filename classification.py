@@ -92,7 +92,6 @@ def partClassification(img_bgr, show = False, isCurves = True):
 
         # The object is automatically QC checked on initialisation
         # Mark the QC result on the output dictionary
-
         results[str(resultIndex)]["QCPassed"] = piece.isQCPassed
         results[str(resultIndex)]["reason"] = piece.reasonForFailure
 

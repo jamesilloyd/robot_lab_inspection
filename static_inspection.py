@@ -4,10 +4,27 @@ from matplotlib import pyplot as plt
 import part
 from TemplateMatching import template_matching
 import classification
+import automationhat
+time.sleep(0.1) # Short pause after ads1015 class creation recommended
+
+# Toggle channel.
+#automationhat.output[channel].write(state)
+#input check
+#automationhat.input[channel].is_on()
+#analog input
+#automationhat.analog[channel].read()
+
+#set 3 outputs high so PLC has signal low
+state = 1
+for channel in range(3):
+    automationhat.output[channel].write(state)
+
 
 straightTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template_straight.png'
 leftTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template_curve_left.png'
 rightTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template_curve.png'
+
+pair_results = [1, 1, 0, 0, 1, 0]
 
 while True:
 
@@ -55,3 +72,19 @@ while True:
     results, parts = classification.partClassification(img_crop_bgr, show = True,isCurves=curve)
 
     print(results)
+    """
+    automationhat.output[0].write(0)
+    
+    for pair in range len(pair_results):
+        automationhat.output[2].write(1)
+        while True:
+            if automationhat.input[0].is_off():
+                pass
+            else:
+                automationhat.output[1].write(1 - pair_results[pair])
+                automationhat.output[2].write(0)
+                break
+    
+    automationhat.output[0].write(1)
+    """
+    

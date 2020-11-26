@@ -5,6 +5,9 @@ import part
 from TemplateMatching import template_matching
 import classification
 
+'''
+This file is for classifying static straight trays 
+'''
 
 
 if __name__ == "__main__":

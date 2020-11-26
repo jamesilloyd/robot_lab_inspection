@@ -122,16 +122,27 @@ class Part:
         return innerPerimeter + outerPerimeter
 
 
-
 class StraightPart(Part):
 
     aspectRatioRange = [0.52,0.57]
     solidityRange = [0.80,0.85]
     areaPerimeterRange = [13.6,14.5]
 
+class MovingStraightPart(Part):
+
+    aspectRatioRange = [0.52,0.57]
+    solidityRange = [0.80,0.85]
+    areaPerimeterRange = [13.6,14.5]
 
 
 class CurvedPart(Part):
+
+    aspectRatioRange = [0.43,0.47]
+    solidityRange = [0.8,0.94]
+    areaPerimeterRange = [16.2,17.1]
+
+
+class MovingCurvedPart(Part):
 
     aspectRatioRange = [0.43,0.47]
     solidityRange = [0.8,0.94]

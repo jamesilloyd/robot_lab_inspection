@@ -5,7 +5,9 @@ import part
 from TemplateMatching import template_matching
 import classification
 
-
+'''
+This file is for classifying static curved trays.
+'''
 
 if __name__ == "__main__":
     # getting the template part

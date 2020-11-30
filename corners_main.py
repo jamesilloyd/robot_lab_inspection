@@ -6,6 +6,7 @@ from TemplateMatching import template_matching
 import classification
 
 '''
+IT IS NO LONGER USED, JUST USED FOR REFERENCE
 This file is for classifying static curved trays.
 '''
 

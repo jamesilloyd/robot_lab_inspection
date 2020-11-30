@@ -11,7 +11,6 @@ minDotArea = 100
 The frame capture function will return true if the frame inserted shows a full view of the tray
 '''
 
-
 def filterOutColoredObjects(img_bgr, colorArray, show = False):
 
     # img_rgb = cv2.cvtColor(img_bgr, cv2.COlOR_BGR2RGB)
@@ -78,7 +77,7 @@ def FrameCapture(frame_bgr, show = False):
                         cv2.drawContours(img_rgb, contours, -1, (0,0,255), 2)
                         plt.figure(figsize = (7,7))
                         plt.imshow(img_rgb)
-                        plt.title("Count {1}".format(len(contours)))
+                        plt.title("Count {0}".format(len(contours)))
                         plt.axis('off')
                         plt.show()
 

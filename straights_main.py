@@ -6,7 +6,8 @@ from TemplateMatching import template_matching
 import classification
 
 '''
-This file is for classifying static straight trays 
+IT IS NO LONGER USED, JUST USED FOR REFERENCE
+This file is for classifying static straight trays. 
 '''
 
 

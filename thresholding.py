@@ -4,6 +4,13 @@ from matplotlib import pyplot as plt
 import part
 
 
+'''
+This file has functions for different thresholding techniques.
+
+The one we are using our function is otsuThresholding. 
+Others were only used for testing during development phase.
+'''
+
 def otsuThresholding(img_gray, isCurved = True):
 
     # Is this too high?
@@ -14,6 +21,9 @@ def otsuThresholding(img_gray, isCurved = True):
     blur = cv2.GaussianBlur(img_gray,(5,5),0)
     # Apply otsu thresholding to the blurred image
     ret3 , thresh = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+
+    # plt.imshow(thresh, "gray")
+    # plt.show()
 
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -39,7 +49,7 @@ def otsuThresholding(img_gray, isCurved = True):
                         foundLastChild = False
 
                         while foundLastChild is False:
-                            # Use recurrsion to get all the child contours
+                            # Use recurrsion to get all the child contours (this is not actually recurssion)
                             child_contours, index, foundLastChild = addChildContoursToList(child_contours,contours,hierarchy,index)
                             
                     # Create a part object for each contour found

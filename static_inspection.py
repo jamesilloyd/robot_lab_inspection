@@ -5,6 +5,7 @@ import part
 from TemplateMatching import template_matching
 import classification
 import automationhat
+import time
 time.sleep(0.1) # Short pause after ads1015 class creation recommended
 
 # Toggle channel.
@@ -15,10 +16,11 @@ time.sleep(0.1) # Short pause after ads1015 class creation recommended
 #automationhat.analog[channel].read()
 
 #set 3 outputs high so PLC has signal low
+"""
 state = 1
 for channel in range(3):
     automationhat.output[channel].write(state)
-
+"""
 
 straightTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template_straight.png'
 leftTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template_curve_left.png'

@@ -16,7 +16,9 @@ import math
 
 
 #template matching function returns list of matched locations
-def templateMatching(img_bgr, img_template):
+def templateMatching(img_bgr, img_template,show = False):
+
+	# TODO: NEED TO ACCOUNT FOR A BLANK TRAY
 
 	img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 	img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
@@ -51,21 +53,22 @@ def templateMatching(img_bgr, img_template):
 
 	#print(pt_list)
 
-	for pt in pt_list:
-		cv2.rectangle(img_rgb, pt, (pt[0] + temp_w, pt[1] + temp_h), (0,0,255), 2)
+	if(show):
+		for pt in pt_list:
+			cv2.rectangle(img_rgb, pt, (pt[0] + temp_w, pt[1] + temp_h), (0,0,255), 2)
 
-	ds=7
-	plt.figure(figsize = (ds,ds))
-	plt.imshow(img_rgb)
-	plt.title('Templates found')
-	plt.axis('off')
-	plt.show()
+		ds=7
+		plt.figure(figsize = (ds,ds))
+		plt.imshow(img_rgb)
+		plt.title('Templates found')
+		plt.axis('off')
+		plt.show()
 
 	return pt_list
 
 #image cropping function crops image to matched template locations
 # Returns the cropped image to be used by contouring
-def imageCropping(img_bgr, img_template, match_list):
+def imageCropping(img_bgr, img_template, match_list, show = False):
 
 	temp_w, temp_h = img_template.shape[::-1]
 
@@ -137,12 +140,13 @@ def imageCropping(img_bgr, img_template, match_list):
 	# Change from bgr to rgb for matplot lib
 	img_crop_rgb = cv2.cvtColor(img_crop, cv2.COLOR_BGR2RGB)
 
-	ds=7
-	plt.figure(figsize = (ds,ds))
-	plt.imshow(img_crop_rgb)
-	plt.axis('off')
-	plt.title('Cropped image')
-	plt.show()
+	if(show):
+		ds=7
+		plt.figure(figsize = (ds,ds))
+		plt.imshow(img_crop_rgb)
+		plt.axis('off')
+		plt.title('Cropped image')
+		plt.show()
 
 	# Return the cropped image to be used in the next function
 	return img_crop

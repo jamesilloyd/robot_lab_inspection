@@ -6,21 +6,35 @@ import part
 from mpl_toolkits.mplot3d import Axes3D
 
 
-def partClassification(img_bgr, show = False, isCurves = True):    
+def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):    
 
     # Prepare the position results to be returned
-    results = {"0":{'QCPassed': False, 'reason' : 'part missing'},
-                "1":{'QCPassed': False, 'reason' : 'part missing'},
-                "2":{'QCPassed': False, 'reason' : 'part missing'},
-                "3":{'QCPassed': False, 'reason' : 'part missing'},
-                "4":{'QCPassed': False, 'reason' : 'part missing'},
-                "5":{'QCPassed': False, 'reason' : 'part missing'},
-                "6":{'QCPassed': False, 'reason' : 'part missing'},
-                "7":{'QCPassed': False, 'reason' : 'part missing'},
-                "8":{'QCPassed': False, 'reason' : 'part missing'},
-                "9":{'QCPassed': False, 'reason' : 'part missing'},
-                "10":{'QCPassed': False, 'reason' : 'part missing'},
-                "11":{'QCPassed': False, 'reason' : 'part missing'}}
+    resultsVision = {"0":{'QCPassed': False, 'reason' : 'No part found'},
+                "1":{'QCPassed': False, 'reason' : 'No part found'},
+                "2":{'QCPassed': False, 'reason' : 'No part found'},
+                "3":{'QCPassed': False, 'reason' : 'No part found'},
+                "4":{'QCPassed': False, 'reason' : 'No part found'},
+                "5":{'QCPassed': False, 'reason' : 'No part found'},
+                "6":{'QCPassed': False, 'reason' : 'No part found'},
+                "7":{'QCPassed': False, 'reason' : 'No part found'},
+                "8":{'QCPassed': False, 'reason' : 'No part found'},
+                "9":{'QCPassed': False, 'reason' : 'No part found'},
+                "10":{'QCPassed': False, 'reason' : 'No part found'},
+                "11":{'QCPassed': False, 'reason' : 'No part found'}}
+
+    # TODO: may need to tweak the keys
+    resultsPLC = {"0":False,
+                "1":False,
+                "2":False,
+                "3":False,
+                "4":False,
+                "5":False,
+                "6":False,
+                "7":False,
+                "8":False,
+                "9":False,
+                "10":False,
+                "11":False}
 
     # prepare variables for graph title
     passedCount = 0
@@ -36,7 +50,7 @@ def partClassification(img_bgr, show = False, isCurves = True):
     img_gray = cv2.cvtColor(img_bgr,cv2.COLOR_BGR2GRAY)
 
     # Carry out otsu thrsholding on the cropped gray image
-    parts = thresholding.otsuThresholding(img_gray, isCurved = isCurves)
+    parts = thresholding.otsuThresholding(img_gray, isCurved = isCurves,isMoving = isMoving)
     
     # Sort parts by position in the grid (Top left to right)
     # TODO: may not need this
@@ -46,65 +60,84 @@ def partClassification(img_bgr, show = False, isCurves = True):
     # Iterate through the list of parts
     for j, piece in enumerate(parts):
 
-        # If we are showing results, plot the contours, part number, and centre point
-        if show:
-            cv2.drawContours(img_rgb, [piece.contour], -1, (0,0,255), 2)
-            cv2.drawContours(img_rgb,piece.childContours,-1,(0,0,255), 1)
-            cv2.putText(img_rgb ,str(j),piece.centreXYText,cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,0,255),1,cv2.LINE_AA) 
-            cv2.circle(img_rgb,piece.centreXY, 3, (255,0,0), -1)
-            # Get the bounding rectangle to be plotted after we have identified the part as good or bad
-            rect = cv2.minAreaRect(piece.contour)
-            box = cv2.boxPoints(rect)
-            box = np.int0(box)
-
-
         # This code finds the part index within the results grid dictionary to be marked as good 
         resultIndex = 0
-        # Find the correct index the piece corresponds to
+        PLCIndex = 0
+        # Find the correct index the piece corresponds to (PLC indexes columns then rows)
+
+        '''
+        TODO
+        NEED TO ACCOUNT FOR CONTOURS THAT ARE FOUND ON THE EDGE
+        PERHAPS ADD IN A MAX CONTOUR SIZE?
+        '''
+
         if(piece.centreXY[0]/imageWidth < 0.33):
             # print('x1')
             resultIndex += 0
+            PLCIndex += 0
         
         elif(piece.centreXY[0]/imageWidth < 0.66):
             # print('x2')
             resultIndex += 1
+            PLCIndex += 4
         
         else:
             # print('x3')
             resultIndex += 2
+            PLCIndex += 8
 
 
         if(piece.centreXY[1]/imageHeight < 0.25):
             # print('y1')
             resultIndex += 0
+            PLCIndex += 0
         
         elif(piece.centreXY[1]/imageHeight < 0.5):
             # print('y2')
             resultIndex += 3
+            PLCIndex += 1
 
         elif(piece.centreXY[1]/imageHeight < 0.75):
             # print('y3')
             resultIndex += 6
+            PLCIndex += 2
         
         else:
             # print('y4')
             resultIndex += 9
+            PLCIndex += 3
 
         # The object is automatically QC checked on initialisation
         # Mark the QC result on the output dictionary
-        results[str(resultIndex)]["QCPassed"] = piece.isQCPassed
-        results[str(resultIndex)]["reason"] = piece.reasonForFailure
+        resultsVision[str(resultIndex)]["QCPassed"] = piece.isQCPassed
+        resultsVision[str(resultIndex)]["reason"] = piece.reasonForFailure
+        resultsPLC[str(PLCIndex)] = piece.isQCPassed
+
+        # Plot the contours, part number, and centre point
+        cv2.drawContours(img_rgb, [piece.contour], -1, (0,0,255), 2)
+        cv2.drawContours(img_rgb,piece.childContours,-1,(0,0,255), 1)
+        # TODO: edit this to just show the part number after debugging
+        cv2.putText(img_rgb ,"{0} - {1}".format(resultIndex,piece.reasonForFailure),piece.centreXYText,cv2.FONT_HERSHEY_SIMPLEX ,0.3,(0,255,0),1,cv2.LINE_AA) 
+        cv2.circle(img_rgb,piece.centreXY, 3, (255,0,0), -1)
+        # Get the bounding rectangle to be plotted after we have identified the part as good or bad
+        rect = cv2.minAreaRect(piece.contour)
+        box = cv2.boxPoints(rect)
+        box = np.int0(box)
 
 
         if piece.isQCPassed:
-            if show: cv2.drawContours(img_rgb,[box],0,(0,255,0),1)
+            cv2.drawContours(img_rgb,[box],0,(0,255,0),1)
             passedCount += 1
+            print('Part {3}, Aspect Ratio {0}, Solidity {1}, Area/Perimeter {2}, Reason {4}'.format(piece.aspectRatio,piece.solidity,piece.areaPerimeterSqr,resultIndex,piece.reasonForFailure))
         
         else:
-            if show: cv2.drawContours(img_rgb,[box],0,(255,0,0),1)
+            cv2.drawContours(img_rgb,[box],0,(255,0,0),1)
             failedCount += 1
+            # This is for debugging
+            print('Part {3}, Aspect Ratio {0}, Solidity {1}, Area/Perimeter {2}, Reason {4}'.format(piece.aspectRatio,piece.solidity,piece.areaPerimeterSqr,resultIndex,piece.reasonForFailure))
+        
+        if(piece.reasonForFailure == "Unknown Failure Reason"): show = True
 
-    # Show results
     if(show):
         plt.figure(figsize = (7,7))
         plt.title('Count: {0} - {1} Passed - {2} Failed'.format(len(parts),passedCount,failedCount))
@@ -112,4 +145,6 @@ def partClassification(img_bgr, show = False, isCurves = True):
         plt.axis('off')
         plt.show()
 
-    return results, parts
+    img_classified = cv2.cvtColor(img_rgb,cv2.COLOR_RGB2BGR)
+
+    return resultsVision, resultsPLC, img_classified

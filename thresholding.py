@@ -4,7 +4,14 @@ from matplotlib import pyplot as plt
 import part
 
 
-def otsuThresholding(img_gray, isCurved = True):
+'''
+This file has functions for different thresholding techniques.
+
+The one we are using our function is otsuThresholding. 
+Others were only used for testing during development phase.
+'''
+
+def otsuThresholding(img_gray, isCurved = True,isMoving = False):
 
     # Is this too high?
     # The minimum area is used to remove any contours that should be neglected
@@ -14,6 +21,9 @@ def otsuThresholding(img_gray, isCurved = True):
     blur = cv2.GaussianBlur(img_gray,(5,5),0)
     # Apply otsu thresholding to the blurred image
     ret3 , thresh = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+
+    # plt.imshow(thresh, "gray")
+    # plt.show()
 
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -39,14 +49,21 @@ def otsuThresholding(img_gray, isCurved = True):
                         foundLastChild = False
 
                         while foundLastChild is False:
-                            # Use recurrsion to get all the child contours
+                            # Use recurrsion to get all the child contours (this is not actually recurssion)
                             child_contours, index, foundLastChild = addChildContoursToList(child_contours,contours,hierarchy,index)
                             
                     # Create a part object for each contour found
                     if(isCurved):
-                        piece = part.CurvedPart(contour)
+                        if(isMoving):
+                            piece = part.MovingCurvedPart(contour)
+                        else:
+                            piece = part.CurvedPart(contour)
+
                     else:
-                        piece = part.StraightPart(contour)
+                        if(isMoving):
+                            piece = part.MovingStraightPart(contour)
+                        else:
+                            piece = part.StraightPart(contour)
                     # Add the child contours to the object
                     piece.childContours = child_contours
                     # Add the part object to the list to be returned

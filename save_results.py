@@ -3,7 +3,6 @@
 import csv
 
 class ResultsSave():
-    
     def __init__(self,vision_file_name,plc_file_name):
 
         vision_file=open(vision_file_name, mode='w')

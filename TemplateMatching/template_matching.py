@@ -18,6 +18,8 @@ import math
 #template matching function returns list of matched locations
 def templateMatching(img_bgr, img_template,show = False):
 
+	# TODO: NEED TO ACCOUNT FOR A BLANK TRAY
+
 	img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 	img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
 

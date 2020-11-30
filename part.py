@@ -20,18 +20,18 @@ class Part:
 
     @property
     def isQCPassed(self):
-        if(self.aspectRatio > self.aspectRatioRange[0] and self.aspectRatio < self.aspectRatioRange[1] and self.solidity > self.solidityRange[0] and self.solidity < self.solidityRange[1] and self.area / self.perimeter > self.areaPerimeterRange[0] and self.area / self.perimeter < self.areaPerimeterRange[1]):
+        if(self.aspectRatioRange[0] < self.aspectRatio < self.aspectRatioRange[1] and self.solidityRange[0] < self.solidity < self.solidityRange[1] and self.areaPerimeterRange[0] < self.areaPerimeterSqr < self.areaPerimeterRange[1]):
             return True
         else:
             return False
 
     @property
     def reasonForFailure(self):
-        reason = ""
         if(self.isQCPassed):
-            return "QC Passed"
+            return ""
         else:
-            return "QC Failed"
+            return "Unknown Failure Reason"
+            # return "QC Failed"
             
 
     @property
@@ -79,6 +79,9 @@ class Part:
 
         return cv2.contourArea(self.contour) - negativeArea 
 
+    @property
+    def areaPerimeterSqr(self):
+        return self.area / (self.perimeter ** 2)
 
     @property
     def extent(self):
@@ -126,7 +129,8 @@ class StraightPart(Part):
     # These are the ranges used to classify a good straight part
     aspectRatioRange = [0.52,0.57]
     solidityRange = [0.80,0.85]
-    areaPerimeterRange = [13.6,14.5]
+    # areaPerimeterRange = [13.6,14.5]
+    areaPerimeterRange = [0.0300,0.0315]
 
     # This needs testing more (see how much you can extend ranges so that they don't interfere), maybe add in a 4th dimension
     # These are the ranges of the defect part types 
@@ -163,7 +167,7 @@ class StraightPart(Part):
         else:
             for i,reason in enumerate(self.failureReasons):
                 # TODO: may need a more robust threshold
-                if(reason.aspectRatio[0] < self.aspectRatio < reason.aspectRatio[1] and reason.solidity[0] < self.solidity < reason.solidity[1] and reason.areaPerimeter[0] < self.area/self.perimeter < reason.areaPerimeter[1]):
+                if(reason.aspectRatio[0] < self.aspectRatio < reason.aspectRatio[1] and reason.solidity[0] < self.solidity < reason.solidity[1] and reason.areaPerimeter[0] < self.areaPerimeterSqr < reason.areaPerimeter[1]):
                     failureReason = reason.reason
                 
             return failureReason
@@ -179,20 +183,20 @@ class CurvedPart(Part):
 
     
     # These are the ranges of the defect part types 
-    halfLengthWithNotch = Defect([0.21,0.25],[0.75,0.78],[9.8,10.5],"Half split by length with notch")
+    halfLengthWithNotch = Defect([0.21,0.25],[0.75,0.79],[9.8,10.5],"Half split by length with notch")
     halfLengthWithoutNotch = Defect([0.22,0.27],[0.92,0.96],[13.1,13.6],"Half split by length without notch")
     holeInMiddleWithHoleFilled = Defect([0.42,0.47],[0.80,0.85],[15.3,15.9],"Hole in the middle and other hole filled")
     holeInMiddle = Defect([0.43,0.47],[0.77,0.81],[13.8,14.2],"Hole in the middle")
     filledHole = Defect([0.43,0.48],[0.85,0.91],[16.5,19.8],"The hole is filled")
     
-    missingNotchHoleFilled = Defect([0.48,0.52],[0.89,0.93],[18.5,21.2],"Notch is missing and hole is filled")
+    missingNotchHoleFilled = Defect([0.48,0.52],[0.89,0.93],[18.5,22.0],"Notch is missing and hole is filled")
     missingNotch = Defect([0.48,0.51],[0.85,0.89],[17.8,18.3],"Notch is missing")
     straightPiece = Defect([0.52,0.57],[0.8,0.85],[13.3,14.5],"Straight piece")
     onlyNotch = Defect([0.61,0.73],[0.91,0.93],[4.4,5.1],"Notch on it's own")
     
     halfWidthWithHoleFilled = Defect([0.77,0.81],[0.93,0.98],[14.1,14.9],"Half split by width with hole filled")
-    halfWidthWithNotch = Defect([0.77,0.82],[0.82,0.87],[13.3,14.0],"Half split by width including notch")
-    halfWidthWithHole = Defect([0.77,0.84],[0.82,0.89],[12.2,12.9],"Half split by width including hole")
+    halfWidthWithNotch = Defect([0.77,0.82],[0.82,0.87],[13.3,14.2],"Half split by width including notch")
+    halfWidthWithHole = Defect([0.77,0.84],[0.82,0.89],[12.2,13.0],"Half split by width including hole")
     
 
 
@@ -231,16 +235,17 @@ class CurvedPart(Part):
 # TBF
 class MovingStraightPart(Part):
 
-    aspectRatioRange = [0.52,0.57]
-    solidityRange = [0.80,0.85]
-    areaPerimeterRange = [13.6,14.5]
+    aspectRatioRange = [0.49,0.55]
+    solidityRange = [0.83,0.88]
+    areaPerimeterRange = [14.8,16.4]
 
 
 # TBF
 class MovingCurvedPart(Part):
 
-    aspectRatioRange = [0.43,0.47]
-    solidityRange = [0.8,0.94]
-    areaPerimeterRange = [16.2,17.1]
+    aspectRatioRange = [0.41,0.45]
+    solidityRange = [0.85,0.89]
+    # areaPerimeterRange = [17.5,19.1]
+    areaPerimeterRange = [0.0320,0.0340]
 
 

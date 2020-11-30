@@ -6,7 +6,7 @@ import part
 from mpl_toolkits.mplot3d import Axes3D
 
 
-def partClassification(img_bgr, show = False, isCurves = True):    
+def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):    
 
     # Prepare the position results to be returned
     resultsVision = {"0":{'QCPassed': False, 'reason' : 'No part found'},
@@ -50,7 +50,7 @@ def partClassification(img_bgr, show = False, isCurves = True):
     img_gray = cv2.cvtColor(img_bgr,cv2.COLOR_BGR2GRAY)
 
     # Carry out otsu thrsholding on the cropped gray image
-    parts = thresholding.otsuThresholding(img_gray, isCurved = isCurves)
+    parts = thresholding.otsuThresholding(img_gray, isCurved = isCurves,isMoving = isMoving)
     
     # Sort parts by position in the grid (Top left to right)
     # TODO: may not need this
@@ -64,6 +64,13 @@ def partClassification(img_bgr, show = False, isCurves = True):
         resultIndex = 0
         PLCIndex = 0
         # Find the correct index the piece corresponds to (PLC indexes columns then rows)
+
+        '''
+        TODO
+        NEED TO ACCOUNT FOR CONTOURS THAT ARE FOUND ON THE EDGE
+        PERHAPS ADD IN A MAX CONTOUR SIZE?
+        '''
+
         if(piece.centreXY[0]/imageWidth < 0.33):
             # print('x1')
             resultIndex += 0
@@ -121,13 +128,13 @@ def partClassification(img_bgr, show = False, isCurves = True):
         if piece.isQCPassed:
             cv2.drawContours(img_rgb,[box],0,(0,255,0),1)
             passedCount += 1
-            # print('Part {3}, Aspect Ratio {0}, Solidity {1}, Area/Perimeter {2}, Reason {4}'.format(piece.aspectRatio,piece.solidity,piece.area/piece.perimeter,resultIndex,piece.reasonForFailure))
+            print('Part {3}, Aspect Ratio {0}, Solidity {1}, Area/Perimeter {2}, Reason {4}'.format(piece.aspectRatio,piece.solidity,piece.areaPerimeterSqr,resultIndex,piece.reasonForFailure))
         
         else:
             cv2.drawContours(img_rgb,[box],0,(255,0,0),1)
             failedCount += 1
             # This is for debugging
-            print('Part {3}, Aspect Ratio {0}, Solidity {1}, Area/Perimeter {2}, Reason {4}'.format(piece.aspectRatio,piece.solidity,piece.area/piece.perimeter,resultIndex,piece.reasonForFailure))
+            print('Part {3}, Aspect Ratio {0}, Solidity {1}, Area/Perimeter {2}, Reason {4}'.format(piece.aspectRatio,piece.solidity,piece.areaPerimeterSqr,resultIndex,piece.reasonForFailure))
         
         if(piece.reasonForFailure == "Unknown Failure Reason"): show = True
 

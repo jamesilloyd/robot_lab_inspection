@@ -11,7 +11,7 @@ The one we are using our function is otsuThresholding.
 Others were only used for testing during development phase.
 '''
 
-def otsuThresholding(img_gray, isCurved = True):
+def otsuThresholding(img_gray, isCurved = True,isMoving = False):
 
     # Is this too high?
     # The minimum area is used to remove any contours that should be neglected
@@ -54,9 +54,16 @@ def otsuThresholding(img_gray, isCurved = True):
                             
                     # Create a part object for each contour found
                     if(isCurved):
-                        piece = part.CurvedPart(contour)
+                        if(isMoving):
+                            piece = part.MovingCurvedPart(contour)
+                        else:
+                            piece = part.CurvedPart(contour)
+
                     else:
-                        piece = part.StraightPart(contour)
+                        if(isMoving):
+                            piece = part.MovingStraightPart(contour)
+                        else:
+                            piece = part.StraightPart(contour)
                     # Add the child contours to the object
                     piece.childContours = child_contours
                     # Add the part object to the list to be returned

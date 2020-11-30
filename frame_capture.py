@@ -46,7 +46,9 @@ def FrameCapture(frame_bgr, show = False):
     # Init dot variables
     cx = 0
     cy = 0
-    
+    count = 0
+    # TODO: need to tweak the threshold to trigger frameFound
+
     # Get the height and width of the frame
     imageHeight , imageWidth = frame_bgr.shape[:2]
     # Convert to rgb for plotting
@@ -55,6 +57,9 @@ def FrameCapture(frame_bgr, show = False):
     mask_inv = filterOutColoredObjects(frame_bgr,greenDotColor,show=False)
     # Get the contours from the mask
     contours, hierarchy = cv2.findContours(mask_inv, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+
+    
     
     # Loop through the contours
     for i, contour in enumerate(contours):
@@ -68,18 +73,21 @@ def FrameCapture(frame_bgr, show = False):
                 cx = int(M['m10']/M['m00'])
                 cy = int(M['m01']/M['m00'])   
                 # if the x position is over 90% of image width you have found the right frame
-                if(cx > imageWidth*0.92): 
+                if(cx > imageWidth*0.90): 
                     foundFrame = True
+                    count += 1
+                     # Plot the dot centre point and contours
+                    cv2.circle(img_rgb,(cx,cy), 3, (255,0,0), -1)
+                    cv2.drawContours(img_rgb, contours, -1, (0,0,255), 2)
 
-                    if(show):
-                        # Plot the dot centre point and contours
-                        cv2.circle(img_rgb,(cx,cy), 3, (255,0,0), -1)
-                        cv2.drawContours(img_rgb, contours, -1, (0,0,255), 2)
-                        plt.figure(figsize = (7,7))
-                        plt.imshow(img_rgb)
-                        plt.title("Count {0}".format(len(contours)))
-                        plt.axis('off')
-                        plt.show()
+    # Add in cropping function based on where the dot is
+
+    if(show and foundFrame):
+        plt.figure(figsize = (7,7))
+        plt.imshow(img_rgb)
+        plt.title("Count {0}".format(len(contours)))
+        plt.axis('off')
+        plt.show()
 
     
-    return foundFrame
+    return foundFrame, count

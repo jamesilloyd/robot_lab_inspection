@@ -1,8 +1,11 @@
+"""
+Test of comms signals between RPi and PLC 
+"""
+
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 import cv2
-#GPIO.setmode(GPIO.BCM)
 
 out1 = 29
 out2 = 32
@@ -13,9 +16,6 @@ out6 = 36
 inp1 = 37
 inp2 = 38
 inp3 = 40
-#inp1 = 26
-#inp2 = 20
-#inp3 = 21
 
 
 GPIO.setup(out1, GPIO.OUT)

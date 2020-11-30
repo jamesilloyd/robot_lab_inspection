@@ -13,7 +13,8 @@ THIS IS THE MOST UP TO DATE FUNCTION USED FOR CLASSIFYING STATIC IMAGES.
 if __name__ == "__main__":
 
     # getting the template part
-    templateLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/templates/template_static_straight.png'
+    #templateLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/templates/template_static_straight.png'
+    templateLocation = 'templates/template_static_straight.png'
     img_template = cv2.imread(templateLocation,0)
 
     my_results=ResultsSave('results/group4_vision_result.csv','results/group4_plc_result.csv')
@@ -23,7 +24,8 @@ if __name__ == "__main__":
     for i in range(37):
         # Getting the image to test on
         print(i)
-        imageLocation = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Dock Images/straight/group4/opencv_frame_{0}.png'.format(i)
+        #imageLocation = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Dock Images/straight/group4/opencv_frame_{0}.png'.format(i)
+        imageLocation = 'TemplateMatching/Dock Images/straight/group4/opencv_frame_{0}.png'.format(i)
         img_bgr = cv2.imread(imageLocation)
 
         # Carry out template matching on the image 

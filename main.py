@@ -28,9 +28,10 @@ templateImage = cv2.imread(templateLocation)
 
 for i in range(1,29):
 
-    imageLocation = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Videos/test{0}.avi'.format(i)
-    capture = cv2.VideoCapture(imageLocation)
-    
+# TODO: change input type to video recording
+#for image in range(1,8):
+#    image_location = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Videos/grp23/test{0}.avi'.format(image)
+    capture = cv2.VideoCapture(image_location)
     
     while (capture.isOpened()):
 
@@ -79,7 +80,7 @@ for i in range(1,29):
 
 
 
-    # Show restuls
-    # img_rgb = cv2.cvtColor(img_crop_bgr, cv2.COLOR_BGR2RGB)
-    # plt.imshow(img_rgb)
-    # plt.show()
+    #Show restuls
+    img_rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
+    plt.imshow(img_rgb)
+    plt.show()

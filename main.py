@@ -35,6 +35,8 @@ while (capture.isOpened()):
 
     ret, frame_bgr = capture.read()
 
+    curved = False
+
     while(ret):
 
         # Video is finished

@@ -185,6 +185,7 @@ class CurvedPart(Part):
     # These are the ranges of the defect part types 
     halfLengthWithNotch = Defect([0.21,0.25],[0.75,0.79],[0.022,0.027],"Half split by length with notch")
     halfLengthWithoutNotch = Defect([0.22,0.27],[0.92,0.96],[0.033,0.037],"Half split by length without notch")
+    # This overlaps with the main one
     holeInMiddleWithHoleFilled = Defect([0.42,0.47],[0.80,0.85],[0.022,0.030],"Hole in the middle and other hole filled")
     holeInMiddle = Defect([0.43,0.47],[0.77,0.81],[0.021,0.024],"Hole in the middle")
     filledHole = Defect([0.43,0.48],[0.85,0.91],[0.029,0.041],"The hole is filled")
@@ -194,9 +195,9 @@ class CurvedPart(Part):
     straightPiece = Defect([0.52,0.57],[0.8,0.85],[0.028,0.032],"Straight piece")
     onlyNotch = Defect([0.62,0.74],[0.91,0.94],[0.053,0.06],"Notch on its own")
     
-    halfWidthWithHoleFilled = Defect([0.77,0.81],[0.93,0.98],[0.041,0.058],"Half split by width with hole filled")
-    halfWidthWithNotch = Defect([0.77,0.82],[0.82,0.87],[0.039,0.043],"Half split by width including notch")
-    halfWidthWithHole = Defect([0.77,0.84],[0.82,0.89],[0.033,0.037],"Half split by width including hole")
+    halfWidthWithHoleFilled = Defect([0.77,0.90],[0.93,0.98],[0.041,0.060],"Half split by width with hole filled")
+    halfWidthWithNotch = Defect([0.72,0.82],[0.82,0.87],[0.039,0.043],"Half split by width including notch")
+    halfWidthWithHole = Defect([0.77,0.89],[0.82,0.89],[0.033,0.037],"Half split by width including hole")
     
 
 

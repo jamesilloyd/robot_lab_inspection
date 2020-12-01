@@ -19,8 +19,7 @@ if __name__ == "__main__":
     my_results=ResultsSave('results/group4_vision_result.csv','results/group4_plc_result.csv')
 
 
-
-    for i in range(7,62):
+    for i in range(62):
         # Getting the image to test on
         print(i)
         imageLocation = 'TemplateMatching/Dock Images/curve_right/group6/opencv_frame_{0}.png'.format(i)
@@ -28,15 +27,17 @@ if __name__ == "__main__":
 
         # Carry out template matching on the image 
         # TODO: how do we know which template to use?
-        match_list = template_matching.templateMatching(img_bgr, img_template,show=False)
+        match_list, foundTemplate = template_matching.templateMatching(img_bgr, img_template,show=False)
 
-        # print(match_list)
+        if(foundTemplate):       # print(match_list)
 
         # Use the templates to crop the image
         img_crop_bgr = template_matching.imageCropping(img_bgr, img_template, match_list,show=False)
 
         # Use the cropped image to classify the parts
         # TODO: how do we auto know whether it's curves or not
+        # Going to receive a signal from PLC to determine what kind of static tray we are dealing with
+        # For moving we will use template matching
         resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=True) 
 
         # print(resultsPLC)

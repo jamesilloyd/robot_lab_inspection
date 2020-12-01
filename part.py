@@ -132,7 +132,6 @@ class StraightPart(Part):
     # areaPerimeterRange = [13.6,14.5]
     areaPerimeterRange = [0.028,0.032]
 
-    # This needs testing more (see how much you can extend ranges so that they don't interfere), maybe add in a 4th dimension
     # These are the ranges of the defect part types 
     holeInMiddle = Defect([0.52,0.56],[0.76,0.80],[0.019,0.023],"Hole in the middle")
     filledHole = Defect([0.53,0.565],[0.89,0.91],[0.037,0.047],"The hole is filled")
@@ -185,8 +184,6 @@ class CurvedPart(Part):
     # These are the ranges of the defect part types 
     halfLengthWithNotch = Defect([0.21,0.25],[0.75,0.79],[0.022,0.027],"Half split by length with notch")
     halfLengthWithoutNotch = Defect([0.22,0.27],[0.92,0.96],[0.033,0.037],"Half split by length without notch")
-    # This overlaps with the main one
-    holeInMiddleWithHoleFilled = Defect([0.42,0.47],[0.80,0.85],[0.022,0.030],"Hole in the middle and other hole filled")
     holeInMiddle = Defect([0.43,0.47],[0.77,0.81],[0.021,0.024],"Hole in the middle")
     filledHole = Defect([0.43,0.48],[0.85,0.91],[0.029,0.041],"The hole is filled")
     
@@ -204,7 +201,6 @@ class CurvedPart(Part):
     # List that contains all the defected parts
     failureReasons = [missingNotch,
                     halfWidthWithNotch,
-                    holeInMiddleWithHoleFilled,
                     halfWidthWithHole,
                     filledHole,
 
@@ -236,16 +232,16 @@ class CurvedPart(Part):
 # TBF
 class MovingStraightPart(Part):
 
-    aspectRatioRange = [0.49,0.55]
-    solidityRange = [0.83,0.88]
-    areaPerimeterRange = [0.031,0.035]
+    aspectRatioRange = [0.48,0.55]
+    solidityRange = [0.83,0.89]
+    areaPerimeterRange = [0.031,0.037]
 
 
 # TBF
 class MovingCurvedPart(Part):
 
     aspectRatioRange = [0.41,0.45]
-    solidityRange = [0.85,0.89]
-    areaPerimeterRange = [0.030,0.0340]
+    solidityRange = [0.85,0.90]
+    areaPerimeterRange = [0.030,0.036]
 
 

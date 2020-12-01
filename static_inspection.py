@@ -25,7 +25,7 @@ out4 = 33 #has an issue with the current board
 out5 = 35
 out6 = 36
 
-GPIO.setup(inp1, GPIO.IN)
+GPIO.setup(inp1, GPIO.IN) #change to start at inp0 and out0
 GPIO.setup(inp2, GPIO.IN)
 GPIO.setup(inp3, GPIO.IN)
 GPIO.setup(out1, GPIO.OUT)
@@ -132,14 +132,16 @@ while True:
     """
     # Handshake with PLC to output pair results in sequence waiting for confirmation from PLC each time
     GPIO.output(out1, 1)
+    ###add one second delay here for PLC to ensure go-flag down
     
     for pair in range(len(pair_results)):
-        GPIO.output(out2, 1)
+        GPIO.output(out2, 1)  #dont need this
         while True:
             if GPIO.input(inp1) == 1:
+            	###set busy flag high here
                 GPIO.output(out3, 1 - pair_results[pair])
-                GPIO.output(out2, 0)
-                time.sleep(0.1)
+                GPIO.output(out2, 0)  ###this should set busy flag low again here instead
+                time.sleep(0.1)   #check if this time needed, likely at least 1 second
                 break
             else:
                 pass

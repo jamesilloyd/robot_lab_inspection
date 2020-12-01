@@ -73,7 +73,7 @@ def FrameCapture(frame_bgr, show = False):
                 cx = int(M['m10']/M['m00'])
                 cy = int(M['m01']/M['m00'])   
                 # if the x position is over 90% of image width you have found the right frame
-                if(cx > imageWidth*0.90): 
+                if(cx > imageWidth*0.93): 
                     foundFrame = True
                     count += 1
                      # Plot the dot centre point and contours

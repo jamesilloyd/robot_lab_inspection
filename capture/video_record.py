@@ -5,7 +5,7 @@ cap = cv2.VideoCapture(0)
 
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('10mm_4.avi',fourcc, 20.0, (640,480))
+out = cv2.VideoWriter('10mm_18.avi',fourcc, 20.0, (640,480))
 
 #out = cv2.VideoWriter('10mm_1.avi',fourcc, 20.0)
 

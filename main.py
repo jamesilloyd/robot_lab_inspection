@@ -37,34 +37,35 @@ while (capture.isOpened()):
 
     curved = False
 
-    while(ret):
+    
 
         # Video is finished
-        if(frame_bgr is None):
-            # TODO: change this to boolean var foundFrame
-            print('DID NOT FIND FRAME')
-            break
+    if(frame_bgr is None):
+        # TODO: change this to boolean var foundFrame
+        print('DID NOT FIND FRAME')
+        break
 
-        cv2.imshow('frame',frame_bgr)
-        cv2.waitKey(1)
+    cv2.imshow('frame',frame_bgr)
+    cv2.waitKey(1)
 
 
-        # Video is running
-        foundFrame, count = FrameCapture(frame_bgr,show=False)
+    # Video is running
+    foundFrame, count = FrameCapture(frame_bgr,show=False)
 
-        if(foundFrame):
-            if(count == 1):
-                pieceType = "straight"
-                curved = False
-            elif(count == 2):
-                pieceType = "curveLeft"
-                curved = True
-            elif(count == 3):
-                pieceType = "curveRight"
-            else:
-                #TODO: RAISE ERROR
-                pieceType = "unknown"
-            break
+    if(foundFrame):
+        if(count == 1):
+            pieceType = "straight"
+            curved = False
+        elif(count == 2):
+            pieceType = "curveLeft"
+            curved = True
+        elif(count == 3):
+            pieceType = "curveRight"
+            curved = True
+        else:
+            #TODO: RAISE ERROR
+            pieceType = "unknown"
+        break
 
 
         #  TODO: also add in code here for allow manual cancellation.
@@ -73,27 +74,25 @@ while (capture.isOpened()):
         
 
     # Release everything if the frame is found
+capture.release()
+cv2.destroyAllWindows()
+
+print(count)
+if(curved):
+    frame_cropped = frame_bgr[0:600,0:600]
     
-    cv2.destroyAllWindows()
- 
-        
-    if(curved):
-        frame_cropped = frame_bgr[0:400,0:600]
-        
-    else:
-        frame_cropped = frame_bgr[0:385,60:600]
-
-
-    resultsVision, resultsPLC, img_classified = classification.partClassification(frame_cropped,show=True,isCurves=curved,isMoving=True)
+else:
+    frame_cropped = frame_bgr[0:385,60:600]
+'''
+frame_cropped = frame_bgr
+'''
+resultsVision, resultsPLC, img_classified = classification.partClassification(frame_cropped,show=True,isCurves=curved,isMoving=True)
 
 
 
         # plt.imshow(cv2.cvtColor(frame_cropped,cv2.COLOR_BGR2RGB))
 
     # plt.show()
-
-capture.release()
-cv2.destroyAllWindows()
 
 
 

@@ -40,7 +40,7 @@ if __name__ == "__main__":
             # TODO: how do we auto know whether it's curves or not
             # Going to receive a signal from PLC to determine what kind of static tray we are dealing with
             # For moving we will use template matching
-            resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=True) 
+            resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = True, isCurves=True) 
 
             # print(resultsPLC)
 

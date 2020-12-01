@@ -145,7 +145,8 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
             # This is for debugging
             print('Part {3}, Aspect Ratio {0}, Solidity {1}, Area/Perimeter {2}, Reason {4}'.format(piece.aspectRatio,piece.solidity,piece.areaPerimeterSqr,resultIndex,piece.reasonForFailure))
         
-        if(piece.reasonForFailure == "Unknown Failure Reason"): show = True
+        # Only use this line for debugging
+        # if(piece.reasonForFailure == "Unknown Failure Reason"): show = True
 
     if(show):
         plt.figure(figsize = (7,7))

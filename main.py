@@ -23,7 +23,7 @@ This is going to be the main file used on the actual day. It is set up for movin
 #     # image_location = 'capture/10mm_{0}.avi'.format(i)
 #     image_location = 'TemplateMatching/Videos/group4/test{0}.avi'.format(i)
 
-
+# Need to take frame after for moving images
 
 capture = cv2.VideoCapture(0)
 foundFrame = False

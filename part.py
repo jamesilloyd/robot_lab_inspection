@@ -130,18 +130,18 @@ class StraightPart(Part):
     aspectRatioRange = [0.52,0.57]
     solidityRange = [0.80,0.85]
     # areaPerimeterRange = [13.6,14.5]
-    areaPerimeterRange = [0.0300,0.0315]
+    areaPerimeterRange = [0.028,0.032]
 
     # This needs testing more (see how much you can extend ranges so that they don't interfere), maybe add in a 4th dimension
     # These are the ranges of the defect part types 
-    holeInMiddle = Defect([0.52,0.56],[0.76,0.80],[10.7,11.6],"Hole in the middle")
-    filledHole = Defect([0.53,0.565],[0.89,0.91],[16.5,18.1],"The hole is filled")
-    onlyNotch = Defect([0.64,0.72],[0.91,0.93],[4.7,5.1],"Notch on it's own")
-    missingNotchHoleFilled = Defect([0.7,0.74],[0.96,1.0],[18.8,20.2],"Notch is missing and hole is filled")
-    missingNotch = Defect([0.71,0.73],[0.88,0.92],[14.8,15.7],"Notch is missing")
-    halfWidthWithHoleFilled = Defect([0.77,0.79],[0.97,0.99],[14.2,14.9],"Half split by width with hole filled")
-    halfWidthWithHole = Defect([0.77,0.84],[0.82,0.88],[10.0,10.7],"Half split by width including hole")
-    halfWidthWithNotch = Defect([0.93,0.99],[0.80,0.84],[11.3,11.8],"Half split by width including notch")
+    holeInMiddle = Defect([0.52,0.56],[0.76,0.80],[0.019,0.023],"Hole in the middle")
+    filledHole = Defect([0.53,0.565],[0.89,0.91],[0.037,0.047],"The hole is filled")
+    onlyNotch = Defect([0.64,0.74],[0.91,0.93],[0.053,0.06],"Notch on its own")
+    missingNotchHoleFilled = Defect([0.7,0.74],[0.96,1.0],[0.057,0.061],"Notch is missing and hole is filled")
+    missingNotch = Defect([0.71,0.74],[0.88,0.92],[0.037,0.05],"Notch is missing")
+    halfWidthWithHoleFilled = Defect([0.77,0.79],[0.96,0.99],[0.0540,0.0570],"Half split by width with hole filled")
+    halfWidthWithHole = Defect([0.75,0.84],[0.82,0.88],[0.031,0.035],"Half split by width including hole")
+    halfWidthWithNotch = Defect([0.93,0.99],[0.80,0.84],[0.038,0.042],"Half split by width including notch")
 
 
     # List that contains all the defect types
@@ -173,30 +173,30 @@ class StraightPart(Part):
             return failureReason
                 
 
-
+# TODO: CHECK IF ANY OF THE STRAIGHT PART AND CURVE PART DEFECT RANGES OVERLAP, IF NOT THEN YOU CAN PUT THEM TOGETHER
 class CurvedPart(Part):
 
     # These are the ranges used to classify a good straight part
     aspectRatioRange = [0.43,0.47]
     solidityRange = [0.8,0.85]
-    areaPerimeterRange = [16.2,17.1]
+    areaPerimeterRange = [0.027,0.031]
 
     
     # These are the ranges of the defect part types 
-    halfLengthWithNotch = Defect([0.21,0.25],[0.75,0.79],[9.8,10.5],"Half split by length with notch")
-    halfLengthWithoutNotch = Defect([0.22,0.27],[0.92,0.96],[13.1,13.6],"Half split by length without notch")
-    holeInMiddleWithHoleFilled = Defect([0.42,0.47],[0.80,0.85],[15.3,15.9],"Hole in the middle and other hole filled")
-    holeInMiddle = Defect([0.43,0.47],[0.77,0.81],[13.8,14.2],"Hole in the middle")
-    filledHole = Defect([0.43,0.48],[0.85,0.91],[16.5,19.8],"The hole is filled")
+    halfLengthWithNotch = Defect([0.21,0.25],[0.75,0.79],[0.022,0.027],"Half split by length with notch")
+    halfLengthWithoutNotch = Defect([0.22,0.27],[0.92,0.96],[0.033,0.037],"Half split by length without notch")
+    holeInMiddleWithHoleFilled = Defect([0.42,0.47],[0.80,0.85],[0.022,0.030],"Hole in the middle and other hole filled")
+    holeInMiddle = Defect([0.43,0.47],[0.77,0.81],[0.021,0.024],"Hole in the middle")
+    filledHole = Defect([0.43,0.48],[0.85,0.91],[0.029,0.041],"The hole is filled")
     
-    missingNotchHoleFilled = Defect([0.48,0.52],[0.89,0.93],[18.5,22.0],"Notch is missing and hole is filled")
-    missingNotch = Defect([0.48,0.51],[0.85,0.89],[17.8,18.3],"Notch is missing")
-    straightPiece = Defect([0.52,0.57],[0.8,0.85],[13.3,14.5],"Straight piece")
-    onlyNotch = Defect([0.61,0.73],[0.91,0.93],[4.4,5.1],"Notch on it's own")
+    missingNotchHoleFilled = Defect([0.48,0.52],[0.89,0.93],[0.037,0.051],"Notch is missing and hole is filled")
+    missingNotch = Defect([0.48,0.51],[0.85,0.89],[0.033,0.037],"Notch is missing")
+    straightPiece = Defect([0.52,0.57],[0.8,0.85],[0.028,0.032],"Straight piece")
+    onlyNotch = Defect([0.62,0.74],[0.91,0.94],[0.053,0.06],"Notch on its own")
     
-    halfWidthWithHoleFilled = Defect([0.77,0.81],[0.93,0.98],[14.1,14.9],"Half split by width with hole filled")
-    halfWidthWithNotch = Defect([0.77,0.82],[0.82,0.87],[13.3,14.2],"Half split by width including notch")
-    halfWidthWithHole = Defect([0.77,0.84],[0.82,0.89],[12.2,13.0],"Half split by width including hole")
+    halfWidthWithHoleFilled = Defect([0.77,0.81],[0.93,0.98],[0.041,0.058],"Half split by width with hole filled")
+    halfWidthWithNotch = Defect([0.77,0.82],[0.82,0.87],[0.039,0.043],"Half split by width including notch")
+    halfWidthWithHole = Defect([0.77,0.84],[0.82,0.89],[0.033,0.037],"Half split by width including hole")
     
 
 
@@ -226,7 +226,7 @@ class CurvedPart(Part):
         else:
             for i,reason in enumerate(self.failureReasons):
                 # TODO: may need a more robust threshold
-                if(reason.aspectRatio[0] < self.aspectRatio < reason.aspectRatio[1] and reason.solidity[0] < self.solidity < reason.solidity[1] and reason.areaPerimeter[0] < self.area/self.perimeter < reason.areaPerimeter[1]):
+                if(reason.aspectRatio[0] < self.aspectRatio < reason.aspectRatio[1] and reason.solidity[0] < self.solidity < reason.solidity[1] and reason.areaPerimeter[0] < self.areaPerimeterSqr < reason.areaPerimeter[1]):
                     failureReason = reason.reason
                 
             return failureReason

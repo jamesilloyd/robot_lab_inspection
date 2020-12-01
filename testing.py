@@ -9,23 +9,21 @@ from save_results import ResultsSave
 '''
 THIS IS THE MOST UP TO DATE FUNCTION USED FOR CLASSIFYING STATIC IMAGES. 
 '''
-
 if __name__ == "__main__":
 
     # getting the template part
     #templateLocation = '/Users/heisenberg/RobotLab/robot_lab_inspection/templates/template_static_straight.png'
-    templateLocation = 'templates/template_static_straight.png'
+    templateLocation = 'templates/template_static_curve_right.png'
     img_template = cv2.imread(templateLocation,0)
 
     my_results=ResultsSave('results/group4_vision_result.csv','results/group4_plc_result.csv')
 
 
 
-    for i in range(37):
+    for i in range(7,62):
         # Getting the image to test on
         print(i)
-        #imageLocation = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Dock Images/straight/group4/opencv_frame_{0}.png'.format(i)
-        imageLocation = 'TemplateMatching/Dock Images/straight/group4/opencv_frame_{0}.png'.format(i)
+        imageLocation = 'TemplateMatching/Dock Images/curve_right/group6/opencv_frame_{0}.png'.format(i)
         img_bgr = cv2.imread(imageLocation)
 
         # Carry out template matching on the image 
@@ -39,13 +37,12 @@ if __name__ == "__main__":
 
         # Use the cropped image to classify the parts
         # TODO: how do we auto know whether it's curves or not
-        resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=False) 
+        resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=True) 
 
         # print(resultsPLC)
 
         # Store image of classified tray for assessment
         # cv2.imwrite('results/images/classified_tray_{0}.png'.format(i),img_classified)
-
 
         # Store results in csv file for assessment
         for j in range(len(resultsVision)):

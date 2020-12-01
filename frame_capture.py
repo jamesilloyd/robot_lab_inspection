@@ -80,7 +80,11 @@ def FrameCapture(frame_bgr, show = False):
                     cv2.circle(img_rgb,(cx,cy), 3, (255,0,0), -1)
                     cv2.drawContours(img_rgb, contours, -1, (0,0,255), 2)
 
+    '''
+    TODO
     # Add in cropping function based on where the dot is
+    # It would be better to use template matching if possible
+    '''
 
     if(show and foundFrame):
         plt.figure(figsize = (7,7))

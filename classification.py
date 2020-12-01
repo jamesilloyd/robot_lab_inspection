@@ -63,15 +63,14 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
         # This code finds the part index within the results grid dictionary to be marked as good 
         resultIndex = 0
         PLCIndex = 0
+        # This variable is used to capture any contours we may have accidentally captured on the edge of the image
+        validPart = True
+        
         # Find the correct index the piece corresponds to (PLC indexes columns then rows)
+        if(piece.centreXY[0]/imageWidth < 0.05):
+            validPart = False
 
-        '''
-        TODO
-        NEED TO ACCOUNT FOR CONTOURS THAT ARE FOUND ON THE EDGE
-        PERHAPS ADD IN A MAX CONTOUR SIZE?
-        '''
-
-        if(piece.centreXY[0]/imageWidth < 0.33):
+        elif(piece.centreXY[0]/imageWidth < 0.33):
             # print('x1')
             resultIndex += 0
             PLCIndex += 0
@@ -81,13 +80,17 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
             resultIndex += 1
             PLCIndex += 4
         
-        else:
+        elif(piece.centreXY[0]/imageWidth < 0.95):
             # print('x3')
             resultIndex += 2
             PLCIndex += 8
+        else:
+            validPart = False
 
+        if(piece.centreXY[1]/imageHeight < 0.05):
+            validPart = False
 
-        if(piece.centreXY[1]/imageHeight < 0.25):
+        elif(piece.centreXY[1]/imageHeight < 0.25):
             # print('y1')
             resultIndex += 0
             PLCIndex += 0
@@ -102,16 +105,21 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
             resultIndex += 6
             PLCIndex += 2
         
-        else:
+        elif(piece.centreXY[1]/imageHeight < 0.95):
             # print('y4')
             resultIndex += 9
             PLCIndex += 3
+        else:
+            validPart = False
 
-        # The object is automatically QC checked on initialisation
-        # Mark the QC result on the output dictionary
-        resultsVision[str(resultIndex)]["QCPassed"] = piece.isQCPassed
-        resultsVision[str(resultIndex)]["reason"] = piece.reasonForFailure
-        resultsPLC[str(PLCIndex)] = piece.isQCPassed
+        if(validPart):
+            # The object is automatically QC checked on initialisation
+            # Mark the QC result on the output dictionary
+            resultsVision[str(resultIndex)]["QCPassed"] = piece.isQCPassed
+            resultsVision[str(resultIndex)]["reason"] = piece.reasonForFailure
+            resultsPLC[str(PLCIndex)] = piece.isQCPassed
+        else:
+            resultIndex = 'N/A'
 
         # Plot the contours, part number, and centre point
         cv2.drawContours(img_rgb, [piece.contour], -1, (0,0,255), 2)
@@ -128,9 +136,10 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
         if piece.isQCPassed:
             cv2.drawContours(img_rgb,[box],0,(0,255,0),1)
             passedCount += 1
+            # This is for debugging
             print('Part {3}, Aspect Ratio {0}, Solidity {1}, Area/Perimeter {2}, Reason {4}'.format(piece.aspectRatio,piece.solidity,piece.areaPerimeterSqr,resultIndex,piece.reasonForFailure))
         
-        else:
+        elif(validPart):
             cv2.drawContours(img_rgb,[box],0,(255,0,0),1)
             failedCount += 1
             # This is for debugging

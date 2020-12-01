@@ -32,7 +32,6 @@ for i in range(12,20):
     print(i)
 
     # image_location = 'capture/10mm_{0}.avi'.format(i)
-    #image_location = '/Users/heisenberg/University of Cambridge/Taba Gibb - Track and Train/Inspection/Videos/group4/test{0}.avi'.format(i)
     image_location = 'TemplateMatching/Videos/group4/test{0}.avi'.format(i)
 
     capture = cv2.VideoCapture(image_location)
@@ -95,9 +94,9 @@ for i in range(12,20):
 
 
 
-    # plt.imshow(cv2.cvtColor(frame_cropped,cv2.COLOR_BGR2RGB))
+        # plt.imshow(cv2.cvtColor(frame_cropped,cv2.COLOR_BGR2RGB))
 
-    # plt.show()
+        # plt.show()
 
 
 

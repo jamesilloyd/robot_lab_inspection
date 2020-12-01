@@ -18,6 +18,8 @@ import math
 #template matching function returns list of matched locations
 def templateMatching(img_bgr, img_template,show = False):
 
+	foundTemplate = False
+
 	# TODO: NEED TO ACCOUNT FOR A BLANK TRAY
 
 	img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
@@ -36,35 +38,43 @@ def templateMatching(img_bgr, img_template,show = False):
 	#threshold = 0.95
 	loc = np.where( res >= threshold)
 
-
 	loc_arr = []
+	pt_list = []
+	
 	for pt in zip(*loc[::-1]):
 		loc_arr.append(pt)
 
-	pt_list = [loc_arr[0]]
-	for loc in loc_arr:
-		dist_list = []
-		for pt in pt_list:
-			dist = math.hypot(loc[0] - pt[0], loc[1] - pt[1])
-			dist_list.append(dist)
-		dist_array = np.array(dist_list)
-		if ((dist_array >= temp_h/2).sum() == dist_array.size).astype(np.int):
-			pt_list.append(loc)
+	if(loc_arr == []):
+		foundTemplate = False
+	else:
+		foundTemplate = True
 
-	#print(pt_list)
+	if(foundTemplate):
 
-	if(show):
-		for pt in pt_list:
-			cv2.rectangle(img_rgb, pt, (pt[0] + temp_w, pt[1] + temp_h), (0,0,255), 2)
+		pt_list = [loc_arr[0]]
+		for loc in loc_arr:
+			dist_list = []
+			for pt in pt_list:
+				dist = math.hypot(loc[0] - pt[0], loc[1] - pt[1])
+				dist_list.append(dist)
+			dist_array = np.array(dist_list)
+			if ((dist_array >= temp_h/2).sum() == dist_array.size).astype(np.int):
+				pt_list.append(loc)
 
-		ds=7
-		plt.figure(figsize = (ds,ds))
-		plt.imshow(img_rgb)
-		plt.title('Templates found')
-		plt.axis('off')
-		plt.show()
+		#print(pt_list)
 
-	return pt_list
+		if(show):
+			for pt in pt_list:
+				cv2.rectangle(img_rgb, pt, (pt[0] + temp_w, pt[1] + temp_h), (0,0,255), 2)
+
+			ds=7
+			plt.figure(figsize = (ds,ds))
+			plt.imshow(img_rgb)
+			plt.title('Templates found')
+			plt.axis('off')
+			plt.show()
+
+	return pt_list , foundTemplate
 
 #image cropping function crops image to matched template locations
 # Returns the cropped image to be used by contouring

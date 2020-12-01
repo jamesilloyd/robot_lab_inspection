@@ -57,9 +57,6 @@ def FrameCapture(frame_bgr, show = False):
     mask_inv = filterOutColoredObjects(frame_bgr,greenDotColor,show=False)
     # Get the contours from the mask
     contours, hierarchy = cv2.findContours(mask_inv, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
-
-    
     
     # Loop through the contours
     for i, contour in enumerate(contours):
@@ -73,6 +70,7 @@ def FrameCapture(frame_bgr, show = False):
                 cx = int(M['m10']/M['m00'])
                 cy = int(M['m01']/M['m00'])   
                 # if the x position is over 90% of image width you have found the right frame
+                # TODO: what is the ultimate image width
                 if(cx > imageWidth*0.93): 
                     foundFrame = True
                     count += 1

@@ -4,7 +4,7 @@ Inspection file used for classification of static images and integration with PL
 
 # Import modules
 import numpy as np
-from cv2 import cv2
+import cv2
 from matplotlib import pyplot as plt
 import part
 from TemplateMatching import template_matching
@@ -51,10 +51,13 @@ rightTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template
 #pair_results = [1, 1, 0, 0, 1, 0]
 
 # Main loop of program for each image inspection
+
+
+
 while True:
 
     cam = cv2.VideoCapture(0)
-    cv2.namedWindow("static_inspection")
+    cv2.namedWindow("test")
 
     while True:
 
@@ -63,8 +66,8 @@ while True:
         if not ret:
             print("failed to grab frame")
             break
-        cv2.imshow("static_inspection", frame)
-        
+        cv2.imshow("test", frame)
+        """
         # Checking for input from PLC defining the type of tray (may be replaced by green dots/template matching layer
         if GPIO.input(inp1) == 0 and GPIO.input(inp2) == 0:
             pass
@@ -81,8 +84,9 @@ while True:
                 curve = True
                 img_template = cv2.imread(rightTemplateLocation,0)
             break
-            
         """
+            
+        
         #simulating tray type straight/curve_left/curve_right
         k = cv2.waitKey(1)
         if k%256 == 49:
@@ -100,7 +104,7 @@ while True:
             curve = True
             img_template = cv2.imread(rightTemplateLocation,0)
             break
-        """
+        
 
     cam.release()
     cv2.destroyAllWindows()
@@ -114,18 +118,22 @@ while True:
     img_crop_bgr = template_matching.imageCropping(img_bgr, img_template, match_list)
 
     # Use the cropped image to classify the parts
-    results, parts = classification.partClassification(img_crop_bgr, show = True,isCurves=curve)
+    #results, parts = classification.partClassification(img_crop_bgr, show = True,isCurves=curve)
 
-    print(results)
+    #print(results)
+    
+    resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = True, isCurves=True) 
+
+    print(resultsPLC)
     
     """
     ADD CODE TO GENERATE PAIRED RESULTS LIST FROM RESULTS DICTIONARY
     """
-    
+    """
     # Handshake with PLC to output pair results in sequence waiting for confirmation from PLC each time
     GPIO.output(out1, 1)
     
-    for pair in range len(pair_results):
+    for pair in range(len(pair_results)):
         GPIO.output(out2, 1)
         while True:
             if GPIO.input(inp1) == 1:
@@ -137,4 +145,4 @@ while True:
                 pass
             
     GPIO.output(out1, 0)
-
+    """

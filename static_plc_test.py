@@ -90,7 +90,7 @@ while True:
     # Handshake with PLC to output pair results in sequence waiting for confirmation from PLC each time
     GPIO.output(out1, 1)
     
-    for result in range len(results):
+    for result in range(len(results)):
         GPIO.output(out2, 1)
         while True:
             if GPIO.input(inp1) == 1:

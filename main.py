@@ -28,7 +28,7 @@ This is going to be the main file used on the actual day. It is set up for movin
 # templateImage = cv2.imread(templateLocation,0)
 
 # untouchables = [14,16,18]
-for i in range(12,20):
+for i in range(20):
     print(i)
 
     # image_location = 'capture/10mm_{0}.avi'.format(i)

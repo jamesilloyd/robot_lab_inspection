@@ -237,7 +237,7 @@ class MovingStraightPart(Part):
 
     aspectRatioRange = [0.49,0.55]
     solidityRange = [0.83,0.88]
-    areaPerimeterRange = [14.8,16.4]
+    areaPerimeterRange = [0.031,0.035]
 
 
 # TBF
@@ -245,7 +245,6 @@ class MovingCurvedPart(Part):
 
     aspectRatioRange = [0.41,0.45]
     solidityRange = [0.85,0.89]
-    # areaPerimeterRange = [17.5,19.1]
-    areaPerimeterRange = [0.0320,0.0340]
+    areaPerimeterRange = [0.030,0.0340]
 
 

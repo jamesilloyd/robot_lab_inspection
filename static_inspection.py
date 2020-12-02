@@ -3,148 +3,207 @@ Inspection file used for classification of static images and integration with PL
 """
 
 # Import modules
-import numpy as np
-import cv2
+from cv2 import cv2
 from matplotlib import pyplot as plt
-import part
 from TemplateMatching import template_matching
 import classification
+from save_results import ResultsSave
 import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
 import time
+#import part
 
-# Define GPIO I/O connections
-inp1 = 37
-inp2 = 38
-inp3 = 40
-out1 = 29
-out2 = 32
-out3 = 31
-out4 = 33 #has an issue with the current board
-out5 = 35
-out6 = 36
+if __name__ == "__main__":
 
-GPIO.setup(inp1, GPIO.IN) #change to start at inp0 and out0
-GPIO.setup(inp2, GPIO.IN)
-GPIO.setup(inp3, GPIO.IN)
-GPIO.setup(out1, GPIO.OUT)
-GPIO.setup(out2, GPIO.OUT)
-GPIO.setup(out3, GPIO.OUT)
-GPIO.setup(out4, GPIO.OUT)
-GPIO.setup(out5, GPIO.OUT)
-GPIO.setup(out6, GPIO.OUT)
+	# Initialisation
+	print ("Initialising setup")
 
-# Reverse logic used on RPi to give standard logic input to PLC
-GPIO.output(out1, 1)
-GPIO.output(out2, 1)
-GPIO.output(out3, 1)
-GPIO.output(out4, 1)
-GPIO.output(out5, 1)
-GPIO.output(out6, 1)
+	# Set GPIO mode and warnings false
+	GPIO.setmode(GPIO.BOARD)
+	GPIO.setwarnings(False)
 
-# Set template image locations for template matching
-straightTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template_straight.png'
-leftTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template_curve_left.png'
-rightTemplateLocation = '/home/pi/robot_lab_inspection/TemplateMatching/template_curve.png'
+	# Define GPIO I/O connections
+	inp0 = 37
+	inp1 = 38
+	inp2 = 40
+	out0 = 29
+	out1 = 32
+	out2 = 31
+	#out3 = 33 #has an issue with the current board
+	#out4 = 35 #not currently in use
+	#out5 = 36 #not currently in use
 
-#pair_results = [1, 1, 0, 0, 1, 0]
+	# Define GPIO pins as inputs and outputs respectively 
+	GPIO.setup(inp0, GPIO.IN)
+	GPIO.setup(inp1, GPIO.IN)
+	GPIO.setup(inp2, GPIO.IN)
+	GPIO.setup(out0, GPIO.OUT)
+	GPIO.setup(out1, GPIO.OUT)
+	GPIO.setup(out2, GPIO.OUT)
 
-# Main loop of program for each image inspection
+	# Set template image locations for template matching
+	straightTemplateLocation = '/home/pi/robot_lab_inspection/templates/template_static_straight.png'
+	leftTemplateLocation = '/home/pi/robot_lab_inspection/templates/template_static_curve_left.png'
+	rightTemplateLocation = '/home/pi/robot_lab_inspection/templates/template_static_curve_right.png'
 
+	# Initialise results saving object
+	my_results=ResultsSave('results/group4_static_vision_result.csv','results/group4_static_plc_result.csv')
 
+	# Start count for images inspected
+	count = 0
 
-while True:
+	# Main loop of program for each image inspection
 
-    cam = cv2.VideoCapture(0)
-    cv2.namedWindow("test")
+	while True:
 
-    while True:
+		# Reverse logic used on RPi to give standard logic input to PLC
+		# Reset all outputs at start of each loop
+		GPIO.output(out0, 1)
+		GPIO.output(out1, 1)
+		GPIO.output(out2, 1)
 
-        ret, frame = cam.read()
+		print("Initialising new window for image capture")
+		print(count)
 
-        if not ret:
-            print("failed to grab frame")
-            break
-        cv2.imshow("test", frame)
-        """
-        # Checking for input from PLC defining the type of tray (may be replaced by green dots/template matching layer
-        if GPIO.input(inp1) == 0 and GPIO.input(inp2) == 0:
-            pass
-        else:
-            GPIO.output(out1, 0)
-            img_bgr = frame
-            if GPIO.input(inp1) == 0 and GPIO.input(inp2) == 1:
-                curve = False
-                img_template = cv2.imread(straightTemplateLocation,0)
-            elif GPIO.input(inp1) == 1 and GPIO.input(inp2) == 0:
-                curve = True
-                img_template = cv2.imread(leftTemplateLocation,0)
-            elif GPIO.input(inp1) == 1 and GPIO.input(inp2) == 1:
-                curve = True
-                img_template = cv2.imread(rightTemplateLocation,0)
-            break
-        """
-            
-        
-        #simulating tray type straight/curve_left/curve_right
-        k = cv2.waitKey(1)
-        if k%256 == 49:
-            img_bgr = frame
-            curve = False
-            img_template = cv2.imread(straightTemplateLocation,0)
-            break
-        elif k%256 == 50:
-            img_bgr = frame
-            curve = True
-            img_template = cv2.imread(leftTemplateLocation,0)
-            break
-        elif k%256 == 51:
-            img_bgr = frame
-            curve = True
-            img_template = cv2.imread(rightTemplateLocation,0)
-            break
-        
+	    cam = cv2.VideoCapture(0)
+	    cv2.namedWindow("static_inspection")
 
-    cam.release()
-    cv2.destroyAllWindows()
+	    while True:
 
-    # Carry out template matching to produce a list of matched locations
-    match_list = template_matching.templateMatching(img_bgr, img_template)
+	        ret, frame = cam.read()
 
-    print(match_list)
+	        if not ret:
+	            print("failed to grab frame")
+	            break
+	        cv2.imshow("static_inspection", frame)
 
-    # Use the templates to crop the image
-    img_crop_bgr = template_matching.imageCropping(img_bgr, img_template, match_list)
+	        cv2.waitKey(1) #check where this should be
+	        
+	        # Checking for input from PLC defining the type of tray
+	        if GPIO.input(inp0) == 0:
+	            pass
+	        else:
+	        	###Record input PLC bit
+	        	print("PLC Go flag received to start inspection")
+	            GPIO.output(out0, 0)
+	            ###Record output bit
+	            print("RPi Busy flag set high")
+	            img_bgr = frame
+	            if GPIO.input(inp1) == 1 and GPIO.input(inp2) == 0:
+	            	###Record input PLC bits
+	            	print("Straight tracks in dock")
+	                curve = False
+	                img_template = cv2.imread(straightTemplateLocation,0)
+	            elif GPIO.input(inp1) == 0 and GPIO.input(inp2) == 1:
+	            	###Record input PLC bits
+	            	print("Left curve tracks in dock")
+	                curve = True
+	                img_template = cv2.imread(leftTemplateLocation,0)
+	            elif GPIO.input(inp1) == 1 and GPIO.input(inp2) == 1:
+	            	###Record input PLC bits
+	            	print("Right curve tracks in dock")
+	                curve = True
+	                img_template = cv2.imread(rightTemplateLocation,0)
+	            break
+	        
+	            
+	        """
+	        #simulating tray type straight/curve_left/curve_right
+	        k = cv2.waitKey(1)
+	        if k%256 == 49:
+	            img_bgr = frame
+	            curve = False
+	            img_template = cv2.imread(straightTemplateLocation,0)
+	            break
+	        elif k%256 == 50:
+	            img_bgr = frame
+	            curve = True
+	            img_template = cv2.imread(leftTemplateLocation,0)
+	            break
+	        elif k%256 == 51:
+	            img_bgr = frame
+	            curve = True
+	            img_template = cv2.imread(rightTemplateLocation,0)
+	            break
+	        """
 
-    # Use the cropped image to classify the parts
-    #results, parts = classification.partClassification(img_crop_bgr, show = True,isCurves=curve)
+	    cam.release()
+	    cv2.destroyAllWindows()
 
-    #print(results)
-    
-    resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = True, isCurves=True) 
+	    print("Starting static image inspection")
 
-    print(resultsPLC)
-    
-    """
-    ADD CODE TO GENERATE PAIRED RESULTS LIST FROM RESULTS DICTIONARY
-    """
-    """
-    # Handshake with PLC to output pair results in sequence waiting for confirmation from PLC each time
-    GPIO.output(out1, 1)
-    ###add one second delay here for PLC to ensure go-flag down
-    
-    for pair in range(len(pair_results)):
-        GPIO.output(out2, 1)  #dont need this
-        while True:
-            if GPIO.input(inp1) == 1:
-            	###set busy flag high here
-                GPIO.output(out3, 1 - pair_results[pair])
-                GPIO.output(out2, 0)  ###this should set busy flag low again here instead
-                time.sleep(0.1)   #check if this time needed, likely at least 1 second
-                break
-            else:
-                pass
-            
-    GPIO.output(out1, 0)
-    """
+	    # Carry out template matching to produce a list of matched locations
+	    match_list, foundTemplate = template_matching.templateMatching(img_bgr, img_template, show=False)
+
+	    if(foundTemplate):
+	    	print("Templates found successfully")
+
+		    # Use the templates to crop the image
+		    img_crop_bgr = template_matching.imageCropping(img_bgr, img_template, match_list, show=False)
+
+		    # Use the cropped image to classify the parts
+		    resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=curve)
+
+		    """
+		    LOOK AT POSSIBILITY OF SHOWING CLASSIFIED IMAGE IN REAL TIME WITHOUT AFFECTING PROGRAM FLOW
+		    """
+
+			# Store image of classified tray for assessment
+            cv2.imwrite('results/static_images/classified_tray_{0}.png'.format(count),img_classified)
+
+            # Store results in csv file for assessment
+            for j in range(len(resultsVision)):
+                my_results.insert_vision(str(count),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
+
+            #### TODO: do something with plc results csv output
+
+            results_order = [0, 1, 4, 5, 8, 9, 2, 3, 6, 7, 10, 11]
+
+            results_list = []
+            for i in results_order:
+            	result = resultsPLC[str(i)]
+            	if result == True:
+            		results_list.append(1)
+            	else:
+            		results_list.append(0)
+
+            print("Inspection Results:")
+            print(results_list)
+		    
+		    # Handshake with PLC to output individual results in sequence waiting for confirmation from PLC each time
+		    GPIO.output(out0, 1)
+		    print("RPi Busy flag set low")
+		    ###add one second delay here for PLC to ensure go-flag down
+		    time.sleep(1)
+		    
+		    for result in range(len(results_list)):
+		        while True:
+		            if GPIO.input(inp0) == 1:
+		            	print("PLC Go flag received to send next result")
+		            	GPIO.output(out0, 0)
+		            	print("RPi Busy flag set high")
+		        
+		                GPIO.output(out1, 1 - results_list[result])
+		                print("RPi Part status flag set")
+		                GPIO.output(out0, 1)
+		                print("RPi Busy flag set low")
+		                time.sleep(1)   #check if this time needed, likely at least 1 second
+		                break
+		            else:
+		                pass
+		            
+		    #GPIO.output(out1, 0)
+		    
+
+		else:
+			print("No templates found")
+
+			# Store image of unclassified tray for assessment
+            cv2.imwrite('results/static_images/unclassified_tray_{0}.png'.format(count),img_bgr)
+
+			GPIO.output(out2, 0)
+			print("RPi Error flag set high")
+
+			# Time to allow PLC to read error flag
+			time.sleep(0.5)
+
+		count += 1

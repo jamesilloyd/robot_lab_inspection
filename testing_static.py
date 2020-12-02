@@ -18,7 +18,7 @@ if __name__ == "__main__":
     my_results=ResultsSave('results/group4_static_vision_result.csv','results/group4_static_plc_result.csv')
 
 
-    for i in range(23):
+    for i in range(2, 4):
         # Getting the image to test on
         print(i)
         imageLocation = 'TemplateMatching/Dock Images/straight/group3/opencv_frame_{0}.png'.format(i)
@@ -36,9 +36,22 @@ if __name__ == "__main__":
             img_crop_bgr = template_matching.imageCropping(img_bgr, img_template, match_list,show=False)
 
             # Use the cropped image to classify the parts
-            resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=False) 
+            resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = True, isCurves=False)
 
-            # print(resultsPLC)
+            print(resultsPLC)
+            #results_order = [0, 3, 1, 4, 2, 5, 6, 9, 7, 10, 8, 11]
+            results_order = [0, 1, 4, 5, 8, 9, 2, 3, 6, 7, 10, 11]
+
+            results_list = []
+            for i in results_order:
+            	result = resultsPLC[str(i)]
+            	if result == True:
+            		results_list.append(1)
+            	else:
+            		results_list.append(0)
+
+            print("Inspection Results:")
+            print(results_list)
 
             # Store image of classified tray for assessment
             # TODO: need to add in incrementer to store file names

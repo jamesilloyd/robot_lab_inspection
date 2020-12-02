@@ -16,7 +16,7 @@ def otsuThresholding(img_gray, isCurved = True,isMoving = False):
     # Is this too high?
     # The minimum area is used to remove any contours that should be neglected
     minArea = 160
-    maxArea = 40000
+    maxArea = 30000
 
     # Apply a gaussion blur to the grey image
     blur = cv2.GaussianBlur(img_gray,(5,5),0)
@@ -39,7 +39,6 @@ def otsuThresholding(img_gray, isCurved = True,isMoving = False):
             if hierarchy[0][m][3] == -1:
                 # Check that the part has a non negligble area
                 if (maxArea > cv2.contourArea(contour) > minArea):
-                    print(cv2.contourArea(contour))
                     # YOU HAVE FOUND A PART
                     # Create a list to add the contour's child contours to
                     child_contours = []

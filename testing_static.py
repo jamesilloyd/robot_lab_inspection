@@ -16,7 +16,7 @@ if __name__ == "__main__":
     templateLocation = 'templates/template_static_curve_right.png'
     img_template = cv2.imread(templateLocation,0)
 
-    my_results=ResultsSave('results/group4_vision_result.csv','results/group4_plc_result.csv')
+    my_results=ResultsSave('results/group4_static_vision_result.csv','results/group4_static_plc_result.csv')
 
 
     for i in range(62):
@@ -45,7 +45,7 @@ if __name__ == "__main__":
             # print(resultsPLC)
 
             # Store image of classified tray for assessment
-            # cv2.imwrite('results/images/classified_tray_{0}.png'.format(i),img_classified)
+            cv2.imwrite('results/static_images/classified_tray_{0}.png'.format(i),img_classified)
 
             # Store results in csv file for assessment
             for j in range(len(resultsVision)):

@@ -43,7 +43,8 @@ def filterOutColoredObjects(img_bgr, colorArray, show = False):
 def FrameCapture(frame_bgr, show = False):
 
     minDotArea = 100
-    foundFrame = False
+    foundCorrectFrame = False
+    foundGreenDot = False
     # Init dot variables
     cx = 0
     cy = 0
@@ -66,14 +67,17 @@ def FrameCapture(frame_bgr, show = False):
         if(hierarchy[0][i][3]==0):
             if(cv2.contourArea(contour) > minDotArea):
                 # Found a contour that is inside the outer edge and is not of negliglbe size
+                # Have found at least a dot on the screen
+                foundGreenDot = True
                 dotContour = contour
                 # Get the coordinates of the coordinate centre
                 M = cv2.moments(dotContour)
                 cx = int(M['m10']/M['m00'])
                 cy = int(M['m01']/M['m00'])   
-                # if the x position is over 90% of image width you have found the right frame
+                # if the x position is over 93% of image width you have found the right frame
                 if(cx > imageWidth*0.93): 
-                    foundFrame = True
+                    foundCorrectFrame = True
+                    
                     count += 1
                      # Plot the dot centre point and contours
                     cv2.circle(img_rgb,(cx,cy), 3, (255,0,0), -1)
@@ -85,7 +89,7 @@ def FrameCapture(frame_bgr, show = False):
     # It would be better to use template matching if possible
     '''
 
-    if(show and foundFrame):
+    if(show and foundCorrectFrame):
         plt.figure(figsize = (7,7))
         plt.imshow(img_rgb)
         plt.title("Count {0}".format(count))
@@ -93,4 +97,4 @@ def FrameCapture(frame_bgr, show = False):
         plt.show()
 
     
-    return foundFrame, count
+    return foundCorrectFrame, count, foundGreenDot

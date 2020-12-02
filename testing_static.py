@@ -39,6 +39,11 @@ if __name__ == "__main__":
             resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=False) 
 
             # print(resultsPLC)
+            #  TODO: look at how to show image in a different window
+            #  TODO: remove matplotlib from programs (it holds it up)
+            cv2.namedWindow('result{0}'.format(i))
+            cv2.imshow('result{0}'.format(i),img_classified)
+            cv2.waitKey(1)
 
             # Store image of classified tray for assessment
             # TODO: need to add in incrementer to store file names
@@ -49,3 +54,4 @@ if __name__ == "__main__":
                 my_results.insert_vision(str(i),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
 
             # TODO: do something with plc results
+    cv2.destroyAllWindows()

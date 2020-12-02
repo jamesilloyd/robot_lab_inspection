@@ -11,6 +11,13 @@ from save_results import ResultsSave
 '''
 This is the file used for classifying the moving video footage
 '''
+
+"""
+capture = cv2.VideoCapture(0)
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('10mm_4.avi',fourcc, 20.0, (640,480))
+"""
+
 num = 0
 my_results = ResultsSave('results/group4_moving_vision_result.csv','results/group4_moving_plc_result.csv')
 for i in range(1,14):
@@ -109,6 +116,7 @@ for i in range(1,14):
             
     # Release everything if the frame is found
     capture.release()
+    #out.release()
     cv2.destroyAllWindows()
 
 

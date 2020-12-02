@@ -107,7 +107,6 @@ for i in range(1,14):
         #  TODO: also add in code here for allow manual cancellation.
 
             
-
     # Release everything if the frame is found
     capture.release()
     cv2.destroyAllWindows()

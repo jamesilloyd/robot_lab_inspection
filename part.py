@@ -135,11 +135,11 @@ class StraightPart(Part):
     holeInMiddle = Defect([0.52,0.56],[0.76,0.80],[0.019,0.023],"Hole in the middle")
     filledHole = Defect([0.53,0.565],[0.89,0.91],[0.037,0.047],"The hole is filled")
     onlyNotch = Defect([0.64,0.74],[0.91,0.93],[0.053,0.06],"Notch on its own")
-    missingNotchHoleFilled = Defect([0.7,0.74],[0.96,1.0],[0.057,0.061],"Notch is missing and hole is filled")
+    missingNotchHoleFilled = Defect([0.7,0.74],[0.96,1.0],[0.054,0.061],"Notch is missing and hole is filled")
 
     missingNotch = Defect([0.71,0.74],[0.88,0.92],[0.037,0.05],"Notch is missing")
-    halfWidthWithHoleFilled = Defect([0.77,0.79],[0.96,0.99],[0.0540,0.0570],"Half split by width with hole filled")
     halfWidthWithHole = Defect([0.75,0.84],[0.82,0.88],[0.031,0.035],"Half split by width including hole")
+    halfWidthWithHoleFilled = Defect([0.77,0.79],[0.96,0.99],[0.0540,0.0570],"Half split by width with hole filled")
     halfWidthWithNotch = Defect([0.93,0.99],[0.80,0.84],[0.038,0.042],"Half split by width including notch")
 
 
@@ -238,16 +238,15 @@ class MovingStraightPart(Part):
 
 
     # These are the ranges of the defect part types 
+    onlyNotch = Defect([0.40,0.49],[0.94,0.99],[0.051,0.058],"Notch on its own")
     holeInMiddle = Defect([0.46,0.50],[0.83,0.87],[0.026,0.031],"Hole in the middle")
-    onlyNotch = Defect([0.44,0.49],[0.94,0.99],[0.053,0.058],"Notch on its own")
     filledHole = Defect([0.46,0.50],[0.89,0.93],[0.043,0.048],"The hole is filled")
-    missingNotchHoleFilled = Defect([0.60,0.64],[0.95,1.0],[0.054,0.058],"Notch is missing and hole is filled")
-
     missingNotch = Defect([0.59,0.63],[0.90,0.94],[0.038,0.042],"Notch is missing")
-    halfWidthWithNotch = Defect([0.79,0.85],[0.83,0.87],[0.042,0.047],"Half split by width including notch")
-    halfWidthWithHoleFilled = Defect([0.95,1.00],[0.92,0.96],[0.050,0.054],"Half split by width with hole filled")
-    halfWidthWithHole = Defect([0.90,1.00],[0.82,0.86],[0.031,0.036],"Half split by width including hole")
     
+    missingNotchHoleFilled = Defect([0.60,0.64],[0.95,1.0],[0.054,0.058],"Notch is missing and hole is filled")
+    halfWidthWithNotch = Defect([0.79,0.85],[0.83,0.87],[0.042,0.047],"Half split by width including notch")
+    halfWidthWithHole = Defect([0.90,1.00],[0.82,0.86],[0.031,0.036],"Half split by width including hole")
+    halfWidthWithHoleFilled = Defect([0.95,1.00],[0.92,0.96],[0.050,0.054],"Half split by width with hole filled")
 
 
     # List that contains all the defect types
@@ -294,16 +293,15 @@ class MovingCurvedPart(Part):
     holeInMiddle = Defect([0.40,0.44],[0.82,0.86],[0.025,0.029],"Hole in the middle")
     filledHole = Defect([0.40,0.45],[0.86,0.91],[0.039,0.043],"The hole is filled")
     
+    # TODO: have another look for these guys
     # missingNotchHoleFilled = Defect([0.48,0.52],[0.89,0.93],[0.037,0.051],"Notch is missing and hole is filled")
     # missingNotch = Defect([0.48,0.51],[0.85,0.89],[0.033,0.037],"Notch is missing")
-    straightPiece = Defect([0.48,0.55],[0.83,0.89],[0.031,0.037],"Straight piece")
     onlyNotch = Defect([0.40,0.49],[0.94,0.99],[0.051,0.058],"Notch on its own")
+    straightPiece = Defect([0.48,0.55],[0.83,0.89],[0.031,0.037],"Straight piece")
     
-    halfWidthWithHoleFilled = Defect([0.74,0.78],[0.94,0.98],[0.053,0.057],"Half split by width with hole filled")
     halfWidthWithNotch = Defect([0.60,0.64],[0.87,0.91],[0.045,0.049],"Half split by width including notch")
     halfWidthWithHole = Defect([0.73,0.77],[0.87,0.91],[0.036,0.042],"Half split by width including hole")
-    
-    
+    halfWidthWithHoleFilled = Defect([0.74,0.78],[0.94,0.98],[0.053,0.057],"Half split by width with hole filled")
 
 
     # List that contains all the defected parts

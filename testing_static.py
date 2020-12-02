@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 from TemplateMatching import template_matching
 import classification
 from save_results import ResultsSave
+import numpy as np
 
 
 
@@ -13,15 +14,14 @@ if __name__ == "__main__":
 
     # getting the template part
     templateLocation = 'templates/template_static_straight.png'
-    img_template = cv2.imread(templateLocation,0)
+    img_template = cv2.imread(templateLocation)
 
     my_results=ResultsSave('results/group4_static_vision_result.csv','results/group4_static_plc_result.csv')
 
-
-    for i in range(2, 4):
+    for i in range(20):
         # Getting the image to test on
         print(i)
-        imageLocation = 'TemplateMatching/Dock Images/straight/group3/opencv_frame_{0}.png'.format(i)
+        imageLocation = 'TemplateMatching/Dock Images/straight/group4/opencv_frame_{0}.png'.format(i)
         img_bgr = cv2.imread(imageLocation)
 
         # Carry out template matching on the image 
@@ -36,16 +36,13 @@ if __name__ == "__main__":
             img_crop_bgr = template_matching.imageCropping(img_bgr, img_template, match_list,show=False)
 
             # Use the cropped image to classify the parts
-            resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = True, isCurves=False)
+            resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=False)
 
             # print(resultsPLC)
-            #  TODO: look at how to show image in a different window
-            # #  TODO: remove matplotlib from programs (it holds it up)
-            # cv2.namedWindow('result{0}'.format(i))
-            # cv2.imshow('result{0}'.format(i),img_classified)
-            # cv2.waitKey(1)
-            # print(resultsPLC)
-            
+            # Display the image on screen
+            cv2.imshow('result{0}'.format(i),img_classified)
+            cv2.waitKey(0)
+
             #results_order = [0, 3, 1, 4, 2, 5, 6, 9, 7, 10, 8, 11]
             results_order = [0, 1, 4, 5, 8, 9, 2, 3, 6, 7, 10, 11]
 
@@ -62,11 +59,12 @@ if __name__ == "__main__":
 
             # Store image of classified tray for assessment
             # TODO: need to add in incrementer to store file names
-            cv2.imwrite('results/static_images/classified_tray_{0}.png'.format(i),img_classified)
+            # cv2.imwrite('results/static_images/classified_tray_{0}.png'.format(i),img_classified)
 
             # Store results in csv file for assessment
             for j in range(len(resultsVision)):
                 my_results.insert_vision(str(i),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
 
             # TODO: do something with plc results
+    
     cv2.destroyAllWindows()

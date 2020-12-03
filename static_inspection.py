@@ -19,7 +19,7 @@ if __name__ == "__main__":
     print ("Initialising setup")
 
     # Incrament this variable each time you re run the program (used for saving results)
-    testRun = 0
+    testRun = 7
 
     # Check whether a results directory has been created or now
     if not os.path.exists('results/static_images_{0}'.format(testRun)):
@@ -58,6 +58,9 @@ if __name__ == "__main__":
 
     # Start count for images inspected
     trayCount = 1
+    
+    cam = cv2.VideoCapture(0)
+    cv2.namedWindow("static_inspection")
 
     # Main loop of program for each image inspection
 
@@ -74,8 +77,7 @@ if __name__ == "__main__":
             print("Initialising new window for image capture")
             print(trayCount)
             
-            cam = cv2.VideoCapture(0)
-            cv2.namedWindow("static_inspection")
+            
 
             while True:
 
@@ -137,8 +139,8 @@ if __name__ == "__main__":
                 """
 
             # TODO: do we need to keep opening and closing the camera like this?
-           # cam.release()
-           # cv2.destroyAllWindows()
+            # cam.release()
+            # cv2.destroyAllWindows()
 
             print("Starting static image inspection")
 
@@ -162,14 +164,15 @@ if __name__ == "__main__":
                 cv2.imwrite('results/static_images_{0}/classified_tray_{1}.png'.format(testRun,trayCount),img_classified)
 
                 # Store results in csv file for assessment
-                for j in range(len(resultsVision)):
-                    my_results.insert_vision(str(trayCount),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
+                #for j in range(len(resultsVision)):
+                #    my_results.insert_vision(str(trayCount),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
 
                 #### TODO: do something with plc results csv output
-                for k in range(len(resultsPLC)):
-                    my_results.insert_plc(str(trayCount),str(resultsPLC[str(k)]))
+                #for k in range(len(resultsPLC)):
+                #    my_results.insert_plc(str(trayCount),str(resultsPLC[str(k)]))
 
-                results_order = [0, 1, 4, 5, 8, 9, 2, 3, 6, 7, 10, 11]
+                #results_order = [0, 1, 4, 5, 8, 9, 2, 3, 6, 7, 10, 11]
+                results_order = [11, 10, 7, 6, 3, 2, 9, 8, 5, 4, 1, 0]
 
                 results_list = []
                 for i in results_order:
@@ -180,14 +183,16 @@ if __name__ == "__main__":
                         results_list.append(0)
 
                 print("Inspection Results:")
+                print(resultsVision)
+                print(resultsPLC)
                 print(results_list)
                 
                 # Handshake with PLC to output individual results in sequence waiting for confirmation from PLC each time
                 GPIO.output(out0, 1)
                 print("RPi Busy flag set low")
                 ###add one second delay here for PLC to ensure go-flag down
-                time.sleep(2)
-                
+                time.sleep(1)
+
                 for result in range(len(results_list)):
                     while True:
                         if GPIO.input(inp0) == 1:
@@ -195,6 +200,7 @@ if __name__ == "__main__":
                             GPIO.output(out0, 0)
                             print("RPi Busy flag set high")
                     
+                            print(result)
                             GPIO.output(out1, 1 - results_list[result])
                             print("RPi Part status flag set")
                             GPIO.output(out0, 1)

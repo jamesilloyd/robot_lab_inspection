@@ -19,7 +19,7 @@ if __name__ == "__main__":
     print ("Initialising setup")
 
     # Incrament this variable each time you re run the program (used for saving results)
-    testRun = 0
+    testRun = 3
 
     # Check whether a results directory has been created or now
     if not os.path.exists('results/static_images_{0}'.format(testRun)):
@@ -58,6 +58,9 @@ if __name__ == "__main__":
 
     # Start count for images inspected
     trayCount = 1
+    
+    cam = cv2.VideoCapture(0)
+    cv2.namedWindow("static_inspection")
 
     # Main loop of program for each image inspection
 
@@ -74,8 +77,7 @@ if __name__ == "__main__":
             print("Initialising new window for image capture")
             print(trayCount)
             
-            cam = cv2.VideoCapture(0)
-            cv2.namedWindow("static_inspection")
+            
 
             while True:
 
@@ -178,16 +180,20 @@ if __name__ == "__main__":
                         results_list.append(1)
                     else:
                         results_list.append(0)
-
-                print("Inspection Results:")
-                print(results_list)
-                
+                        
                 if 0 in results_list:
                     tray_result = 0
                 else:
                     tray_result = 1
                     
                 GPIO.output(out1, 1 - tray_result)
+
+                print("Inspection Results:")
+                print(resultsVision)
+                print(resultsPLC)
+                print(results_list)
+                print(tray_result)
+                
                 
                 # Handshake with PLC to output individual results in sequence waiting for confirmation from PLC each time
                 GPIO.output(out0, 1)

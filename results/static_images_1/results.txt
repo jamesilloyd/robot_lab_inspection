@@ -1,0 +1,246 @@
+Initialising setup
+Initialising new window for image capture
+1
+PLC Go flag received to start inspection
+RPi Busy flag set high
+Straight tracks in dock
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.552, Solidity 0.8332894043226147, Area/Perimeter 0.03076654681283104, Reason 
+Part 1, Aspect Ratio 0.552, Solidity 0.8359323810771851, Area/Perimeter 0.030945267787150604, Reason 
+Part 2, Aspect Ratio 0.5476190476190477, Solidity 0.7803501945525292, Area/Perimeter 0.021660197217796814, Reason Hole in the middle
+Part 3, Aspect Ratio 0.5483870967741935, Solidity 0.8310959727509517, Area/Perimeter 0.0307225961272566, Reason 
+Part 4, Aspect Ratio 0.9859154929577465, Solidity 0.8096544842210303, Area/Perimeter 0.04038157259341573, Reason Half split by width including notch
+Part 5, Aspect Ratio 0.5476190476190477, Solidity 0.8405927835051547, Area/Perimeter 0.03141413331579402, Reason 
+Part 6, Aspect Ratio 0.8254771819106286, Solidity 0.8546113051351701, Area/Perimeter 0.03376057015567778, Reason Half split by width including hole
+Part 7, Aspect Ratio 0.5476190476190477, Solidity 0.8354069466044582, Area/Perimeter 0.030930742509568607, Reason 
+Part 8, Aspect Ratio 0.7187499552965093, Solidity 0.9148646605171632, Area/Perimeter 0.03886068595971424, Reason Notch is missing
+Part 9, Aspect Ratio 0.5574747870260538, Solidity 0.8314321100319405, Area/Perimeter 0.030839025474304452, Reason 
+Part 10, Aspect Ratio 0.7263157894736842, Solidity 0.9866369710467706, Area/Perimeter 0.0556652943966532, Reason Notch is missing and hole is filled
+Part 11, Aspect Ratio 0.552, Solidity 0.8399270025418758, Area/Perimeter 0.03127200824900688, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Hole in the middle'}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by width including notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': False, 'reason': 'Half split by width including hole'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Notch is missing'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': False, 'reason': 'Notch is missing and hole is filled'}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': False, '3': True, '4': True, '5': False, '6': True, '7': False, '8': False, '9': True, '10': False, '11': True}
+[1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1]
+0
+RPi Busy flag set low
+Initialising new window for image capture
+2
+[ WARN:0] global /tmp/pip-wheel-2l8ccy47/opencv-python/opencv/modules/videoio/src/cap_v4l.cpp (893) open VIDEOIO(V4L2:/dev/video0): can't open camera by index
+failed to grab frame
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.552, Solidity 0.8332894043226147, Area/Perimeter 0.03076654681283104, Reason 
+Part 1, Aspect Ratio 0.552, Solidity 0.8359323810771851, Area/Perimeter 0.030945267787150604, Reason 
+Part 2, Aspect Ratio 0.5476190476190477, Solidity 0.7803501945525292, Area/Perimeter 0.021660197217796814, Reason Hole in the middle
+Part 3, Aspect Ratio 0.5483870967741935, Solidity 0.8310959727509517, Area/Perimeter 0.0307225961272566, Reason 
+Part 4, Aspect Ratio 0.9859154929577465, Solidity 0.8096544842210303, Area/Perimeter 0.04038157259341573, Reason Half split by width including notch
+Part 5, Aspect Ratio 0.5476190476190477, Solidity 0.8405927835051547, Area/Perimeter 0.03141413331579402, Reason 
+Part 6, Aspect Ratio 0.8254771819106286, Solidity 0.8546113051351701, Area/Perimeter 0.03376057015567778, Reason Half split by width including hole
+Part 7, Aspect Ratio 0.5476190476190477, Solidity 0.8354069466044582, Area/Perimeter 0.030930742509568607, Reason 
+Part 8, Aspect Ratio 0.7187499552965093, Solidity 0.9148646605171632, Area/Perimeter 0.03886068595971424, Reason Notch is missing
+Part 9, Aspect Ratio 0.5574747870260538, Solidity 0.8314321100319405, Area/Perimeter 0.030839025474304452, Reason 
+Part 10, Aspect Ratio 0.7263157894736842, Solidity 0.9866369710467706, Area/Perimeter 0.0556652943966532, Reason Notch is missing and hole is filled
+Part 11, Aspect Ratio 0.552, Solidity 0.8399270025418758, Area/Perimeter 0.03127200824900688, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Hole in the middle'}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by width including notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': False, 'reason': 'Half split by width including hole'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Notch is missing'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': False, 'reason': 'Notch is missing and hole is filled'}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': False, '3': True, '4': True, '5': False, '6': True, '7': False, '8': False, '9': True, '10': False, '11': True}
+[1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1]
+0
+RPi Busy flag set low
+Initialising new window for image capture
+3
+PLC Go flag received to start inspection
+RPi Busy flag set high
+Right curve tracks in dock
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.45614035087719296, Solidity 0.8269342771381211, Area/Perimeter 0.0302363321586696, Reason 
+Part 1, Aspect Ratio 0.4540229885057471, Solidity 0.8227870289219983, Area/Perimeter 0.030010818894946764, Reason 
+Part 2, Aspect Ratio 0.45614035087719296, Solidity 0.825347066726377, Area/Perimeter 0.03001019591011428, Reason 
+Part 4, Aspect Ratio 0.2355595393695992, Solidity 0.7745458059528412, Area/Perimeter 0.02627346565775596, Reason Half split by length with notch
+Part 3, Aspect Ratio 0.4582777924109002, Solidity 0.8225283270384359, Area/Perimeter 0.029988825210776403, Reason 
+Part 5, Aspect Ratio 0.45348837209302323, Solidity 0.8324119482835488, Area/Perimeter 0.028982448702635395, Reason 
+Part 7, Aspect Ratio 0.8172043010752689, Solidity 0.8541977366435652, Area/Perimeter 0.04209870233904865, Reason Half split by width including notch
+Part 6, Aspect Ratio 0.46089433591906903, Solidity 0.8222372270988071, Area/Perimeter 0.030321889010695078, Reason 
+Part 8, Aspect Ratio 0.45930232558139533, Solidity 0.8263545150501672, Area/Perimeter 0.03011096190842854, Reason 
+Part 9, Aspect Ratio 0.5527980617175908, Solidity 0.8256369426751592, Area/Perimeter 0.030432189586975158, Reason Straight piece
+Part 10, Aspect Ratio 0.45069875535888865, Solidity 0.8084762503367154, Area/Perimeter 0.02315475358556467, Reason Hole in the middle
+Part 11, Aspect Ratio 0.4588235294117647, Solidity 0.8289141414141414, Area/Perimeter 0.03029325983134049, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by length with notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': False, 'reason': 'Half split by width including notch'}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': False, 'reason': 'Straight piece'}, '10': {'QCPassed': False, 'reason': 'Hole in the middle'}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': True, '3': False, '4': True, '5': False, '6': False, '7': False, '8': True, '9': True, '10': True, '11': True}
+[1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1]
+0
+RPi Busy flag set low
+Initialising new window for image capture
+4[ WARN:0] global /tmp/pip-wheel-2l8ccy47/opencv-python/opencv/modules/videoio/src/cap_v4l.cpp (893) open VIDEOIO(V4L2:/dev/video0): can't open camera by index
+
+failed to grab frame
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.45614035087719296, Solidity 0.8269342771381211, Area/Perimeter 0.0302363321586696, Reason 
+Part 1, Aspect Ratio 0.4540229885057471, Solidity 0.8227870289219983, Area/Perimeter 0.030010818894946764, Reason 
+Part 2, Aspect Ratio 0.45614035087719296, Solidity 0.825347066726377, Area/Perimeter 0.03001019591011428, Reason 
+Part 4, Aspect Ratio 0.2355595393695992, Solidity 0.7745458059528412, Area/Perimeter 0.02627346565775596, Reason Half split by length with notch
+Part 3, Aspect Ratio 0.4582777924109002, Solidity 0.8225283270384359, Area/Perimeter 0.029988825210776403, Reason 
+Part 5, Aspect Ratio 0.45348837209302323, Solidity 0.8324119482835488, Area/Perimeter 0.028982448702635395, Reason 
+Part 7, Aspect Ratio 0.8172043010752689, Solidity 0.8541977366435652, Area/Perimeter 0.04209870233904865, Reason Half split by width including notch
+Part 6, Aspect Ratio 0.46089433591906903, Solidity 0.8222372270988071, Area/Perimeter 0.030321889010695078, Reason 
+Part 8, Aspect Ratio 0.45930232558139533, Solidity 0.8263545150501672, Area/Perimeter 0.03011096190842854, Reason 
+Part 9, Aspect Ratio 0.5527980617175908, Solidity 0.8256369426751592, Area/Perimeter 0.030432189586975158, Reason Straight piece
+Part 10, Aspect Ratio 0.45069875535888865, Solidity 0.8084762503367154, Area/Perimeter 0.02315475358556467, Reason Hole in the middle
+Part 11, Aspect Ratio 0.4588235294117647, Solidity 0.8289141414141414, Area/Perimeter 0.03029325983134049, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by length with notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': False, 'reason': 'Half split by width including notch'}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': False, 'reason': 'Straight piece'}, '10': {'QCPassed': False, 'reason': 'Hole in the middle'}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': True, '3': False, '4': True, '5': False, '6': False, '7': False, '8': True, '9': True, '10': True, '11': True}
+[1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1]
+0
+RPi Busy flag set low
+Initialising new window for image capture
+5
+PLC Go flag received to start inspection
+RPi Busy flag set high
+Right curve tracks in dock
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.46087728263877803, Solidity 0.821882951653944, Area/Perimeter 0.030005529158466666, Reason 
+Part 1, Aspect Ratio 0.45348837209302323, Solidity 0.82569917533166, Area/Perimeter 0.029809424152018506, Reason 
+Part 2, Aspect Ratio 0.4562527806317312, Solidity 0.8245380832114848, Area/Perimeter 0.029983863283484652, Reason 
+Part 3, Aspect Ratio 0.4609331260554473, Solidity 0.8233343787804113, Area/Perimeter 0.0301924850085979, Reason 
+Part 4, Aspect Ratio 0.45930232558139533, Solidity 0.822064369025695, Area/Perimeter 0.03014439693267103, Reason 
+Part 5, Aspect Ratio 0.45348837209302323, Solidity 0.819314224484329, Area/Perimeter 0.029692924255125205, Reason 
+Part 6, Aspect Ratio 0.4588235294117647, Solidity 0.822138853733502, Area/Perimeter 0.029858964161246584, Reason 
+Part 7, Aspect Ratio 0.45348837209302323, Solidity 0.8253014728785654, Area/Perimeter 0.029920816065728262, Reason 
+Part 8, Aspect Ratio 0.45348837209302323, Solidity 0.8213550523583639, Area/Perimeter 0.02945959946461978, Reason 
+Part 9, Aspect Ratio 0.45614035087719296, Solidity 0.8221861178806752, Area/Perimeter 0.02979082636401033, Reason 
+Part 10, Aspect Ratio 0.45608216894228254, Solidity 0.8239778857728833, Area/Perimeter 0.030029717109017137, Reason 
+Part 11, Aspect Ratio 0.45294117647058824, Solidity 0.8291340731307986, Area/Perimeter 0.03029056630454675, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': True, 'reason': ''}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': True, '3': True, '4': True, '5': True, '6': True, '7': True, '8': True, '9': True, '10': True, '11': True}
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+1
+RPi Busy flag set low
+Initialising new window for image capture
+6
+[ WARN:0] global /tmp/pip-wheel-2l8ccy47/opencv-python/opencv/modules/videoio/src/cap_v4l.cpp (893) open VIDEOIO(V4L2:/dev/video0): can't open camera by index
+failed to grab frame
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.46087728263877803, Solidity 0.821882951653944, Area/Perimeter 0.030005529158466666, Reason 
+Part 1, Aspect Ratio 0.45348837209302323, Solidity 0.82569917533166, Area/Perimeter 0.029809424152018506, Reason 
+Part 2, Aspect Ratio 0.4562527806317312, Solidity 0.8245380832114848, Area/Perimeter 0.029983863283484652, Reason 
+Part 3, Aspect Ratio 0.4609331260554473, Solidity 0.8233343787804113, Area/Perimeter 0.0301924850085979, Reason 
+Part 4, Aspect Ratio 0.45930232558139533, Solidity 0.822064369025695, Area/Perimeter 0.03014439693267103, Reason 
+Part 5, Aspect Ratio 0.45348837209302323, Solidity 0.819314224484329, Area/Perimeter 0.029692924255125205, Reason 
+Part 6, Aspect Ratio 0.4588235294117647, Solidity 0.822138853733502, Area/Perimeter 0.029858964161246584, Reason 
+Part 7, Aspect Ratio 0.45348837209302323, Solidity 0.8253014728785654, Area/Perimeter 0.029920816065728262, Reason 
+Part 8, Aspect Ratio 0.45348837209302323, Solidity 0.8213550523583639, Area/Perimeter 0.02945959946461978, Reason 
+Part 9, Aspect Ratio 0.45614035087719296, Solidity 0.8221861178806752, Area/Perimeter 0.02979082636401033, Reason 
+Part 10, Aspect Ratio 0.45608216894228254, Solidity 0.8239778857728833, Area/Perimeter 0.030029717109017137, Reason 
+Part 11, Aspect Ratio 0.45294117647058824, Solidity 0.8291340731307986, Area/Perimeter 0.03029056630454675, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': True, 'reason': ''}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': True, '3': True, '4': True, '5': True, '6': True, '7': True, '8': True, '9': True, '10': True, '11': True}
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+1
+RPi Busy flag set low
+Initialising new window for image capture
+7
+PLC Go flag received to start inspection
+RPi Busy flag set high
+Left curve tracks in dock
+Starting static image inspection
+Templates found successfully
+Part 1, Aspect Ratio 0.46112711807482776, Solidity 0.8205684434212857, Area/Perimeter 0.02954865008409655, Reason 
+Part 2, Aspect Ratio 0.45993301842498174, Solidity 0.8261368653421634, Area/Perimeter 0.02999732065362849, Reason 
+Part 4, Aspect Ratio 0.2585656063975378, Solidity 0.9396378269617707, Area/Perimeter 0.036144190830205876, Reason Half split by length without notch
+Part 5, Aspect Ratio 0.794099332312664, Solidity 0.8719312984224774, Area/Perimeter 0.035465226836477896, Reason Half split by width including hole
+Part 3, Aspect Ratio 0.4617009861698216, Solidity 0.8206724782067247, Area/Perimeter 0.03004601924553311, Reason 
+Part 6, Aspect Ratio 0.500123236471423, Solidity 0.8710420841683367, Area/Perimeter 0.03630014376418195, Reason Notch is missing
+Part 7, Aspect Ratio 0.4500112506259431, Solidity 0.8308626540453652, Area/Perimeter 0.030315589298042896, Reason 
+Part 8, Aspect Ratio 0.455076822184748, Solidity 0.790515259432899, Area/Perimeter 0.022428512080358034, Reason Hole in the middle
+Part 9, Aspect Ratio 0.4592885295082139, Solidity 0.8227728134308151, Area/Perimeter 0.029838264999065427, Reason 
+Part 10, Aspect Ratio 0.45514874590924775, Solidity 0.8210418430551223, Area/Perimeter 0.029938722864456712, Reason 
+Part 11, Aspect Ratio 0.4581606074959954, Solidity 0.8239985741656641, Area/Perimeter 0.03032029297948246, Reason 
+Inspection Results:
+{'0': {'QCPassed': False, 'reason': 'No part found'}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by length without notch'}, '5': {'QCPassed': False, 'reason': 'Half split by width including hole'}, '6': {'QCPassed': False, 'reason': 'Notch is missing'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Hole in the middle'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': False, '1': True, '2': False, '3': True, '4': True, '5': False, '6': True, '7': True, '8': True, '9': False, '10': False, '11': True}
+[0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1]
+0
+RPi Busy flag set low
+Initialising new window for image capture
+8
+[ WARN:0] global /tmp/pip-wheel-2l8ccy47/opencv-python/opencv/modules/videoio/src/cap_v4l.cpp (893) open VIDEOIO(V4L2:/dev/video0): can't open camera by index
+failed to grab frame
+Starting static image inspection
+Templates found successfully
+Part 1, Aspect Ratio 0.46112711807482776, Solidity 0.8205684434212857, Area/Perimeter 0.02954865008409655, Reason 
+Part 2, Aspect Ratio 0.45993301842498174, Solidity 0.8261368653421634, Area/Perimeter 0.02999732065362849, Reason 
+Part 4, Aspect Ratio 0.2585656063975378, Solidity 0.9396378269617707, Area/Perimeter 0.036144190830205876, Reason Half split by length without notch
+Part 5, Aspect Ratio 0.794099332312664, Solidity 0.8719312984224774, Area/Perimeter 0.035465226836477896, Reason Half split by width including hole
+Part 3, Aspect Ratio 0.4617009861698216, Solidity 0.8206724782067247, Area/Perimeter 0.03004601924553311, Reason 
+Part 6, Aspect Ratio 0.500123236471423, Solidity 0.8710420841683367, Area/Perimeter 0.03630014376418195, Reason Notch is missing
+Part 7, Aspect Ratio 0.4500112506259431, Solidity 0.8308626540453652, Area/Perimeter 0.030315589298042896, Reason 
+Part 8, Aspect Ratio 0.455076822184748, Solidity 0.790515259432899, Area/Perimeter 0.022428512080358034, Reason Hole in the middle
+Part 9, Aspect Ratio 0.4592885295082139, Solidity 0.8227728134308151, Area/Perimeter 0.029838264999065427, Reason 
+Part 10, Aspect Ratio 0.45514874590924775, Solidity 0.8210418430551223, Area/Perimeter 0.029938722864456712, Reason 
+Part 11, Aspect Ratio 0.4581606074959954, Solidity 0.8239985741656641, Area/Perimeter 0.03032029297948246, Reason 
+Inspection Results:
+{'0': {'QCPassed': False, 'reason': 'No part found'}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by length without notch'}, '5': {'QCPassed': False, 'reason': 'Half split by width including hole'}, '6': {'QCPassed': False, 'reason': 'Notch is missing'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Hole in the middle'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': False, '1': True, '2': False, '3': True, '4': True, '5': False, '6': True, '7': True, '8': True, '9': False, '10': False, '11': True}
+[0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1]
+0
+RPi Busy flag set low
+Initialising new window for image capture
+9
+PLC Go flag received to start inspection
+RPi Busy flag set high
+Left curve tracks in dock
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.45614035087719296, Solidity 0.827685135377443, Area/Perimeter 0.030283768049842008, Reason 
+Part 1, Aspect Ratio 0.4555883041762593, Solidity 0.825810159600336, Area/Perimeter 0.030096651217793303, Reason 
+Part 2, Aspect Ratio 0.45510258350402744, Solidity 0.8255421258442943, Area/Perimeter 0.029996968809979294, Reason 
+Part 3, Aspect Ratio 0.4647391249174168, Solidity 0.8184786011359063, Area/Perimeter 0.03001806342545186, Reason 
+Part 4, Aspect Ratio 0.45493392197400356, Solidity 0.8246981779302357, Area/Perimeter 0.029927299360193827, Reason 
+Part 5, Aspect Ratio 0.45903597858918627, Solidity 0.8236542031291435, Area/Perimeter 0.029823632175298917, Reason 
+Part 6, Aspect Ratio 0.4551303770396269, Solidity 0.8249887031179395, Area/Perimeter 0.029717713097147457, Reason 
+Part 7, Aspect Ratio 0.4476744186046512, Solidity 0.8293199855699855, Area/Perimeter 0.030153058369459078, Reason 
+Part 8, Aspect Ratio 0.45245294696968147, Solidity 0.821390134529148, Area/Perimeter 0.02963791032721803, Reason 
+Part 9, Aspect Ratio 0.4567557418351217, Solidity 0.8321094640820981, Area/Perimeter 0.03037700602454013, Reason 
+Part 10, Aspect Ratio 0.4502923976608187, Solidity 0.8263231765291801, Area/Perimeter 0.029744767390986398, Reason 
+Part 11, Aspect Ratio 0.45144511352745875, Solidity 0.8214269453171242, Area/Perimeter 0.029527296287418944, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': True, 'reason': ''}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': True, '3': True, '4': True, '5': True, '6': True, '7': True, '8': True, '9': True, '10': True, '11': True}
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+1
+RPi Busy flag set low
+Initialising new window for image capture
+10
+[ WARN:0] global /tmp/pip-wheel-2l8ccy47/opencv-python/opencv/modules/videoio/src/cap_v4l.cpp (893) open VIDEOIO(V4L2:/dev/video0): can't open camera by index
+failed to grab frame
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.45614035087719296, Solidity 0.827685135377443, Area/Perimeter 0.030283768049842008, Reason 
+Part 1, Aspect Ratio 0.4555883041762593, Solidity 0.825810159600336, Area/Perimeter 0.030096651217793303, Reason 
+Part 2, Aspect Ratio 0.45510258350402744, Solidity 0.8255421258442943, Area/Perimeter 0.029996968809979294, Reason 
+Part 3, Aspect Ratio 0.4647391249174168, Solidity 0.8184786011359063, Area/Perimeter 0.03001806342545186, Reason 
+Part 4, Aspect Ratio 0.45493392197400356, Solidity 0.8246981779302357, Area/Perimeter 0.029927299360193827, Reason 
+Part 5, Aspect Ratio 0.45903597858918627, Solidity 0.8236542031291435, Area/Perimeter 0.029823632175298917, Reason 
+Part 6, Aspect Ratio 0.4551303770396269, Solidity 0.8249887031179395, Area/Perimeter 0.029717713097147457, Reason 
+Part 7, Aspect Ratio 0.4476744186046512, Solidity 0.8293199855699855, Area/Perimeter 0.030153058369459078, Reason 
+Part 8, Aspect Ratio 0.45245294696968147, Solidity 0.821390134529148, Area/Perimeter 0.02963791032721803, Reason 
+Part 9, Aspect Ratio 0.4567557418351217, Solidity 0.8321094640820981, Area/Perimeter 0.03037700602454013, Reason 
+Part 10, Aspect Ratio 0.4502923976608187, Solidity 0.8263231765291801, Area/Perimeter 0.029744767390986398, Reason 
+Part 11, Aspect Ratio 0.45144511352745875, Solidity 0.8214269453171242, Area/Perimeter 0.029527296287418944, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': True, 'reason': ''}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': True, '3': True, '4': True, '5': True, '6': True, '7': True, '8': True, '9': True, '10': True, '11': True}
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+1
+RPi Busy flag set low
+Initialising new window for image capture
+11

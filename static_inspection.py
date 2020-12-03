@@ -143,9 +143,9 @@ if __name__ == "__main__":
             # Use the cropped image to classify the parts
             resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=curve)
 
-            """
-            LOOK AT POSSIBILITY OF SHOWING CLASSIFIED IMAGE IN REAL TIME WITHOUT AFFECTING PROGRAM FLOW
-            """
+            # Display the image on screen
+            cv2.imshow('result{0}'.format(i),img_classified)
+            cv2.waitKey(100)
 
             # Store image of classified tray for assessment
             cv2.imwrite('results/static_images/classified_tray_{0}.png'.format(count),img_classified)
@@ -173,7 +173,7 @@ if __name__ == "__main__":
             GPIO.output(out0, 1)
             print("RPi Busy flag set low")
             ###add one second delay here for PLC to ensure go-flag down
-            time.sleep(1)
+            time.sleep(2)
             
             for result in range(len(results_list)):
                 while True:

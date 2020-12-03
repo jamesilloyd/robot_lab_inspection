@@ -182,12 +182,19 @@ if __name__ == "__main__":
                 print("Inspection Results:")
                 print(results_list)
                 
+                if 0 in results_list:
+                    tray_result = 0
+                else:
+                    tray_result = 1
+                    
+                GPIO.output(out1, 1 - tray_result)
+                
                 # Handshake with PLC to output individual results in sequence waiting for confirmation from PLC each time
                 GPIO.output(out0, 1)
                 print("RPi Busy flag set low")
                 ###add one second delay here for PLC to ensure go-flag down
                 time.sleep(2)
-                
+                """
                 for result in range(len(results_list)):
                     while True:
                         if GPIO.input(inp0) == 1:
@@ -208,7 +215,7 @@ if __name__ == "__main__":
                             pass
                         
                 #GPIO.output(out1, 0)
-       
+                """
 
             else:
                 raise ValueError('Error: There was an error templating the image')

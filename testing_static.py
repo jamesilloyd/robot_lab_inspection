@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     my_results=ResultsSave('results/group4_static_vision_result','results/group4_static_plc_result')
 
-    for i in range(20):
+    for i in range(2):
         # Getting the image to test on
         print(i)
         imageLocation = 'TemplateMatching/Dock Images/straight/group4/opencv_frame_{0}.png'.format(i)

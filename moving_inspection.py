@@ -21,7 +21,7 @@ testRun = 0
 if not os.path.exists('results/moving_images_{0}'.format(testRun)):
     os.makedirs('results/moving_images_{0}'.format(testRun))
 
-my_results = ResultsSave('results/moving_images_{0}/group4_moving_vision_result.csv'.format(testRun),'results/moving_images_{0}/group4_moving_plc_result.csv'.format(testRun))
+my_results = ResultsSave('results/moving_images_{0}/group4_moving_vision_result'.format(testRun),'results/moving_images_{0}/group4_moving_plc_result'.format(testRun))
 
 capture = cv2.VideoCapture(0)
 foundCorrectFrame = False
@@ -118,5 +118,6 @@ capture.release()
 #out.release()
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+my_results.close_files()
 
 

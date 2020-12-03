@@ -15,7 +15,7 @@ if __name__ == "__main__":
     templateLocation = 'templates/template_static_straight.png'
     img_template = cv2.imread(templateLocation, 0)
 
-    my_results=ResultsSave('results/group4_static_vision_result.csv','results/group4_static_plc_result.csv')
+    my_results=ResultsSave('results/group4_static_vision_result','results/group4_static_plc_result')
 
     for i in range(20):
         # Getting the image to test on

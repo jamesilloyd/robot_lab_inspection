@@ -19,8 +19,8 @@ fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter('10mm_4.avi',fourcc, 20.0, (640,480))
 """
 
-
-testRun = 5
+# Increment this every time 
+testRun = 6
 if not os.path.exists('results/moving_images_{0}'.format(testRun)):
     os.makedirs('results/moving_images_{0}'.format(testRun))
 
@@ -121,4 +121,6 @@ for i in range(1,14):
     capture.release()
     #out.release()
     cv2.destroyAllWindows()
+
+
 my_results.close_files()

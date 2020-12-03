@@ -20,11 +20,11 @@ out = cv2.VideoWriter('10mm_4.avi',fourcc, 20.0, (640,480))
 """
 
 
-testRun = 2
+testRun = 5
 if not os.path.exists('results/moving_images_{0}'.format(testRun)):
     os.makedirs('results/moving_images_{0}'.format(testRun))
 
-my_results = ResultsSave('results/moving_images_{0}/group4_moving_vision_result.csv'.format(testRun),'results/moving_images_{0}/group4_moving_plc_result.csv'.format(testRun))
+my_results = ResultsSave('results/moving_images_{0}/group4_moving_vision_result'.format(testRun),'results/moving_images_{0}/group4_moving_plc_result'.format(testRun))
 
 num = 0
 
@@ -121,5 +121,4 @@ for i in range(1,14):
     capture.release()
     #out.release()
     cv2.destroyAllWindows()
-
-
+my_results.close_files()

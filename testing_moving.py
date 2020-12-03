@@ -20,7 +20,7 @@ out = cv2.VideoWriter('10mm_4.avi',fourcc, 20.0, (640,480))
 """
 
 
-testRun = 1
+testRun = 2
 if not os.path.exists('results/moving_images_{0}'.format(testRun)):
     os.makedirs('results/moving_images_{0}'.format(testRun))
 

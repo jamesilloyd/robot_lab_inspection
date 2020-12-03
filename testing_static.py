@@ -7,7 +7,7 @@ import numpy as np
 
 
 '''
-THIS IS THE MOST UP TO DATE FUNCTION USED FOR CLASSIFYING STATIC IMAGES. 
+DON
 '''
 if __name__ == "__main__":
 

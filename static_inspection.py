@@ -10,12 +10,23 @@ import classification
 from save_results import ResultsSave
 import RPi.GPIO as GPIO
 import time
+import os
 #import part
 
 if __name__ == "__main__":
 
     # Initialisation
     print ("Initialising setup")
+
+    # Incrament this variable each time you re run the program (used for saving results)
+    testRun = 0
+
+    # Check whether a results directory has been created or now
+    if not os.path.exists('results/static_images_{0}'.format(testRun)):
+        os.makedirs('results/static_images_{0}'.format(testRun))
+
+    # Initialise results saving object
+    my_results = ResultsSave('results/static_images_{0}/group4_static_vision_result.csv'.format(testRun),'results/static_images_{0}/group4_static_plc_result.csv'.format(testRun))
 
     # Set GPIO mode and warnings false
     GPIO.setmode(GPIO.BOARD)
@@ -45,11 +56,8 @@ if __name__ == "__main__":
     leftTemplateLocation = '/home/pi/robot_lab_inspection/templates/template_static_curve_left.png'
     rightTemplateLocation = '/home/pi/robot_lab_inspection/templates/template_static_curve_right.png'
 
-    # Initialise results saving object
-    my_results=ResultsSave('results/group4_static_vision_result.csv','results/group4_static_plc_result.csv')
-
     # Start count for images inspected
-    count = 0
+    trayCount = 1
 
     # Main loop of program for each image inspection
 
@@ -62,7 +70,7 @@ if __name__ == "__main__":
         GPIO.output(out2, 1)
 
         print("Initialising new window for image capture")
-        print(count)
+        print(trayCount)
         
         cam = cv2.VideoCapture(0)
         cv2.namedWindow("static_inspection")
@@ -126,6 +134,7 @@ if __name__ == "__main__":
                 break
             """
 
+        # TODO: do we need to keep opening and closing the camera like this?
         cam.release()
         cv2.destroyAllWindows()
 
@@ -144,15 +153,15 @@ if __name__ == "__main__":
             resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr, show = False, isCurves=curve)
 
             # Display the image on screen
-            cv2.imshow('result{0}'.format(i),img_classified)
+            cv2.imshow('result{0}'.format(trayCount),img_classified)
             cv2.waitKey(100)
 
             # Store image of classified tray for assessment
-            cv2.imwrite('results/static_images/classified_tray_{0}.png'.format(count),img_classified)
+            cv2.imwrite('results/static_images_{0}/classified_tray_{1}.png'.format(testRun,trayCount),img_classified)
 
             # Store results in csv file for assessment
             for j in range(len(resultsVision)):
-                my_results.insert_vision(str(count),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
+                my_results.insert_vision(str(trayCount),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
 
             #### TODO: do something with plc results csv output
 
@@ -201,7 +210,7 @@ if __name__ == "__main__":
             print("No templates found")
 
             # Store image of unclassified tray for assessment
-            cv2.imwrite('results/static_images/unclassified_tray_{0}.png'.format(count),img_bgr)
+            cv2.imwrite('results/static_images_{0}/unclassified_tray_{1}.png'.format(testRun,trayCount),img_bgr)
 
             GPIO.output(out2, 0)
             print("RPi Error flag set high")
@@ -209,4 +218,4 @@ if __name__ == "__main__":
             # Time to allow PLC to read error flag
             time.sleep(0.5)
 
-        count += 1
+        trayCount += 1

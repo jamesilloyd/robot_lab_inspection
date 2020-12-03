@@ -7,6 +7,7 @@ import templates
 import thresholding
 import classification
 from save_results import ResultsSave
+import os
 
 '''
 This is the file used for classifying the moving video footage
@@ -15,7 +16,13 @@ This is the file used for classifying the moving video footage
 # fourcc = cv2.VideoWriter_fourcc(*'XVID')
 # out = cv2.VideoWriter('10mm_4.avi',fourcc, 20.0, (640,480))
 
-my_results = ResultsSave('results/group4_moving_vision_result.csv','results/group4_moving_plc_result.csv')
+# Incrament this variable each time you re run the program (used for saving results)
+testRun = 0
+if not os.path.exists('results/moving_images_{0}'.format(testRun)):
+    os.makedirs('results/moving_images_{0}'.format(testRun))
+
+my_results = ResultsSave('results/moving_images_{0}/group4_moving_vision_result.csv'.format(testRun),'results/moving_images_{0}/group4_moving_plc_result.csv'.format(testRun))
+
 capture = cv2.VideoCapture(0)
 foundCorrectFrame = False
 curved = False
@@ -93,7 +100,7 @@ while(capture.isOpened()):
                 cv2.waitKey(100)
                 
                 # Write result
-                cv2.imwrite('results/moving_images/classified_moving_tray_{0}.png'.format(trayNum),img_classified)
+                cv2.imwrite('results/moving_images_{0}/classified_moving_tray_{1}.png'.format(testRun, trayNum),img_classified)
 
                 for j in range(len(resultsVision)):
                     my_results.insert_vision(str(trayNum),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])

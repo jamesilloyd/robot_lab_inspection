@@ -81,7 +81,7 @@ while(capture.isOpened()):
                 raise ValueError('Error: found invalid number of dots')
             
 
-            template_location = 'templates/template_moving_{0}.png'.format(pieceType)
+            template_location = '/home/pi/robot_lab_inspection/templates/template_moving_{0}.png'.format(pieceType)
             img_template = cv2.imread(template_location,0)
 
             foundTemplate = False

@@ -6,7 +6,6 @@ from save_results import ResultsSave
 import numpy as np
 
 
-
 '''
 THIS IS THE MOST UP TO DATE FUNCTION USED FOR CLASSIFYING STATIC IMAGES. 
 '''

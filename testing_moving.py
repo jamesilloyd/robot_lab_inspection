@@ -109,7 +109,7 @@ for i in range(1,14):
                     my_results.insert_vision(str(num),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
 
             else:
-                print('there was an error templating the image')
+                print('There was an error templating the image')
 
         #  TODO: also add in code here for allow manual cancellation.
 

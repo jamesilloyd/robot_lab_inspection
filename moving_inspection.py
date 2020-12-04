@@ -17,7 +17,7 @@ This is the file used for classifying the moving video footage
 # out = cv2.VideoWriter('10mm_4.avi',fourcc, 20.0, (640,480))
 
 # Incrament this variable each time you re run the program (used for saving results)
-testRun = 0
+testRun = 2
 if not os.path.exists('results/moving_images_{0}'.format(testRun)):
     os.makedirs('results/moving_images_{0}'.format(testRun))
 
@@ -93,7 +93,7 @@ while(capture.isOpened()):
                 # Use the templates to crop the image
                 img_crop_bgr = template_matching.imageCropping(frame_bgr, img_template, match_list,show=False)
 
-                resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr,show=True,isCurves=curved,isMoving=True)
+                resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr,show=False,isCurves=curved,isMoving=True)
 
                 # Display image on screen
                 cv2.imshow('result{0}'.format(trayNum),img_classified)
@@ -104,6 +104,8 @@ while(capture.isOpened()):
 
                 for j in range(len(resultsVision)):
                     my_results.insert_vision(str(trayNum),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
+                    
+                print(resultsVision)
 
             else:
                 print('There was an error templating the image')

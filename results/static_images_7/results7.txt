@@ -1,0 +1,114 @@
+Initialising setup
+Initialising new window for image capture
+1
+PLC Go flag received to start inspection
+RPi Busy flag set high
+Straight tracks in dock
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.552, Solidity 0.8286354056902002, Area/Perimeter 0.030723024285474517, Reason 
+Part 1, Aspect Ratio 0.5418778860174067, Solidity 0.8324494205460616, Area/Perimeter 0.030503681405322648, Reason 
+Part 2, Aspect Ratio 0.544, Solidity 0.7860264900662252, Area/Perimeter 0.021624464323363804, Reason Hole in the middle
+Part 3, Aspect Ratio 0.544, Solidity 0.8290843566470902, Area/Perimeter 0.030459704106309635, Reason 
+Part 4, Aspect Ratio 0.967981362179179, Solidity 0.8130537875951579, Area/Perimeter 0.04076879879867182, Reason Half split by width including notch
+Part 5, Aspect Ratio 0.5476190476190477, Solidity 0.8362860468123626, Area/Perimeter 0.030807478942454378, Reason 
+Part 6, Aspect Ratio 0.8219090929190179, Solidity 0.8524271844660194, Area/Perimeter 0.033119790799264734, Reason Half split by width including hole
+Part 7, Aspect Ratio 0.5519999453124933, Solidity 0.8354035247447487, Area/Perimeter 0.030886008730513247, Reason 
+Part 8, Aspect Ratio 0.7187499552965093, Solidity 0.9127862884877901, Area/Perimeter 0.03898183593080965, Reason Notch is missing
+Part 9, Aspect Ratio 0.5541022449036782, Solidity 0.8308231628148532, Area/Perimeter 0.03064003898988372, Reason 
+Part 10, Aspect Ratio 0.71875, Solidity 0.9834229051547952, Area/Perimeter 0.05808244537231373, Reason Notch is missing and hole is filled
+Part 11, Aspect Ratio 0.552, Solidity 0.8389410537297861, Area/Perimeter 0.03125445359131342, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Hole in the middle'}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by width including notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': False, 'reason': 'Half split by width including hole'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Notch is missing'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': False, 'reason': 'Notch is missing and hole is filled'}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': False, '3': True, '4': True, '5': False, '6': True, '7': False, '8': False, '9': True, '10': False, '11': True}
+[1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1]
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+0
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+1
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+2
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+3
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+4
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+5
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+6
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+7
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+8
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+9
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+10
+RPi Part status flag set
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+11
+RPi Part status flag set
+RPi Busy flag set low
+Initialising new window for image capture
+2
+PLC Go flag received to start inspection
+RPi Busy flag set high
+Straight tracks in dock
+Starting static image inspection
+Templates found successfully
+Part 0, Aspect Ratio 0.5483870967741935, Solidity 0.8354969709073963, Area/Perimeter 0.03098429622421668, Reason 
+Part 1, Aspect Ratio 0.5400194614499203, Solidity 0.8308760893781535, Area/Perimeter 0.030532823105615194, Reason 
+Part 2, Aspect Ratio 0.544, Solidity 0.7820818434644418, Area/Perimeter 0.02145089506808347, Reason Hole in the middle
+Part 3, Aspect Ratio 0.536, Solidity 0.8343183344526528, Area/Perimeter 0.030571769309874822, Reason 
+Part 4, Aspect Ratio 0.9698236588570434, Solidity 0.8097488187018155, Area/Perimeter 0.040581653511602596, Reason Half split by width including notch
+Part 5, Aspect Ratio 0.5476190476190477, Solidity 0.8313636363636364, Area/Perimeter 0.03074989120852224, Reason 
+Part 6, Aspect Ratio 0.8260869565217391, Solidity 0.8547841913676547, Area/Perimeter 0.033243959513941636, Reason Half split by width including hole
+Part 7, Aspect Ratio 0.5519999453124933, Solidity 0.8342678315295345, Area/Perimeter 0.030765792238499543, Reason 
+Part 8, Aspect Ratio 0.7187499552965093, Solidity 0.9110858010630221, Area/Perimeter 0.0388140478257908, Reason Notch is missing
+Part 9, Aspect Ratio 0.5537199985118255, Solidity 0.8318359375, Area/Perimeter 0.030668334596250915, Reason 
+Part 10, Aspect Ratio 0.71875, Solidity 0.9863128279218311, Area/Perimeter 0.05894629180003087, Reason Notch is missing and hole is filled
+Part 11, Aspect Ratio 0.552, Solidity 0.8382007822685789, Area/Perimeter 0.03112126046416157, Reason 
+Inspection Results:
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Hole in the middle'}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by width including notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': False, 'reason': 'Half split by width including hole'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Notch is missing'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': False, 'reason': 'Notch is missing and hole is filled'}, '11': {'QCPassed': True, 'reason': ''}}
+{'0': True, '1': True, '2': False, '3': True, '4': True, '5': False, '6': True, '7': False, '8': False, '9': True, '10': False, '11': True}
+[1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1]
+RPi Busy flag set low
+PLC Go flag received to send next result
+RPi Busy flag set high
+0
+RPi Part status flag set
+RPi Busy flag set low

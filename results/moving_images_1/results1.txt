@@ -1,0 +1,194 @@
+Found the tray
+Part 1, Aspect Ratio 0.43177254626242967, Solidity 0.8599561440499283, Area/Perimeter 0.03183447250978082, Reason 
+Part 2, Aspect Ratio 0.42101239654112665, Solidity 0.8733885819521179, Area/Perimeter 0.03361497356650853, Reason 
+Part 4, Aspect Ratio 0.23838236825754827, Solidity 0.9647190431116083, Area/Perimeter 0.03575946095274592, Reason Half split by length without notch
+Part 5, Aspect Ratio 0.7020757084031425, Solidity 0.9025205971123257, Area/Perimeter 0.03926782840681239, Reason Unknown Failure Reason
+Part 3, Aspect Ratio 0.41596578796502587, Solidity 0.8636308341105389, Area/Perimeter 0.032129789686966385, Reason 
+Part 6, Aspect Ratio 0.4511764051751829, Solidity 0.9052771537297694, Area/Perimeter 0.03739629525780997, Reason Unknown Failure Reason
+Part 7, Aspect Ratio 0.41847826086956524, Solidity 0.8669870455495194, Area/Perimeter 0.032577550925187236, Reason 
+Part 8, Aspect Ratio 0.4256919862530207, Solidity 0.8458275017494752, Area/Perimeter 0.026484745576776873, Reason Hole in the middle
+Part 9, Aspect Ratio 0.42050479447656997, Solidity 0.8716235602738042, Area/Perimeter 0.03339092977931306, Reason 
+Part 10, Aspect Ratio 0.425414364640884, Solidity 0.8625751903419846, Area/Perimeter 0.03213237821715013, Reason 
+Part 11, Aspect Ratio 0.42339079398118473, Solidity 0.8706332341691457, Area/Perimeter 0.03371139297193293, Reason 
+{'0': {'QCPassed': False, 'reason': 'No part found'}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by length without notch'}, '5': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '6': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Hole in the middle'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+Part 0, Aspect Ratio 0.41621621621621624, Solidity 0.8764456517265506, Area/Perimeter 0.033676329488125246, Reason 
+Part 1, Aspect Ratio 0.41806000151423695, Solidity 0.8684232573726541, Area/Perimeter 0.0322675723040891, Reason 
+Part 2, Aspect Ratio 0.4215877285376018, Solidity 0.8685357722882298, Area/Perimeter 0.03210989003360758, Reason 
+Part 3, Aspect Ratio 0.42712066057493087, Solidity 0.8598398651495996, Area/Perimeter 0.03165475274842275, Reason 
+Part 4, Aspect Ratio 0.41759176293123, Solidity 0.8696400100696484, Area/Perimeter 0.03226134637545386, Reason 
+Part 5, Aspect Ratio 0.4197518219881642, Solidity 0.8723152376120412, Area/Perimeter 0.03283275551827212, Reason 
+Part 6, Aspect Ratio 0.417870309343756, Solidity 0.8694062050544483, Area/Perimeter 0.032987100381585345, Reason 
+Part 7, Aspect Ratio 0.4195695497711993, Solidity 0.8629692113032476, Area/Perimeter 0.03162374343589067, Reason 
+Part 8, Aspect Ratio 0.4198895027624309, Solidity 0.8657018563983289, Area/Perimeter 0.03224204371867743, Reason 
+Part 9, Aspect Ratio 0.41837671954541045, Solidity 0.8726021260131145, Area/Perimeter 0.033073746019743167, Reason 
+Part 11, Aspect Ratio 0.42857142857142855, Solidity 0.8558879178304352, Area/Perimeter 0.03144844741395656, Reason 
+Part 10, Aspect Ratio 0.425500791813659, Solidity 0.8601805754788625, Area/Perimeter 0.03193140392538422, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': True, 'reason': ''}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+Error: Missed the tray
+Except block was triggered, tell plc we could not classify the tray
+Found the tray
+Part 0, Aspect Ratio 0.41361256544502617, Solidity 0.8681045542014112, Area/Perimeter 0.033013372188506813, Reason 
+Part 1, Aspect Ratio 0.4156632757661854, Solidity 0.8634324290326638, Area/Perimeter 0.03296368484974312, Reason 
+Part 2, Aspect Ratio 0.4164691071313303, Solidity 0.8681242052586242, Area/Perimeter 0.03372062761704204, Reason 
+Part 3, Aspect Ratio 0.4105263157894737, Solidity 0.8674396994060846, Area/Perimeter 0.032788394177951076, Reason 
+Part 6, Aspect Ratio 0.41027651126871717, Solidity 0.8658001558079462, Area/Perimeter 0.03270341472873222, Reason 
+Part 7, Aspect Ratio 0.41399460907675356, Solidity 0.8687420427943653, Area/Perimeter 0.0333128041858888, Reason 
+Part 8, Aspect Ratio 0.4189973134520341, Solidity 0.8649964027254645, Area/Perimeter 0.032966098718707905, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'No part found'}, '5': {'QCPassed': False, 'reason': 'No part found'}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': False, 'reason': 'No part found'}, '10': {'QCPassed': False, 'reason': 'No part found'}, '11': {'QCPassed': False, 'reason': 'No part found'}}
+Error: Missed the tray
+Except block was triggered, tell plc we could not classify the tray
+Found the tray
+Part 1, Aspect Ratio 0.4245778620190232, Solidity 0.8645705326496885, Area/Perimeter 0.03236098822070473, Reason 
+Part 2, Aspect Ratio 0.42153577454856195, Solidity 0.8731924823936326, Area/Perimeter 0.0336428386818194, Reason 
+Part 4, Aspect Ratio 0.24108600042700074, Solidity 0.9617556468172485, Area/Perimeter 0.03570557498104992, Reason Half split by length without notch
+Part 5, Aspect Ratio 0.7037037231529828, Solidity 0.9038367745082101, Area/Perimeter 0.038655650205352214, Reason Unknown Failure Reason
+Part 3, Aspect Ratio 0.4154848287791683, Solidity 0.8712322062242526, Area/Perimeter 0.032448381395423165, Reason 
+Part 6, Aspect Ratio 0.4512905691658319, Solidity 0.9055854704754951, Area/Perimeter 0.03795195096133463, Reason Unknown Failure Reason
+Part 7, Aspect Ratio 0.41847826086956524, Solidity 0.8688360450563204, Area/Perimeter 0.03272974003439701, Reason 
+Part 8, Aspect Ratio 0.4256846018624179, Solidity 0.8455831005586593, Area/Perimeter 0.0267002868330144, Reason Hole in the middle
+Part 9, Aspect Ratio 0.42073747900043085, Solidity 0.8723927385977134, Area/Perimeter 0.03338799638825935, Reason 
+Part 10, Aspect Ratio 0.4226492356899542, Solidity 0.8626535419821639, Area/Perimeter 0.03233482255381385, Reason 
+Part 11, Aspect Ratio 0.4198895027624309, Solidity 0.8749306118963235, Area/Perimeter 0.03357510150861639, Reason 
+{'0': {'QCPassed': False, 'reason': 'No part found'}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by length without notch'}, '5': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '6': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Hole in the middle'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+Part 0, Aspect Ratio 0.4105263157894737, Solidity 0.8733417690517981, Area/Perimeter 0.03317712588348214, Reason 
+Part 1, Aspect Ratio 0.41228800143808814, Solidity 0.871243225488586, Area/Perimeter 0.03362775219366888, Reason 
+Part 2, Aspect Ratio 0.38384573891812135, Solidity 0.8052062906140655, Area/Perimeter 0.02628716546372099, Reason Unknown Failure Reason
+Part 4, Aspect Ratio 0.20763600854331182, Solidity 0.8546830652790918, Area/Perimeter 0.028276298931554988, Reason Half split by length with notch
+Part 3, Aspect Ratio 0.40414507772020725, Solidity 0.8634838501030845, Area/Perimeter 0.031984854943160175, Reason Unknown Failure Reason
+Part 5, Aspect Ratio 0.4112761332909067, Solidity 0.8922137922265079, Area/Perimeter 0.035432214008989237, Reason 
+Part 7, Aspect Ratio 0.6242370991035171, Solidity 0.8868398994132439, Area/Perimeter 0.045871418556095035, Reason Half split by width including notch
+Part 6, Aspect Ratio 0.4139703633793212, Solidity 0.868980405181003, Area/Perimeter 0.03326941487225446, Reason 
+Part 8, Aspect Ratio 0.4160635392044213, Solidity 0.8720792414493735, Area/Perimeter 0.03364030862196856, Reason 
+Part 9, Aspect Ratio 0.5159993069509667, Solidity 0.8449645048730599, Area/Perimeter 0.03155861137215554, Reason Straight piece
+Part 10, Aspect Ratio 0.40792033968616787, Solidity 0.8641306702482562, Area/Perimeter 0.031995002752439806, Reason Unknown Failure Reason
+Part 11, Aspect Ratio 0.42236825569740283, Solidity 0.8684312962242118, Area/Perimeter 0.033336558965784385, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '3': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '4': {'QCPassed': False, 'reason': 'Half split by length with notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': False, 'reason': 'Half split by width including notch'}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': False, 'reason': 'Straight piece'}, '10': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+Part 0, Aspect Ratio 0.41621621621621624, Solidity 0.8767505852396402, Area/Perimeter 0.03359096362727632, Reason 
+Part 1, Aspect Ratio 0.4178706795888025, Solidity 0.8693141398501903, Area/Perimeter 0.03226776676851785, Reason 
+Part 2, Aspect Ratio 0.42110956354359275, Solidity 0.870059880239521, Area/Perimeter 0.0326602378765663, Reason 
+Part 3, Aspect Ratio 0.427353209255829, Solidity 0.8583270217958427, Area/Perimeter 0.03158178688427374, Reason 
+Part 4, Aspect Ratio 0.4153037866346789, Solidity 0.8716040037009, Area/Perimeter 0.032678558415555274, Reason 
+Part 5, Aspect Ratio 0.42346062820720765, Solidity 0.8687323706479182, Area/Perimeter 0.0329062710719898, Reason 
+Part 6, Aspect Ratio 0.42050433839927487, Solidity 0.867635555189592, Area/Perimeter 0.0326383672504678, Reason 
+Part 7, Aspect Ratio 0.41974304258876344, Solidity 0.862280516183626, Area/Perimeter 0.0316941020062496, Reason 
+Part 8, Aspect Ratio 0.4198895027624309, Solidity 0.8642023178665288, Area/Perimeter 0.03193236147572467, Reason 
+Part 9, Aspect Ratio 0.418028612431948, Solidity 0.8737856118056979, Area/Perimeter 0.03330387155434258, Reason 
+Part 10, Aspect Ratio 0.4249035003039139, Solidity 0.8595567631824743, Area/Perimeter 0.03170900552735479, Reason 
+Part 11, Aspect Ratio 0.42857142857142855, Solidity 0.8527742749054225, Area/Perimeter 0.03149288365086721, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': True, 'reason': ''}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+Part 0, Aspect Ratio 0.49640287769784175, Solidity 0.8578307592929708, Area/Perimeter 0.03269475821114693, Reason 
+Part 1, Aspect Ratio 0.48936170212765956, Solidity 0.8591885441527446, Area/Perimeter 0.03275714894724267, Reason 
+Part 2, Aspect Ratio 0.5036496358494748, Solidity 0.8447305389221557, Area/Perimeter 0.027966438212176765, Reason Unknown Failure Reason
+Part 3, Aspect Ratio 0.4892086330935252, Solidity 0.8562817069531483, Area/Perimeter 0.03214359753998121, Reason 
+Part 4, Aspect Ratio 0.7865168539325843, Solidity 0.8634165597552551, Area/Perimeter 0.04607600932064323, Reason Unknown Failure Reason
+Part 5, Aspect Ratio 0.4928571428571429, Solidity 0.870256111757858, Area/Perimeter 0.0340214963426951, Reason 
+Part 6, Aspect Ratio 0.9452054679986547, Solidity 0.8852204512523287, Area/Perimeter 0.036861521063402125, Reason Unknown Failure Reason
+Part 7, Aspect Ratio 0.5035971223021583, Solidity 0.8544551562956471, Area/Perimeter 0.03196095166817876, Reason 
+Part 8, Aspect Ratio 0.6216216216216216, Solidity 0.920016077170418, Area/Perimeter 0.03825503297878126, Reason Notch is missing
+Part 9, Aspect Ratio 0.4964538999417136, Solidity 0.862057044079516, Area/Perimeter 0.03307364969927913, Reason 
+Part 10, Aspect Ratio 0.6272726755693853, Solidity 0.9815138478085507, Area/Perimeter 0.055061986141356, Reason Notch is missing and hole is filled
+Part 11, Aspect Ratio 0.5072463768115942, Solidity 0.8631033060286405, Area/Perimeter 0.03374787877855306, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Notch is missing'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': False, 'reason': 'Notch is missing and hole is filled'}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+Part 0, Aspect Ratio 0.4105263157894737, Solidity 0.8740608374284206, Area/Perimeter 0.03342961767398499, Reason 
+Part 1, Aspect Ratio 0.41621621621621624, Solidity 0.8656502090636483, Area/Perimeter 0.03271295490837366, Reason 
+Part 2, Aspect Ratio 0.41644097372980865, Solidity 0.872234444398323, Area/Perimeter 0.034154207690499525, Reason 
+Part 3, Aspect Ratio 0.4105263157894737, Solidity 0.8676715556819566, Area/Perimeter 0.03317177376849844, Reason 
+Part 6, Aspect Ratio 0.4099937350954764, Solidity 0.8675488498639624, Area/Perimeter 0.03298871537620457, Reason Unknown Failure Reason
+Part 7, Aspect Ratio 0.4142757421843612, Solidity 0.8693160737106814, Area/Perimeter 0.03305455171510414, Reason 
+Part 8, Aspect Ratio 0.4202590763596004, Solidity 0.864029509030781, Area/Perimeter 0.0329098773736539, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'No part found'}, '5': {'QCPassed': False, 'reason': 'No part found'}, '6': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': False, 'reason': 'No part found'}, '10': {'QCPassed': False, 'reason': 'No part found'}, '11': {'QCPassed': False, 'reason': 'No part found'}}
+Found the tray
+Part 0, Aspect Ratio 0.5, Solidity 0.8506933838352985, Area/Perimeter 0.030551832976397773, Reason Unknown Failure Reason
+Part 1, Aspect Ratio 0.49541113105924595, Solidity 0.8669154228855721, Area/Perimeter 0.03426987026110172, Reason 
+Part 2, Aspect Ratio 0.5035971223021583, Solidity 0.8604200891809435, Area/Perimeter 0.03330170619851661, Reason 
+Part 3, Aspect Ratio 0.48951048951048953, Solidity 0.8646616541353384, Area/Perimeter 0.03352356765394594, Reason 
+Part 6, Aspect Ratio 0.49295774647887325, Solidity 0.8680571299025165, Area/Perimeter 0.03365796111928805, Reason 
+Part 7, Aspect Ratio 0.4825174825174825, Solidity 0.8681763732816155, Area/Perimeter 0.034155117749221704, Reason 
+Part 9, Aspect Ratio 0.48936170212765956, Solidity 0.8707966664724052, Area/Perimeter 0.033796780883208866, Reason 
+{'0': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'No part found'}, '5': {'QCPassed': False, 'reason': 'No part found'}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'No part found'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': False, 'reason': 'No part found'}, '11': {'QCPassed': False, 'reason': 'No part found'}}
+Found the tray
+Part 1, Aspect Ratio 0.42777776553306845, Solidity 0.8623728813559322, Area/Perimeter 0.03225221554229607, Reason 
+Part 2, Aspect Ratio 0.4239332761104989, Solidity 0.8711594809543742, Area/Perimeter 0.03331586091308213, Reason 
+Part 4, Aspect Ratio 0.24036499604981854, Solidity 0.9661777394305435, Area/Perimeter 0.0356742560672906, Reason Half split by length without notch
+Part 5, Aspect Ratio 0.7082592897715476, Solidity 0.9015725576468671, Area/Perimeter 0.039119495545791194, Reason Unknown Failure Reason
+Part 3, Aspect Ratio 0.41935483870967744, Solidity 0.866997882391269, Area/Perimeter 0.03234204303999892, Reason 
+Part 6, Aspect Ratio 0.45137346133474837, Solidity 0.9036006771286087, Area/Perimeter 0.03756220438669877, Reason Unknown Failure Reason
+Part 7, Aspect Ratio 0.41847826086956524, Solidity 0.865175585284281, Area/Perimeter 0.03217257016367502, Reason 
+Part 8, Aspect Ratio 0.428114260832798, Solidity 0.8432083133213989, Area/Perimeter 0.026294595446793002, Reason Hole in the middle
+Part 9, Aspect Ratio 0.4228293561882132, Solidity 0.871636289166496, Area/Perimeter 0.03347360214891593, Reason 
+Part 10, Aspect Ratio 0.4226492356899542, Solidity 0.8625462807135644, Area/Perimeter 0.03215215904719362, Reason 
+Part 11, Aspect Ratio 0.4198895027624309, Solidity 0.8744074817440322, Area/Perimeter 0.033310515001642414, Reason 
+{'0': {'QCPassed': False, 'reason': 'No part found'}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by length without notch'}, '5': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '6': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Hole in the middle'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+Part 0, Aspect Ratio 0.4126984126984127, Solidity 0.8703054989816701, Area/Perimeter 0.033324792220873006, Reason 
+Part 1, Aspect Ratio 0.4126984126984127, Solidity 0.868463147532915, Area/Perimeter 0.03298533329839133, Reason 
+Part 2, Aspect Ratio 0.385, Solidity 0.8026027870551653, Area/Perimeter 0.025942975189894194, Reason Unknown Failure Reason
+Part 4, Aspect Ratio 0.20995085316939582, Solidity 0.8532644434006575, Area/Perimeter 0.028562281973193576, Reason Half split by length with notch
+Part 3, Aspect Ratio 0.405953489984358, Solidity 0.8598274054359223, Area/Perimeter 0.03183660300198456, Reason Unknown Failure Reason
+Part 5, Aspect Ratio 0.41621621621621624, Solidity 0.8908620835805713, Area/Perimeter 0.03545620917213482, Reason 
+Part 7, Aspect Ratio 0.6727272727272727, Solidity 0.8865735440042745, Area/Perimeter 0.044794526860175224, Reason Unknown Failure Reason
+Part 6, Aspect Ratio 0.41711229946524064, Solidity 0.8683262229217579, Area/Perimeter 0.033026938591879516, Reason 
+Part 8, Aspect Ratio 0.4138677009385679, Solidity 0.8711220214161765, Area/Perimeter 0.03346579448274293, Reason 
+Part 9, Aspect Ratio 0.5147058823529411, Solidity 0.8465792954190213, Area/Perimeter 0.03194476735760155, Reason Straight piece
+Part 10, Aspect Ratio 0.40443662605282527, Solidity 0.865411315515446, Area/Perimeter 0.0319688128035496, Reason Unknown Failure Reason
+Part 11, Aspect Ratio 0.42253120561346535, Solidity 0.8693336796986622, Area/Perimeter 0.033053693546675665, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '3': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '4': {'QCPassed': False, 'reason': 'Half split by length with notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': False, 'reason': 'Straight piece'}, '10': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+There was an error templating the image
+Found the tray
+Part 0, Aspect Ratio 0.49640287769784175, Solidity 0.8578218518953175, Area/Perimeter 0.03263842602175891, Reason 
+Part 1, Aspect Ratio 0.48936170212765956, Solidity 0.8599522895211497, Area/Perimeter 0.032916335199126956, Reason 
+Part 2, Aspect Ratio 0.5036496350364964, Solidity 0.8479861152672212, Area/Perimeter 0.02760974164422485, Reason Unknown Failure Reason
+Part 3, Aspect Ratio 0.4927536231884058, Solidity 0.8591971240263631, Area/Perimeter 0.032482535047862734, Reason 
+Part 4, Aspect Ratio 0.7752808988764045, Solidity 0.8643832904375371, Area/Perimeter 0.04630786026403409, Reason Unknown Failure Reason
+Part 5, Aspect Ratio 0.4928571413001232, Solidity 0.8681606519208381, Area/Perimeter 0.033533675308579605, Reason 
+Part 6, Aspect Ratio 0.9452054794520548, Solidity 0.8833558581973178, Area/Perimeter 0.03626648808184076, Reason Unknown Failure Reason
+Part 7, Aspect Ratio 0.5, Solidity 0.859524089998822, Area/Perimeter 0.0322601276532064, Reason 
+Part 8, Aspect Ratio 0.6272727272727273, Solidity 0.9220316178943828, Area/Perimeter 0.03862890013673479, Reason Notch is missing
+Part 9, Aspect Ratio 0.5, Solidity 0.8599378524571297, Area/Perimeter 0.032613504459951044, Reason 
+Part 10, Aspect Ratio 0.6272726755693853, Solidity 0.9789870689655172, Area/Perimeter 0.05400465731329962, Reason Notch is missing and hole is filled
+Part 11, Aspect Ratio 0.5109489051094891, Solidity 0.8640094478889873, Area/Perimeter 0.03354666357699269, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Notch is missing'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': False, 'reason': 'Notch is missing and hole is filled'}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+There was an error templating the image
+Found the tray
+Part 0, Aspect Ratio 0.5036496358494748, Solidity 0.8474125958577381, Area/Perimeter 0.030653277959318697, Reason Unknown Failure Reason
+Part 1, Aspect Ratio 0.4912581609117622, Solidity 0.8680774425934263, Area/Perimeter 0.0345920772389255, Reason 
+Part 2, Aspect Ratio 0.5, Solidity 0.8623724040830694, Area/Perimeter 0.03318087915683396, Reason 
+Part 3, Aspect Ratio 0.49295774496540445, Solidity 0.8716955332725616, Area/Perimeter 0.03402511986144799, Reason 
+Part 6, Aspect Ratio 0.49295774647887325, Solidity 0.8690381331815594, Area/Perimeter 0.03406067691557044, Reason 
+Part 7, Aspect Ratio 0.4859154929577465, Solidity 0.8691252144082333, Area/Perimeter 0.03383958124160256, Reason 
+Part 9, Aspect Ratio 0.4928571413001232, Solidity 0.8697170799860287, Area/Perimeter 0.03367348814613852, Reason 
+{'0': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'No part found'}, '5': {'QCPassed': False, 'reason': 'No part found'}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'No part found'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': False, 'reason': 'No part found'}, '11': {'QCPassed': False, 'reason': 'No part found'}}
+Found the tray
+Part 1, Aspect Ratio 0.43183699117149266, Solidity 0.8598712717176391, Area/Perimeter 0.03220142265466148, Reason 
+Part 2, Aspect Ratio 0.4213397452158349, Solidity 0.873678933957141, Area/Perimeter 0.03369229753895003, Reason 
+Part 4, Aspect Ratio 0.2403361448270909, Solidity 0.9673163159710245, Area/Perimeter 0.03614282602317185, Reason Half split by length without notch
+Part 5, Aspect Ratio 0.7050032711881355, Solidity 0.9038602194229988, Area/Perimeter 0.038785807692908, Reason Unknown Failure Reason
+Part 3, Aspect Ratio 0.4117647058823529, Solidity 0.8703665946254536, Area/Perimeter 0.03284140970636313, Reason 
+Part 6, Aspect Ratio 0.45294117647058824, Solidity 0.9006273297572507, Area/Perimeter 0.03755865594089738, Reason Unknown Failure Reason
+Part 7, Aspect Ratio 0.41847826086956524, Solidity 0.8674985393539771, Area/Perimeter 0.03268009354961231, Reason 
+Part 8, Aspect Ratio 0.4280000089778564, Solidity 0.8456630980991916, Area/Perimeter 0.026546542386905563, Reason Hole in the middle
+Part 9, Aspect Ratio 0.4206541990577227, Solidity 0.8719809734694715, Area/Perimeter 0.03325270885865541, Reason 
+Part 10, Aspect Ratio 0.4226492356899542, Solidity 0.8631769561189253, Area/Perimeter 0.03251008070805471, Reason 
+Part 11, Aspect Ratio 0.4198895027624309, Solidity 0.8750160071712128, Area/Perimeter 0.03356035944034878, Reason 
+{'0': {'QCPassed': False, 'reason': 'No part found'}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': True, 'reason': ''}, '3': {'QCPassed': True, 'reason': ''}, '4': {'QCPassed': False, 'reason': 'Half split by length without notch'}, '5': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '6': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '7': {'QCPassed': True, 'reason': ''}, '8': {'QCPassed': False, 'reason': 'Hole in the middle'}, '9': {'QCPassed': True, 'reason': ''}, '10': {'QCPassed': True, 'reason': ''}, '11': {'QCPassed': True, 'reason': ''}}
+Found the tray
+Part 0, Aspect Ratio 0.4126984126984127, Solidity 0.8743517497652007, Area/Perimeter 0.03312182642415005, Reason 
+Part 1, Aspect Ratio 0.4148936170212766, Solidity 0.8677101638808288, Area/Perimeter 0.03307568700252407, Reason 
+Part 2, Aspect Ratio 0.385, Solidity 0.8024738635928464, Area/Perimeter 0.025934799640181333, Reason Unknown Failure Reason
+Part 4, Aspect Ratio 0.21161778731787012, Solidity 0.846541115047548, Area/Perimeter 0.028469141658935344, Reason Half split by length with notch
+Part 3, Aspect Ratio 0.3956010565069661, Solidity 0.8516231826329417, Area/Perimeter 0.030725420612162345, Reason Unknown Failure Reason
+Part 5, Aspect Ratio 0.41621621621621624, Solidity 0.8897774392823897, Area/Perimeter 0.035473077881292746, Reason 
+Part 7, Aspect Ratio 0.6788990825688074, Solidity 0.8860691967687853, Area/Perimeter 0.04484080618194208, Reason Unknown Failure Reason
+Part 6, Aspect Ratio 0.4140303948784564, Solidity 0.8706376606630339, Area/Perimeter 0.03323906024542503, Reason 
+Part 8, Aspect Ratio 0.4181352467942822, Solidity 0.8693373901284652, Area/Perimeter 0.033308642654284175, Reason 
+Part 9, Aspect Ratio 0.5147058823529411, Solidity 0.8489862222489621, Area/Perimeter 0.03170691100551704, Reason Straight piece
+Part 10, Aspect Ratio 0.4073629180558366, Solidity 0.8674688328048303, Area/Perimeter 0.03237389846946718, Reason Unknown Failure Reason
+Part 11, Aspect Ratio 0.4224176298485175, Solidity 0.8694466095089634, Area/Perimeter 0.033153288697870535, Reason 
+{'0': {'QCPassed': True, 'reason': ''}, '1': {'QCPassed': True, 'reason': ''}, '2': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '3': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '4': {'QCPassed': False, 'reason': 'Half split by length with notch'}, '5': {'QCPassed': True, 'reason': ''}, '6': {'QCPassed': True, 'reason': ''}, '7': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '8': {'QCPassed': True, 'reason': ''}, '9': {'QCPassed': False, 'reason': 'Straight piece'}, '10': {'QCPassed': False, 'reason': 'Unknown Failure Reason'}, '11': {'QCPassed': True, 'reason': ''}}

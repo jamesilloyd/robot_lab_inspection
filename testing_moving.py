@@ -20,7 +20,7 @@ out = cv2.VideoWriter('10mm_4.avi',fourcc, 20.0, (640,480))
 """
 
 # Increment this every time 
-testRun = 6
+testRun = 10
 if not os.path.exists('results/moving_images_{0}'.format(testRun)):
     os.makedirs('results/moving_images_{0}'.format(testRun))
 
@@ -58,7 +58,7 @@ for i in range(1,14):
             #   -how many dots
             #   -whether it has found a dot at all
             # This allows us to expect a frame to be captured, if not we have missed it and need to report that.
-            foundCorrectFrame, count, foundGreenDot = FrameCapture(frame_bgr,show=False)
+            foundCorrectFrame, count, foundGreenDot = FrameCapture(frame_bgr,show=True)
 
             # If we have found a green dot we know we are expecting a tray
             if(foundGreenDot):
@@ -93,14 +93,14 @@ for i in range(1,14):
 
                 foundTemplate = False
 
-                match_list, foundTemplate = template_matching.templateMatching(frame_bgr,img_template,show=False)
+                match_list, foundTemplate = template_matching.templateMatching(frame_bgr,img_template,show=True)
 
                 if(foundTemplate):
 
                     # Use the templates to crop the image
-                    img_crop_bgr = template_matching.imageCropping(frame_bgr, img_template, match_list,show=False)
+                    img_crop_bgr = template_matching.imageCropping(frame_bgr, img_template, match_list,show=True)
 
-                    resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr,show=False,isCurves=curved,isMoving=True)
+                    resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr,show=True,isCurves=curved,isMoving=True)
 
                     print(resultsVision)
 

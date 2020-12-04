@@ -23,6 +23,9 @@ def otsuThresholding(img_gray, isCurved = True,isMoving = False):
     # Apply otsu thresholding to the blurred image
     ret3 , thresh = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
+
+    # print(thresh)
+
     # plt.imshow(thresh, "gray")
     # plt.show()
 

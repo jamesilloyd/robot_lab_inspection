@@ -102,6 +102,8 @@ for i in range(1,14):
 
                     resultsVision, resultsPLC, img_classified = classification.partClassification(img_crop_bgr,show=False,isCurves=curved,isMoving=True)
 
+                    print(resultsVision)
+
                     
                     cv2.imwrite('results/moving_images_{0}/classified_moving_tray_{1}.png'.format(testRun,num),img_classified)
 

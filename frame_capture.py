@@ -3,17 +3,20 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 
-# TODO: how do we make these constants a bit more robust
+
+
+
+'''
+The FrameCapture function is used to determine whether the correct frame has been found and 
+also report back on how many green dots are show in the frame (if any).
+To do this it calls the filterOutColoredObjects function that takes an image and a BGR color array to filter. 
+'''
+
+# Establish the green dot color that will be used for filtering the correct colour
 greenDotColor = np.uint8([[[40,89,24]]])
-
-
-'''
-The frame capture function will return true if the frame inserted shows a full view of the tray
-'''
 
 def filterOutColoredObjects(img_bgr, colorArray, show = False):
 
-    # img_rgb = cv2.cvtColor(img_bgr, cv2.COlOR_BGR2RGB)
     # Convert BGR to HSV
     hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
 
@@ -28,7 +31,6 @@ def filterOutColoredObjects(img_bgr, colorArray, show = False):
     res = cv2.bitwise_and(img_bgr,img_bgr, mask = mask)
 
     if(show):
-
         plt.figure(figsize = (7,7))
         plt.imshow(mask)
         plt.axis('off')
@@ -42,15 +44,15 @@ def filterOutColoredObjects(img_bgr, colorArray, show = False):
 
 def FrameCapture(frame_bgr, show = False):
 
+    # Establish the minimum area a dot can have to be valid
     minDotArea = 100
+    # Initialise variables to be outputted
     foundCorrectFrame = False
     foundGreenDot = False
     # Init dot variables
     cx = 0
     cy = 0
     count = 0
-
-    # TODO: need to tweak the threshold to trigger frameFound
 
     # Get the height and width of the frame
     imageHeight , imageWidth = frame_bgr.shape[:2]
@@ -67,7 +69,7 @@ def FrameCapture(frame_bgr, show = False):
         if(hierarchy[0][i][3]==0):
             if(cv2.contourArea(contour) > minDotArea):
                 # Found a contour that is inside the outer edge and is not of negliglbe size
-                # Have found at least a dot on the screen
+                # Have found at least one dot on the screen
                 foundGreenDot = True
                 dotContour = contour
                 # Get the coordinates of the coordinate centre
@@ -77,17 +79,11 @@ def FrameCapture(frame_bgr, show = False):
                 # if the x position is over 93% of image width you have found the right frame
                 if(cx > imageWidth*0.93): 
                     foundCorrectFrame = True
-                    
                     count += 1
                      # Plot the dot centre point and contours
                     cv2.circle(img_rgb,(cx,cy), 3, (255,0,0), -1)
                     cv2.drawContours(img_rgb, contours, -1, (0,0,255), 2)
 
-    '''
-    TODO
-    # Add in cropping function based on where the dot is
-    # It would be better to use template matching if possible
-    '''
 
     if(show and foundCorrectFrame):
         plt.figure(figsize = (7,7))

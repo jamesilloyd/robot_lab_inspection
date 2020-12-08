@@ -2,6 +2,7 @@
 
 import csv
 
+# This has been changed to create txt files as csv didn't work on the r-pi
 class ResultsSave():
 
 

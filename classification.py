@@ -6,9 +6,18 @@ import part
 from mpl_toolkits.mplot3d import Axes3D
 
 
+'''
+partClassification is used to classify all the parts within a cropped image.
+It's inputs are:
+-img_bgr = the cropped image to be classified
+-show = whether to show results using matplotlib (for debugging)
+-isCurves = to create the correct part type object that will inherit the correct classification metric ranges
+-isMoving = same as above (can have different part objects: static straight, static curve, moving straight, moving curve)
+'''
+
 def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):    
 
-    # Prepare the position results to be returned
+    # Prepare the position results to be used to save in csv
     resultsVision = {"0":{'QCPassed': False, 'reason' : 'No part found'},
                 "1":{'QCPassed': False, 'reason' : 'No part found'},
                 "2":{'QCPassed': False, 'reason' : 'No part found'},
@@ -22,7 +31,7 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
                 "10":{'QCPassed': False, 'reason' : 'No part found'},
                 "11":{'QCPassed': False, 'reason' : 'No part found'}}
 
-    # TODO: may need to tweak the keys
+    # Prepare the position results to be sent to plc
     resultsPLC = {"0":False,
                 "1":False,
                 "2":False,
@@ -53,7 +62,6 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
     parts = thresholding.otsuThresholding(img_gray, isCurved = isCurves,isMoving = isMoving)
     
     # Sort parts by position in the grid (Top left to right)
-    # TODO: may not need this
     parts.sort(key=lambda x: x.centreXY[0], reverse=False)
     parts.sort(key=lambda x: x.centreXY[1], reverse=False)
 
@@ -148,6 +156,7 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
         # Only use this line for debugging
             #if(piece.reasonForFailure == "Unknown Failure Reason"): show = True
 
+    # Show resuts
     if(show):
         plt.figure(figsize = (7,7))
         plt.title('Count: {0} - {1} Passed - {2} Failed'.format(len(parts),passedCount,failedCount))
@@ -155,6 +164,7 @@ def partClassification(img_bgr, show = False, isCurves = True,isMoving = False):
         plt.axis('off')
         plt.show()
 
+    # Send back the classified image to also save for assessment
     img_classified = cv2.cvtColor(img_rgb,cv2.COLOR_RGB2BGR)
 
     return resultsVision, resultsPLC, img_classified

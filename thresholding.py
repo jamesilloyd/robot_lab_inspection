@@ -9,12 +9,13 @@ This file has functions for different thresholding techniques.
 
 The one we are using our function is otsuThresholding. 
 Others were only used for testing during development phase.
+
+The otsuThresholding function outputs a list of part objects by finding the contours found from the threshoded image
 '''
 
 def otsuThresholding(img_gray, isCurved = True,isMoving = False):
 
-    # Is this too high?
-    # The minimum area is used to remove any contours that should be neglected
+    # The minimum and maximum area is used to remove any contours that should be neglected
     minArea = 160
     maxArea = 30000
 
@@ -23,12 +24,7 @@ def otsuThresholding(img_gray, isCurved = True,isMoving = False):
     # Apply otsu thresholding to the blurred image
     ret3 , thresh = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
-
-    # print(thresh)
-
-    # plt.imshow(thresh, "gray")
-    # plt.show()
-
+    # Find contours and hierarcy in the iamge
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     # Prepare a list for the part objects corresponding to contours

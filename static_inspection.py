@@ -138,9 +138,6 @@ if __name__ == "__main__":
                     break
                 """
 
-            # TODO: do we need to keep opening and closing the camera like this?
-            # cam.release()
-            # cv2.destroyAllWindows()
 
             print("Starting static image inspection")
 
@@ -164,14 +161,15 @@ if __name__ == "__main__":
                 cv2.imwrite('results/static_images_{0}/classified_tray_{1}.png'.format(testRun,trayCount),img_classified)
 
                 # Store results in csv file for assessment
-                #for j in range(len(resultsVision)):
-                #    my_results.insert_vision(str(trayCount),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
+                for j in range(len(resultsVision)):
+                   my_results.insert_vision(str(trayCount),str(j),str(resultsVision[str(j)]["QCPassed"]),resultsVision[str(j)]["reason"])
 
-                #### TODO: do something with plc results csv output
-                #for k in range(len(resultsPLC)):
-                #    my_results.insert_plc(str(trayCount),str(resultsPLC[str(k)]))
+                # Save plc output
+                for k in range(len(resultsPLC)):
+                   my_results.insert_plc(str(trayCount),str(resultsPLC[str(k)]))
 
-                #results_order = [0, 1, 4, 5, 8, 9, 2, 3, 6, 7, 10, 11]
+
+                # Index array to format plc results from classification function to the correct order for plc
                 results_order = [11, 10, 7, 6, 3, 2, 9, 8, 5, 4, 1, 0]
 
                 results_list = []

@@ -1,14 +1,19 @@
 from cv2 import cv2
 import numpy as np
 
+'''
+This file contains the parent "part class and the specific part classes that inherit from it.
+
+The classes work by initialising with a contour. using that contour we can extract properties for the part. 
+The properties allow us to automatically QC pass or fail an object by comparing the parameters to the specific dimensionless ranges.
+
+'''
+
 # Want to use this class to initiate objects that can be added to a list and identified 
 class Part:
 
     # Initialise parameters that don't need to be passed on init
-    name = 'unnamed'
-    colour = "colourless"
     childContours = []
-
     aspectRatioRange = []
     solidityRange = []
     areaPerimeterRange = []
@@ -18,6 +23,7 @@ class Part:
         self.contour = contour 
 
 
+    # Establish whether the part is good or bad if it's properties fit inbetween the ranges
     @property
     def isQCPassed(self):
         if(self.aspectRatioRange[0] < self.aspectRatio < self.aspectRatioRange[1] and self.solidityRange[0] < self.solidity < self.solidityRange[1] and self.areaPerimeterRange[0] < self.areaPerimeterSqr < self.areaPerimeterRange[1]):
@@ -25,6 +31,7 @@ class Part:
         else:
             return False
 
+    # Create this property that will be overriden by child classes
     @property
     def reasonForFailure(self):
         if(self.isQCPassed):
@@ -34,6 +41,7 @@ class Part:
             # return "QC Failed"
             
 
+    # Centre point of the contour
     @property
     def centreXY(self):
         M = cv2.moments(self.contour)
@@ -41,6 +49,7 @@ class Part:
         cy = int(M['m01']/M['m00'])
         return (cx,cy)
 
+    # Where to put text on the image
     @property
     def centreXYText(self):
         M = cv2.moments(self.contour)
@@ -63,12 +72,13 @@ class Part:
         return min(width,height) / max(width,height)
 
 
+    # Not used
     @property
     def angleOfRotation(self):
         rect = cv2.minAreaRect(self.contour)
         return round(rect[2],2)
 
-
+    # get the area of the external contour then subtract internal contour areas
     @property
     def area(self):
         # Remove any child contour area from the parent contour
@@ -83,17 +93,7 @@ class Part:
     def areaPerimeterSqr(self):
         return self.area / (self.perimeter ** 2)
 
-    @property
-    def extent(self):
-        # Ratio of contour area to bounding rectangle area
-        rect = cv2.minAreaRect(self.contour)
-        box = cv2.boxPoints(rect)
-        box = np.int0(box)
-        boxArea = cv2.contourArea(box)
-        return self.area / boxArea
-
-    
-
+    # % that the contour fills the convex hull area
     @property 
     def solidity(self):
         # Ratio of contour area to it's convex hull area
@@ -101,7 +101,7 @@ class Part:
         hullArea = cv2.contourArea(hull)
         return float(self.area)/hullArea
 
-    # TODO may need to only take external perimeter
+    # Add external perimeters to internal perimeters
     @property
     def perimeter(self):
         outerPerimeter = cv2.arcLength(self.contour,True)
@@ -113,7 +113,7 @@ class Part:
         return innerPerimeter + outerPerimeter
 
 
-
+# Class to add in dimensionless ranges for defect part types
 class Defect():
 
     def __init__(self, aspectRatio, solidity,areaPerimeter, reason):
@@ -123,7 +123,7 @@ class Defect():
         self.reason = reason
 
     
-
+# Following four classes inherit from the Part class and override the ranges and the failure reason class to establish why a part has failed
 class StraightPart(Part):
 
     # These are the ranges used to classify a good straight part
@@ -172,7 +172,6 @@ class StraightPart(Part):
             return failureReason
                 
 
-# TODO: CHECK IF ANY OF THE STRAIGHT PART AND CURVE PART DEFECT RANGES OVERLAP, IF NOT THEN YOU CAN PUT THEM TOGETHER
 class CurvedPart(Part):
 
     # These are the ranges used to classify a good straight part
@@ -229,7 +228,6 @@ class CurvedPart(Part):
             return failureReason
                 
 
-# TBF
 class MovingStraightPart(Part):
 
     aspectRatioRange = [0.48,0.55]
@@ -279,7 +277,7 @@ class MovingStraightPart(Part):
             return failureReason
 
 
-# TBF
+
 class MovingCurvedPart(Part):
 
     aspectRatioRange = [0.41,0.45]
